@@ -45,6 +45,7 @@ class EnsureUserRoleIsAllowedToAccess
         return [
             'admin' => [
                 'user-permissions',
+                'roles',
             ],
         ];
     }

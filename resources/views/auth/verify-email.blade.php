@@ -1,7 +1,10 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+            {{-- <x-jet-authentication-card-logo /> --}}
+            <a class="text-3xl font-medium text-black" href="{{ url('/') }}">
+                {{ config('app.name', 'Laravel') }}
+            </a>
         </x-slot>
 
         <div class="mb-4 text-sm text-gray-600">

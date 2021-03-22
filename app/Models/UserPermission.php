@@ -18,9 +18,9 @@ class UserPermission extends Model
     public static function routeNameList()
     {
         return [
+            'dashboard',
             'pages',
             'navigation-menus',
-            'dashboard',
             'users',
             'roles',
             'user-permissions',

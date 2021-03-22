@@ -72,10 +72,7 @@
             <div class="mt-4">
                 <x-jet-label for="role" value="{{ __('Role') }}" />
                 <select wire:model="role" id="role" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                    <option value="">-- Select a Role --</option>    
-                    {{-- @foreach (App\Models\Roles::all() as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>    
-                    @endforeach --}}
+                        <option value="">-- Select a Role --</option>    
                     @foreach (App\Models\Roles::all() as $item)
                         <option value="{{ $item->name }}">{{ $item->name }}</option>
                     @endforeach
