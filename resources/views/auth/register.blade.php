@@ -39,7 +39,7 @@
                     <span class="inline-flex items-center px-3 py-2 rounded-l-lg border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
                         +216
                     </span>
-                    <x-jet-input id="tel" class="inline-flex items-center w-full pl-2 py-2 rounded-r-lg rounded-l-none border border-l-0" type="tel" name="tel" placeholder="enter 8 number here! ..." required />
+                    <x-jet-input id="tel" class="inline-flex items-center w-full pl-2 py-2 rounded-r-lg rounded-l-none border border-l-0" type="tel" name="tel" placeholder="enter 8 numbers here! ..." required />
                 </div>
             </div>
 

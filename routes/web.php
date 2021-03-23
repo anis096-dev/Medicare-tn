@@ -13,13 +13,20 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
+Route::group(['middleware' => ['auth', 'verified']], function() {
+    
+    Route::get('register-step2', [App\Http\Controllers\RegisterStepTwoController::class, 'create'])->name('register-step2.create');
+    Route::post('register-step2', [App\Http\Controllers\RegisterStepTwoController::class, 'store'])->name('register-step2.store');
+});
 
 Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], function () 
 {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::group(['middleware' => ['registration_completed']], function() {
+        Route::get('/dashboard', function () {
+            return view('dashboard');
+        })->name('dashboard');
+    });
 
     Route::get('/pages', function () {
         return view('admin.pages');
@@ -40,7 +47,6 @@ Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], funct
     Route::get('/user-permissions', function () {
         return view('admin.user-permissions');
     })->name('user-permissions');
-
 });
 
 Route::get('/{urlslug}', Frontpage::class);

@@ -11,11 +11,11 @@
                 </div>
 
                 <!-- Navigation Links -->
-                @if(auth()->user()->role)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+                    @if(auth()->user()->role == 'admin')
                     <x-jet-nav-link href="{{ route('pages') }}" :active="request()->routeIs('pages')">
                         {{ __('Pages') }}
                     </x-jet-nav-link>
@@ -31,8 +31,8 @@
                     <x-jet-nav-link href="{{ route('user-permissions') }}" :active="request()->routeIs('user-permissions')">
                         {{ __('User Permissions') }}
                     </x-jet-nav-link>
+                    @endif
                 </div>
-                @endif
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">

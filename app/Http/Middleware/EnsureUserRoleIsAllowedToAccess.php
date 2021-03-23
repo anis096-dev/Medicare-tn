@@ -44,6 +44,7 @@ class EnsureUserRoleIsAllowedToAccess
     {
         return [
             'admin' => [
+                'register-step2',
                 'user-permissions',
                 'roles',
             ],
