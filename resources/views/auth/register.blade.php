@@ -11,8 +11,14 @@
 
         <form method="POST" action="{{ route('register') }}" x-data="{role: 'Patient'}">
             @csrf
+            
+            <div class="mt-4">
+                <x-jet-label for="gender" class="mb-2" value="{{ __('Gender') }}"/>
+                <x-jet-input id="gender" class=" mr-0.5" type="radio" name="gender" value="male" required checked/>Male
+                <x-jet-input id="gender" class=" ml-2 mr-0.5" type="radio" name="gender" value="female" required/>Female
+            </div>
 
-            <div>
+            <div class="mt-4">
                 <x-jet-label for="name" value="{{ __('Name') }}"/>
                 <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             </div>
@@ -22,10 +28,20 @@
                 <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
             
-            {{-- <div class="mt-4" x-show = "role == 'Patient'">
-                <x-jet-label for="" value="{{ __('Test') }}" />
-                <x-jet-input id="" class="block mt-1 w-full" type="text" name="" :value="old('')" required />
-            </div> --}}
+            <div class="mt-4">
+                <x-jet-label for="date_of_birth" value="{{ __('Date of birth') }}" />
+                <x-jet-input id="date_of_birth" class="block mt-1 w-full" type="date" name="date_of_birth" required />
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="tel" value="{{ __('Tel') }}" />
+                <div class="mt-1 flex rounded-md shadow-sm">
+                    <span class="inline-flex items-center px-3 py-2 rounded-l-lg border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+                        +216
+                    </span>
+                    <x-jet-input id="tel" class="inline-flex items-center w-full pl-2 py-2 rounded-r-lg rounded-l-none border border-l-0" type="tel" name="tel" placeholder="enter 8 number here! ..." required />
+                </div>
+            </div>
 
             <div class="mt-4">
                 <x-jet-label for="role" value="{{ __('Register as:') }}" />
