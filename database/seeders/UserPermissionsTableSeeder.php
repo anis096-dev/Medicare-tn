@@ -51,6 +51,30 @@ class UserPermissionsTableSeeder extends Seeder
                 'created_at' => '2021-03-21 07:20:29',
                 'updated_at' => '2021-03-21 07:20:29',
             ),
+            4 => 
+            array (
+                'id' => 5,
+                'role' => 'admin',
+                'route_name' => 'Specialties',
+                'created_at' => '2021-03-24 23:24:29',
+                'updated_at' => '2021-03-24 23:24:29',
+            ),
+            5 => 
+            array (
+                'id' => 6,
+                'role' => 'Patient',
+                'route_name' => 'dashboard',
+                'created_at' => '2021-03-24 23:24:38',
+                'updated_at' => '2021-03-24 23:24:38',
+            ),
+            6 => 
+            array (
+                'id' => 7,
+                'role' => 'E-health Care',
+                'route_name' => 'dashboard',
+                'created_at' => '2021-03-24 23:24:47',
+                'updated_at' => '2021-03-24 23:24:47',
+            ),
         ));
         
         

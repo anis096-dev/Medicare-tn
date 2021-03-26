@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\User;
+use App\Models\Specialty;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Users extends Component
+class Specialties extends Component
 {
     use WithPagination;
     
@@ -17,11 +17,8 @@ class Users extends Component
     /**
      * Put your custom public properties here!
      */
-    public $role;
-    public $specialty;
     public $name;
-    public $email;
-
+    public $description;
     /**
      * The validation rules
      *
@@ -29,11 +26,9 @@ class Users extends Component
      */
     public function rules()
     {
-        return [
-            'role' => 'required',
-            'specialty' => 'required_if:role,E-health Care|string',
-            'name' => 'required',
-            'email' => 'required',
+        return [   
+            'name' => 'required',          
+            'description' => ['required', 'max:255'],          
         ];
     }
 
@@ -45,11 +40,10 @@ class Users extends Component
      */
     public function loadModel()
     {
-        $data = User::find($this->modelId);
-        $this->role = $data->role;
-        $this->specialty = $data->specialty;
+        $data = Specialty::find($this->modelId);
+        // Assign the variables here
         $this->name = $data->name;
-        $this->email = $data->email;
+        $this->description = $data->description;
     }
 
     /**
@@ -60,11 +54,9 @@ class Users extends Component
      */
     public function modelData()
     {
-        return [
-            'role' => $this->role,
-            'specialty' => $this->specialty,
-            'name' => $this->name,
-            'email'=> $this->email,
+        return [ 
+            'name' => $this->name,         
+            'description' => $this->description,         
         ];
     }
 
@@ -76,7 +68,7 @@ class Users extends Component
     public function create()
     {
         $this->validate();
-        User::create($this->modelData());
+        Specialty::create($this->modelData());
         $this->modalFormVisible = false;
         $this->reset();
     }
@@ -88,7 +80,7 @@ class Users extends Component
      */
     public function read()
     {
-        return User::paginate(5);
+        return Specialty::paginate(5);
     }
 
     /**
@@ -99,7 +91,7 @@ class Users extends Component
     public function update()
     {
         $this->validate();
-        User::find($this->modelId)->update($this->modelData());
+        Specialty::find($this->modelId)->update($this->modelData());
         $this->modalFormVisible = false;
     }
 
@@ -110,7 +102,7 @@ class Users extends Component
      */
     public function delete()
     {
-        User::destroy($this->modelId);
+        Specialty::destroy($this->modelId);
         $this->modalConfirmDeleteVisible = false;
         $this->resetPage();
     }
@@ -153,11 +145,11 @@ class Users extends Component
     {
         $this->modelId = $id;
         $this->modalConfirmDeleteVisible = true;
-    }
+    }    
 
     public function render()
-    {   
-        return view('livewire.users', [
+    {
+        return view('livewire.specialties', [
             'data' => $this->read(),
         ]);
     }

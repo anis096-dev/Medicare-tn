@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
+
 Route::group(['middleware' => ['auth', 'verified']], function() {
     
     Route::get('register-step2', [App\Http\Controllers\RegisterStepTwoController::class, 'create'])->name('register-step2.create');
@@ -26,27 +27,31 @@ Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], funct
         Route::get('/dashboard', function () {
             return view('dashboard');
         })->name('dashboard');
+
+        Route::get('/pages', function () {
+            return view('admin.pages');
+        })->name('pages');
+
+        Route::get('/navigation-menus', function () {
+            return view('admin.navigation-menus');
+        })->name('navigation-menus');
+
+        Route::get('/roles', function () {
+            return view('admin.roles');
+        })->name('roles');
+
+        Route::get('/users', function () {
+            return view('admin.users');
+        })->name('users');
+
+        Route::get('/user-permissions', function () {
+            return view('admin.user-permissions');
+        })->name('user-permissions');
+        
+        Route::get('/specialties', function () {
+            return view('admin.specialties');
+        })->name('specialties');
     });
-
-    Route::get('/pages', function () {
-        return view('admin.pages');
-    })->name('pages');
-
-    Route::get('/navigation-menus', function () {
-        return view('admin.navigation-menus');
-    })->name('navigation-menus');
-
-    Route::get('/roles', function () {
-        return view('admin.roles');
-    })->name('roles');
-
-    Route::get('/users', function () {
-        return view('admin.users');
-    })->name('users');
-
-    Route::get('/user-permissions', function () {
-        return view('admin.user-permissions');
-    })->name('user-permissions');
 });
 
 Route::get('/{urlslug}', Frontpage::class);

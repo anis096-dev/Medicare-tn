@@ -105,7 +105,7 @@
                     </label>
                 </div>
 
-                <div class="mt-4">
+                {{-- <div class="mt-4">
                     <x-jet-label for="title" value="{{ __('Content') }}" />
                     <div class="rounded-md shadow-sm">
                         <div class="mt-1 bg-white">                      
@@ -115,6 +115,11 @@
                         </div>
                     </div> 
                     @error('content') <span class="error">{{ $message }}</span> @enderror
+                </div> --}}
+                <div class="mt-4">
+                    <x-jet-label for="content" value="{{ __('Content') }}" />
+                    <textarea id="content" class="block mt-1 w-full" type="text" name="content" :value="old('content')"></textarea>
+                    @error('content') <span class="error">{{ $message }}</span> @enderror            
                 </div>
             </x-slot>
 

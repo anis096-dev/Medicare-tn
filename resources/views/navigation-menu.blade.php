@@ -31,6 +31,9 @@
                     <x-jet-nav-link href="{{ route('user-permissions') }}" :active="request()->routeIs('user-permissions')">
                         {{ __('User Permissions') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('specialties') }}" :active="request()->routeIs('specialties')">
+                        {{ __('Specialties') }}
+                    </x-jet-nav-link>
                     @endif
                 </div>
             </div>

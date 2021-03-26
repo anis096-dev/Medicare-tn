@@ -18,8 +18,9 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="bio" value="{{ __('bio') }}" />
-                <x-jet-input id="bio" class="block mt-1 w-full" type="text" name="bio" :value="old('bio')"/>
+                <x-jet-label for="bio" value="{{ __('Bio') }}" />
+                <textarea id="bio" class="block mt-1 w-full" type="text" name="bio" :value="old('bio')"></textarea>
+                @error('bio') <span class="error">{{ $message }}</span> @enderror            
             </div>
 
             <div class="flex items-center justify-end mt-4">

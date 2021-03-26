@@ -23,19 +23,25 @@ class UsersTableSeeder extends Seeder
             array (
                 'id' => 1,
                 'role' => 'admin',
+                'specialty' => NULL,
                 'name' => 'Admin',
-                'email' => 'admin@admin.com',
-                'email_verified_at' => NULL,
-                'password' => '$2y$10$idmPr5ADvyGmiEKHW.Xnu.LMZsMLUK0KAkoSpvEyp8DYJlkAsmk2e',
-                'two_factor_secret' => NULL,
-                'two_factor_recovery_codes' => NULL,
-                'remember_token' => NULL,
-                'current_team_id' => NULL,
-                'profile_photo_path' => NULL,
-                'created_at' => '2021-03-21 07:16:51',
-                'updated_at' => '2021-03-21 07:16:51',
-            ),
-        ));
+                'gender' => 'male',
+                'date_of_birth' => NULL,
+                'tel' => NULL,
+                'adresse' => '17 AV Farhat Hached Jendouba, Tunisie',
+            'bio' => 'I\'m the Admin! hey ;)',
+            'email' => 'admin@admin.com',
+            'email_verified_at' => NULL,
+            'password' => '$2y$10$idmPr5ADvyGmiEKHW.Xnu.LMZsMLUK0KAkoSpvEyp8DYJlkAsmk2e',
+            'two_factor_secret' => NULL,
+            'two_factor_recovery_codes' => NULL,
+            'remember_token' => NULL,
+            'current_team_id' => NULL,
+            'profile_photo_path' => NULL,
+            'created_at' => '2021-03-21 07:16:51',
+            'updated_at' => '2021-03-24 23:23:29',
+        ),
+    ));
         
         
     }

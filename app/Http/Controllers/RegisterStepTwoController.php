@@ -13,6 +13,10 @@ class RegisterStepTwoController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'adresse' => 'required|string|max:255',
+            'bio' => 'max:255',
+        ]);
         auth()->user()->update([
             'adresse' => $request->adresse,
             'bio' => $request->bio,

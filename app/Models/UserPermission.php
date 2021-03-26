@@ -24,6 +24,7 @@ class UserPermission extends Model
             'users',
             'roles',
             'user-permissions',
+            'Specialties',
         ];
     }
 
