@@ -19,13 +19,13 @@
                         </x-jet-button>
                     </div>
 
-                    {{-- @if(auth()->user()->role == 'E-health Care') --}}
+                    @if(auth()->user()->role == 'E-health Care')
                         <div class="mt-4">
                         <x-jet-label for="bio" value="{{ __('Bio') }}" />
                         <textarea id="bio" class="lg:h-40 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" type="text" name="bio" :value="old('bio')"></textarea>
                         @error('bio') <span class="error">{{ $message }}</span> @enderror            
                     </div>
-                    {{-- @endif --}}
+                    @endif
 
                     <div class="mt-4">
                         @if(auth()->user()->role == 'E-health Care') 
@@ -35,7 +35,7 @@
                         @endif
                         <span class="font-bold text-yellow-600">If you do not find your address, try in <span class=" font-extrabold text-yellow-700">Arabic</span> or please enter your city!!</span>
                         <input type="search" id="adresse" name="adresse" class="block mt-2 w-full" placeholder="Try &quot;Rue el mar&quot;" /></div>
-                        <x-jet-validation-errors class="mb-4" />    
+                        @error('adresse') <span class="error">{{ $message }}</span> @enderror            
                     </div>
                 
                 </form>
