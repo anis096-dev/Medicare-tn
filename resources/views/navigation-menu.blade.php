@@ -34,6 +34,12 @@
                     <x-jet-nav-link href="{{ route('specialties') }}" :active="request()->routeIs('specialties')">
                         {{ __('Specialties') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('treatments') }}" :active="request()->routeIs('treatments')">
+                        {{ __('Treatments') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('sub-treatments') }}" :active="request()->routeIs('sub-treatments')">
+                        {{ __('Sub Treatments') }}
+                    </x-jet-nav-link>
                     @endif
                 </div>
             </div>

@@ -25,6 +25,8 @@ class UserPermission extends Model
             'roles',
             'user-permissions',
             'Specialties',
+            'treatments',
+            'sub-treatments',
         ];
     }
 

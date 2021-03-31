@@ -51,6 +51,12 @@ Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], funct
         Route::get('/specialties', function () {
             return view('admin.specialties');
         })->name('specialties');
+        Route::get('/treatments', function () {
+            return view('admin.treatments');
+        })->name('treatments');
+        Route::get('/sub-treatments', function () {
+            return view('admin.sub-treatments');
+        })->name('sub-treatments');
     });
 });
 

@@ -15,8 +15,9 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead>
                             <tr>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Route Name</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Treatment</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Description</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"></th>
                             </tr>
                         </thead>
@@ -24,8 +25,9 @@
                             @if ($data->count())
                                 @foreach ($data as $item)
                                     <tr>
-                                        <td class="px-6 py-2">{{ $item->role }}</td>
-                                        <td class="px-6 py-2">{{ $item->route_name }}</td>                                        
+                                        <td class="px-6 py-2">{{ $item->treatment }}</td>
+                                        <td class="px-6 py-2">{{ $item->name }}</td>
+                                        <td class="px-6 py-2">{{ \Illuminate\Support\Str::limit($item->description, 50, '...') }}</td>
                                         <td class="px-6 py-2 flex justify-end">
                                             <a class="w-10 h-10 text-green-600 box-border" wire:click="updateShowModal({{ $item->id }})">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -51,38 +53,48 @@
             </div>
         </div>
     </div>
-    
+
     <div class="mt-5">
     {{ $data->links() }}
     </div>
 
     {{-- Modal Form --}}
     <x-jet-dialog-modal wire:model="modalFormVisible">
+        @if ($modelId)
         <x-slot name="title">
-            {{ __('Save User Permission') }}
+            {{ __('Update SubTreatment') }}
         </x-slot>
+        @else
+        <x-slot name="title">
+            {{ __('Add SubTreatment') }}
+        </x-slot>
+        @endif
 
         <x-slot name="content">
+
             <div class="mt-4">
-                <x-jet-label for="role" value="{{ __('Role') }}" />
-                <select wire:model="role" id="" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                    <option value="">-- Select a Role --</option>    
-                    @foreach (App\Models\Roles::all() as $item)
+                <x-jet-label for="treatment" value="{{ __('Treatment') }}"/>
+                <select wire:model="treatment" id="treatment" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                        <option value="">-- Select a Sepecialty --</option>    
+                        @foreach (App\Models\Treatment::all() as $item)
                         <option value="{{ $item->name }}">{{ $item->name }}</option>
-                    @endforeach
+                        @endforeach
                 </select>
-                @error('role') <span class="error">{{ $message }}</span> @enderror
-            </div>  
+                @error('treatment') <span class="error">{{ $message }}</span> @enderror
+            </div>
+
             <div class="mt-4">
-                <x-jet-label for="routeName" value="{{ __('Route Name') }}" />
-                <select wire:model="routeName" id="" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                    <option value="">-- Select a Route --</option>    
-                    @foreach (App\Models\UserPermission::routeNameList() as $item)
-                        <option value="{{ $item }}">{{ $item }}</option>    
-                    @endforeach
-                </select>
-                @error('routeName') <span class="error">{{ $message }}</span> @enderror
-            </div>      
+                <x-jet-label for="name" value="{{ __('Name') }}" />
+                <textarea wire:model="name" id="name" class="h-20 block mt-1 w-full" type="text" wire:model.debounce.100000ms="name"></textarea>
+                @error('name') <span class="error">{{ $message }}</span> @enderror
+            </div>  
+
+            <div class="mt-4">
+                <x-jet-label for="description" value="{{ __('Description') }}" />
+                <textarea wire:model="description" id="description" class="block mt-1 w-full" type="text" wire:model.debounce.100000ms="description"></textarea>
+                @error('description') <span class="error">{{ $message }}</span> @enderror
+            </div>  
+           
         </x-slot>
 
         <x-slot name="footer">
@@ -105,7 +117,7 @@
     {{-- The Delete Modal --}}
     <x-jet-dialog-modal wire:model="modalConfirmDeleteVisible">
         <x-slot name="title">
-            {{ __('Delete Permission') }}
+            {{ __('Delete Modal Title') }}
         </x-slot>
 
         <x-slot name="content">
