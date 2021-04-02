@@ -67,7 +67,7 @@
             var osmLayer = new L.TileLayer(
                 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 minZoom: 6,
-                maxZoom: 17,
+                maxZoom: 13,
                 // attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
                 }
             );

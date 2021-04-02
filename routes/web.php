@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Livewire\Frontpage;
+use App\Http\Livewire\Users;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,8 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     
     Route::get('register-step2', [App\Http\Controllers\RegisterStepTwoController::class, 'create'])->name('register-step2.create');
     Route::post('register-step2', [App\Http\Controllers\RegisterStepTwoController::class, 'store'])->name('register-step2.store');
+
+    Route::get('user/{user}', [App\Http\Livewire\Users::class, 'show'])->name('user.show');
 });
 
 Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], function () 
@@ -62,3 +65,4 @@ Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], funct
 
 Route::get('/{urlslug}', Frontpage::class);
 Route::get('/', Frontpage::class);
+

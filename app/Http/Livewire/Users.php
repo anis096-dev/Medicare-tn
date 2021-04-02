@@ -17,6 +17,7 @@ class Users extends Component
     /**
      * Put your custom public properties here!
      */
+    public $user;
     public $role;
     public $specialty;
     public $name;
@@ -35,6 +36,17 @@ class Users extends Component
             'name' => 'required',
             'email' => 'required',
         ];
+    }
+    
+    /**
+     * mount
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function show (User $user)
+    {
+        return view('profile.show-profile',compact('user'));
     }
 
     /**
