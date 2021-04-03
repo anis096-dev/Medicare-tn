@@ -33,8 +33,15 @@
                     <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{$user->name}}</h1>
                     <h3 class="text-gray-600 font-bold font-lg text-semibold leading-6">{{$user->specialty}}</h3>
                     <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">{{$user->bio}}</p>
-                    <ul
-                        class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
+                    <ul class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
+                        <li class="flex items-center py-3">
+                            <span>Rated</span>
+                            <span class="ml-auto">
+                                @if($avgrating->count() > 0)
+                                ⭐<strong>{{round($avgrating->avg('rating'), 1)}}/5</strong>
+                                @endif
+                            </span>
+                        </li>
                         <li class="flex items-center py-3">
                             <span>Status</span>
                             <span class="ml-auto">
@@ -108,8 +115,16 @@
                                 <div class="px-4 py-2">{{$user->gender}}</div>
                             </div>
                             <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Contact No.</div>
-                                <div class="px-4 py-2 bg-blue-300 bg-clip-border rounded-xl"><a class="font-bold" href="tel:+216{{$user->tel}}">+216 {{$user->tel}}</a></div>
+                                <div class="px-4 py-2 font-bold">Contact No.</div>
+                                <div class="px-4 py-2">
+                                    <h6 class="font-bold">+216{{$user->tel}}</h6>
+                                    <a href="tel:+216{{$user->tel}}">
+                                        <svg  class="text-blue-500 h-6 w-6 -mt-6 ml-28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M17.924 2.617a.997.997 0 00-.215-.322l-.004-.004A.997.997 0 0017 2h-4a1 1 0 100 2h1.586l-3.293 3.293a1 1 0 001.414 1.414L16 5.414V7a1 1 0 102 0V3a.997.997 0 00-.076-.383z" />
+                                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Current Address</div>
@@ -120,9 +135,11 @@
                                 <div class="px-4 py-2">{{$user->adresse}}</div>
                             </div>
                             <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Email.</div>
-                                <div class="px-2 lg:px-4 py-2">
-                                    <a class="text-blue-800" href="mailto:{{$user->email}}">{{$user->email}}</a>
+                                <div class="px-4 py-2 font-bold">Email.</div>
+                                <div class="px-2 py-2">
+                                    <a class="text-blue-800" href="mailto:{{$user->email}}">
+                                        {{$user->email}}
+                                    </a>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2">
@@ -201,6 +218,14 @@
                     </div>
                     <!-- End of Experience and education grid -->
                 </div>
+                <!-- End of experience and education -->
+
+                <div class="my-4"></div>
+
+                <!-- Rating -->
+                @if(($user->role == 'E-health Care'))
+                @livewire('user-ratings', ['user' => $user], key($user->id))
+                @endif
                 <!-- End of profile tab -->
             </div>
         </div>

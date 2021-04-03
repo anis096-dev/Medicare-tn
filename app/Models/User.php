@@ -81,4 +81,9 @@ class User extends Authenticatable
             'admin' => 'Admin',
         ];
     }
+
+    public function ratings()
+    {
+        return $this->hasMany('App\Models\Rating');
+    }
 }

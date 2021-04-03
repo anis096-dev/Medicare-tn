@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Rating;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -45,8 +46,16 @@ class Users extends Component
      * @return void
      */
     public function show (User $user)
-    {
-        return view('profile.show-profile',compact('user'));
+    {   
+        if ($user->role == 'E-health Care') {
+            # code...
+            $avgrating = Rating::all()->where('related_id', $user->id );
+            return view('profile.show-profile',compact('user', 'avgrating'));
+        }
+        else 
+        {
+            return \redirect('dashboard');
+        }
     }
 
     /**
