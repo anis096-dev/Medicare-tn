@@ -65,4 +65,3 @@ Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], funct
 
 Route::get('/{urlslug}', Frontpage::class);
 Route::get('/', Frontpage::class);
-

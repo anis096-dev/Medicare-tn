@@ -84,14 +84,14 @@
                     </h2>
                 </div>
             </div>
-            <div class="box-border flex flex-wrap justify-center gap-10 -mx-4 text-center text-indigo-900 lg:gap-16 lg:justify-start lg:text-left">
+            <div class="box-border flex flex-wrap justify-start gap-10 -mx-4 text-start text-indigo-900 lg:gap-16 lg:justify-start lg:text-left">
                 @forelse ($comments as $comment)
                     <div class="flex col-span-1">
                         <div class="relative flex-shrink-0 w-20 h-20 text-left">
                             <a href="{{ '@' . $comment->user->name }}">
                             </a>
                         </div>
-                        <div class="relative px-4 mb-16 leading-6 text-left">
+                        <div class="relative md:px-4 lg:mb-16 leading-6 text-left ">
                             <div class="box-border text-lg font-medium text-gray-600">
                                 {{ $comment->comment }}
                             </div>
@@ -104,10 +104,14 @@
                                 @endauth
                             </div>
                             <div class="box-border text-left text-gray-700" style="quotes: auto;">
-                                <a href="{{ '@' . $comment->user->username }}">
-                                    {{  $comment->user->name }}
-                                </a>
-                                {{  $comment->user->specialty }}
+                                @if( $comment->user->role == 'E-health Care')
+                                <a href="{{ $comment->user->id }}">
+                                    <span class="text-blue-700 underline mr-2 uppercase">{{  $comment->user->name }}</span>
+                                </a>  
+                                @else
+                                {{  $comment->user->name }}
+                                @endif
+                                <strong>{{  $comment->user->specialty }}</strong>
                             </div>
                         </div>
                     </div>

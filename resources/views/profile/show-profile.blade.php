@@ -74,12 +74,63 @@
                         <span>Similar Profiles</span>
                     </div>
                     <div class="grid grid-cols-3">
-                        @foreach (App\Models\User::paginate(7)->where('specialty', $user->specialty)->sortByDesc('last_seen') as $item)
                         <div class="text-center my-2">
-                            <img class="h-16 w-16 rounded-full mx-auto" src="{{ $item->profile_photo_url }}" alt="{{ $item->name }}">
-                            <a href="{{ route('user.show', [$item->id]) }}" class="text-main-color">{{ $item->name }}</a>
+                            <div class="relative inline-block">
+                                {{-- <div class="flex relative -space-x-3">
+                                    @foreach ($user::latest()->where('specialty', $user->specialty)->paginate(7) as $item)
+                                    <div class="m-1 mr-2 w-12 h-12 relative flex justify-center items-center rounded-ful">
+                                        <a href="{{ route('user.show', [$item->id]) }}" class="text-main-color">
+                                            <img class="object-cover w-12 h-12 border-4 border-white rounded-full" src="{{ $item->profile_photo_url }}" alt="{{ $item->name }}">
+                                        </a>
+                                        @if(Cache::has('is_online' . $item->id))
+                                        <div  class="bg-green-500 rounded-full w-3 h-3 absolute bottom-0 right-0"></div>
+                                        @else
+                                        <div class="bg-red-500 rounded-full w-3 h-3 absolute bottom-0 right-0"></div>
+                                        @endif
+                                    </div>
+                                    @endforeach
+                                    <div class="m-1 mr-2 flex items-center justify-center font-semibold text-gray-600 w-12 h-12 rounded-full bg-gray-200 border-4 border-white -ml-1">
+                                        <a href="{{ route( 'dashboard') }}">
+                                            +9
+                                        </a>
+                                    </div>
+                                </div> --}}
+                                <hr class="mx-32 md:inline-flex border-t border-gray-300"/>
+                                @foreach ($user::latest()->where('specialty', $user->specialty)->paginate(7) as $item)
+                                <div class="flex relative my-3">
+                                    <div class="ml-2">
+                                        <a href="{{ route('user.show', [$item->id]) }}" class="text-main-color">
+                                            <img class="object-cover w-12 h-12 border-white rounded-full" src="{{ $item->profile_photo_url }}" alt="{{ $item->name }}">
+                                        </a>
+                                        @if(Cache::has('is_online' . $item->id))
+                                        <div  class="bg-green-500 rounded-full w-3 h-3 absolute bottom-0 right-38"></div>
+                                        @else
+                                        <div class="bg-red-500 rounded-full w-3 h-3 absolute bottom-0 right-38"></div>
+                                        @endif
+                                    </div>
+                                    <div class="flex-auto items-center ml-4">
+                                        <div class="text-gray-700 font-semibold">
+                                            {{$item->specialty}}
+                                        </div>
+                                        <div class="text-gray-600 text-xs font-thin">
+                                            {{$item->gender}}
+                                        </div>
+                                    </div>
+                                    <div class="text-red-400 text-xs ml-4 mt-1">{{ \Carbon\Carbon::parse($item->last_seen)->diffForHumans() }}</div>
+                                </div>
+                                <div class="border-t border-gray-100"></div>
+                                @endforeach
+                                <div class="border-t border-gray-100"></div>
+                                <div class="ml-2">
+                                    <a href="{{ route( 'dashboard') }}" class="text-main-color">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="m-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                        </svg>
+                                    </a>
+                                    <div  class="bg-green-500 rounded-full w-3 h-3 absolute bottom-0 right-18"></div>
+                                </div>
+                            </div>
                         </div>
-                        @endforeach
                     </div>
                 </div>
                 <!-- End of friends card -->

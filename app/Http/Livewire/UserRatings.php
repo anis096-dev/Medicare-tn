@@ -41,7 +41,7 @@ class UserRatings extends Component
     public function delete($id)
     {
         $rating = Rating::where('id', $id)->first();
-        if ($rating && ($rating->user_id == auth()->user()->id)) {
+        if ($rating && ($rating->user_id == auth()->user()->id)  || ('admin'== auth()->user()->role)) {
             $rating->delete();
         }
         if ($this->currentId) {
