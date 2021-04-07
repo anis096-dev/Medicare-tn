@@ -39,6 +39,8 @@
                             <span class="ml-auto">
                                 @if($avgrating->count() > 0)
                                 ⭐<strong>{{round($avgrating->avg('rating'), 1)}}/5</strong>
+                                @else
+                                <strong>Rate me 5/5</strong>⭐
                                 @endif
                             </span>
                         </li>
@@ -76,31 +78,12 @@
                     <div class="grid grid-cols-3">
                         <div class="text-center my-2">
                             <div class="relative inline-block">
-                                {{-- <div class="flex relative -space-x-3">
-                                    @foreach ($user::latest()->where('specialty', $user->specialty)->paginate(7) as $item)
-                                    <div class="m-1 mr-2 w-12 h-12 relative flex justify-center items-center rounded-ful">
-                                        <a href="{{ route('user.show', [$item->id]) }}" class="text-main-color">
-                                            <img class="object-cover w-12 h-12 border-4 border-white rounded-full" src="{{ $item->profile_photo_url }}" alt="{{ $item->name }}">
-                                        </a>
-                                        @if(Cache::has('is_online' . $item->id))
-                                        <div  class="bg-green-500 rounded-full w-3 h-3 absolute bottom-0 right-0"></div>
-                                        @else
-                                        <div class="bg-red-500 rounded-full w-3 h-3 absolute bottom-0 right-0"></div>
-                                        @endif
-                                    </div>
-                                    @endforeach
-                                    <div class="m-1 mr-2 flex items-center justify-center font-semibold text-gray-600 w-12 h-12 rounded-full bg-gray-200 border-4 border-white -ml-1">
-                                        <a href="{{ route( 'dashboard') }}">
-                                            +9
-                                        </a>
-                                    </div>
-                                </div> --}}
                                 <hr class="mx-32 md:inline-flex border-t border-gray-300"/>
                                 @foreach ($user::latest()->where('specialty', $user->specialty)->paginate(7) as $item)
                                 <div class="flex relative my-3">
                                     <div class="ml-2">
                                         <a href="{{ route('user.show', [$item->id]) }}" class="text-main-color">
-                                            <img class="object-cover w-12 h-12 border-white rounded-full" src="{{ $item->profile_photo_url }}" alt="{{ $item->name }}">
+                                            <img class="object-cover w-10 h-10 border-white rounded-full" src="{{ $item->profile_photo_url }}" alt="{{ $item->name }}">
                                         </a>
                                         @if(Cache::has('is_online' . $item->id))
                                         <div  class="bg-green-500 rounded-full w-3 h-3 absolute bottom-0 right-38"></div>
@@ -108,7 +91,7 @@
                                         <div class="bg-red-500 rounded-full w-3 h-3 absolute bottom-0 right-38"></div>
                                         @endif
                                     </div>
-                                    <div class="flex-auto items-center ml-4">
+                                    <div class="flex-auto items-center ml-4 mt-1">
                                         <div class="text-gray-700 font-semibold">
                                             {{$item->specialty}}
                                         </div>
@@ -154,12 +137,12 @@
                     <div class="text-gray-700">
                         <div class="grid md:grid-cols-2 text-sm">
                             <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">First Name</div>
+                                <div class="px-4 py-2 font-semibold">Full Name</div>
                                 <div class="px-4 py-2">{{$user->name}}</div>
                             </div>
                             <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Last Name</div>
-                                <div class="px-4 py-2">{{$user->name}}</div>
+                                <div class="px-4 py-2 font-semibold">Marital Status</div>
+                                <div class="px-4 py-2">{{$user->marital_status}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Gender</div>
@@ -178,12 +161,16 @@
                                 </div>
                             </div>
                             <div class="grid grid-cols-2">
+                                @if($item->role == 'E-health Care') 
+                                <div class="px-4 py-2 font-semibold">Cabinet Address</div>
+                                @else
                                 <div class="px-4 py-2 font-semibold">Current Address</div>
+                                @endif
                                 <div class="px-4 py-2">{{$user->adresse}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Permanant Address</div>
-                                <div class="px-4 py-2">{{$user->adresse}}</div>
+                                <div class="px-4 py-2">{{$user->adresse2}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-bold">Email.</div>

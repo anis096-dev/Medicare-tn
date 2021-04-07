@@ -17,6 +17,12 @@
                 <x-jet-input id="gender" class=" mr-0.5" type="radio" name="gender" value="male" required checked/><span class="font-bold">Male</span>
                 <x-jet-input id="gender" class=" ml-2 mr-0.5" type="radio" name="gender" value="female" required/><span class="font-bold">Female</span>
             </div>
+            
+            <div class="mt-4">
+                <x-jet-label for="marital_status" class="mb-2" value="{{ __('Marital status') }}"/>
+                <x-jet-input id="marital_status" class=" mr-0.5" type="radio" name="marital_status" value="single" required checked/><span class="font-bold">Single</span>
+                <x-jet-input id="marital_status" class=" ml-2 mr-0.5" type="radio" name="marital_status" value="married" required/><span class="font-bold">Married</span>
+            </div>
 
             <div class="mt-4">
                 <x-jet-label for="name" value="{{ __('Name') }}"/>

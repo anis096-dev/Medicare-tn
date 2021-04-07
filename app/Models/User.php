@@ -33,9 +33,11 @@ class User extends Authenticatable
         'role', 
         'specialty', 
         'gender', 
+        'marital_status', 
         'date_of_birth', 
         'tel', 
         'adresse',
+        'adresse2',
         'bio',
     ];
 

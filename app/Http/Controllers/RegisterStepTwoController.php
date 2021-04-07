@@ -15,10 +15,12 @@ class RegisterStepTwoController extends Controller
     {
         $request->validate([
             'adresse' => 'required|string|max:255',
+            'adresse2' => 'required|string|max:255',
             'bio' => 'max:255',
         ]);
         auth()->user()->update([
             'adresse' => $request->adresse,
+            'adresse2' => $request->adresse2,
             'bio' => $request->bio,
         ]);
         return redirect()->route('dashboard');

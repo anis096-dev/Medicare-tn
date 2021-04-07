@@ -20,7 +20,7 @@
                     </div>
 
                     @if(auth()->user()->role == 'E-health Care')
-                        <div class="mt-4">
+                    <div class="mt-4">
                         <x-jet-label for="bio" value="{{ __('Bio') }}" />
                         <textarea id="bio" class="lg:h-40 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" type="text" name="bio" :value="old('bio')"></textarea>
                         @error('bio') <span class="error">{{ $message }}</span> @enderror            
@@ -28,16 +28,24 @@
                     @endif
 
                     <div class="mt-4">
-                        @if(auth()->user()->role == 'E-health Care') 
-                        <x-jet-label for="adresse" value="{{ __('Cabinet Adresse') }}" />
-                        @else
-                        <x-jet-label for="adresse" value="{{ __('Adresse') }}" />
-                        @endif
-                        <span class="font-bold text-yellow-600">If you do not find your address, try in <span class=" font-extrabold text-yellow-700">Arabic</span> or please enter your city!!</span>
-                        <input type="search" id="adresse" name="adresse" class="block mt-2 w-full" placeholder="Try &quot;Rue el mar&quot;" /></div>
-                        @error('adresse') <span class="error">{{ $message }}</span> @enderror            
+                        <div>
+                            @if(auth()->user()->role == 'E-health Care') 
+                            <x-jet-label for="adresse" value="{{ __('Cabinet Adresse') }}" />
+                            @else
+                            <x-jet-label for="adresse" value="{{ __('Adresse') }}" />
+                            @endif
+                            <span class="font-bold text-yellow-600">If you do not find your address, try in <span class=" font-extrabold text-yellow-700">Arabic</span> or please enter your city!!</span>
+                            <input type="search" id="adresse" name="adresse" class="block mt-2 w-full" placeholder="Try &quot;Rue el mar&quot;" /></div>
+                            @error('adresse') <span class="error">{{ $message }}</span> @enderror            
+                        </div>
+                    
+                        <div class="mt-4">
+                        <x-jet-label for="adresse2" value="{{ __('Adresse 2') }}" />
+                        <span class="font-bold text-yellow-600">Add second address, enter in <span class=" font-extrabold text-yellow-700">Arabic</span> if you want!!</span>
+                        <input type="text" id="adresse2" name="adresse2" class="block mt-2 w-full" placeholder="Try &quot;Rue el mar&quot;" /></div>
+                        @error('adresse2') <span class="error">{{ $message }}</span> @enderror            
+                        </div>
                     </div>
-                
                 </form>
             </div>
         </div> 
