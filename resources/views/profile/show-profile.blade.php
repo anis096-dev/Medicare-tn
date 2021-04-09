@@ -30,9 +30,9 @@
                         <img class="h-auto w-full mx-auto"
                             src="{{$user->profile_photo_url }}" alt="{{ $user->name }}" >
                     </div>
-                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{$user->name}}</h1>
-                    <h3 class="text-gray-600 font-bold font-lg text-semibold leading-6">{{$user->specialty}}</h3>
-                    <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">{{$user->bio}}</p>
+                    <h1 class="text-gray-900 font-bold text-xl leading-8 my-1 capitalize">{{$user->name}}</h1>
+                    <h3 class="text-gray-600 font-bold font-lg text-semibold leading-6 capitalize">{{$user->specialty}}</h3>
+                    <p class="text-sm text-gray-500 hover:text-gray-600 leading-6 capitalize">{{$user->bio}}</p>
                     <ul class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                         <li class="flex items-center py-3">
                             <span>Rated</span>
@@ -40,7 +40,7 @@
                                 @if($avgrating->count() > 0)
                                 ⭐<strong>{{round($avgrating->avg('rating'), 1)}}/5</strong>
                                 @else
-                                <strong>Rate me 5/5</strong>⭐
+                                <strong>Rate me!</strong>⭐
                                 @endif
                             </span>
                         </li>
@@ -138,15 +138,15 @@
                         <div class="grid md:grid-cols-2 text-sm">
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Full Name</div>
-                                <div class="px-4 py-2">{{$user->name}}</div>
+                                <div class="px-4 py-2 capitalize">{{$user->name}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Marital Status</div>
-                                <div class="px-4 py-2">{{$user->marital_status}}</div>
+                                <div class="px-4 py-2 capitalize">{{$user->marital_status}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Gender</div>
-                                <div class="px-4 py-2">{{$user->gender}}</div>
+                                <div class="px-4 py-2 capitalize">{{$user->gender}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-bold">Contact No.</div>
@@ -166,11 +166,11 @@
                                 @else
                                 <div class="px-4 py-2 font-semibold">Current Address</div>
                                 @endif
-                                <div class="px-4 py-2">{{$user->adresse}}</div>
+                                <div class="px-4 py-2 capitalize">{{$user->adresse}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Permanant Address</div>
-                                <div class="px-4 py-2">{{$user->adresse2}}</div>
+                                <div class="px-4 py-2 capitalize">{{$user->adresse2}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-bold">Email.</div>
@@ -191,13 +191,11 @@
                         Full Information</button>
                 </div>
                 <!-- End of about section -->
-
                 <div class="my-4"></div>
-
                 <!-- Experience and education -->
                 <div class="bg-white p-3 shadow-sm rounded-sm">
 
-                    <div class="grid grid-cols-2">
+                    <div class="grid md:grid-cols-2">
                         <div>
                             <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
                                 <span clas="text-green-500">
@@ -210,25 +208,22 @@
                                 <span class="tracking-wide">Experience</span>
                             </div>
                             <ul class="list-inside space-y-2">
+                                @if (App\Models\Experience::all()->count())
+                                @foreach (App\Models\Experience::all()->where('user_id', $user->id) as $item)
                                 <li>
-                                    <div class="text-teal-600">Owner at Her Company Inc.</div>
-                                    <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                                    <div class="text-teal-600"><strong class="text-blue-800 capitalize">{{$item->occupation}}</strong> at <strong class="capitalize">{{$item->company}}</strong>.</div>
+                                    <div class="text-gray-500 text-xs">From <strong>{{$item->start_date}}</strong> To <strong>{{$item->end_date}}</strong></div>
                                 </li>
+                                @endforeach
+                                @else
                                 <li>
-                                    <div class="text-teal-600">Owner at Her Company Inc.</div>
-                                    <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                                    <div class="text-teal-600">No experiences added!</div>
+                                    <div class="text-gray-500 text-xs">start date - end date</div>
                                 </li>
-                                <li>
-                                    <div class="text-teal-600">Owner at Her Company Inc.</div>
-                                    <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                                </li>
-                                <li>
-                                    <div class="text-teal-600">Owner at Her Company Inc.</div>
-                                    <div class="text-gray-500 text-xs">March 2020 - Now</div>
-                                </li>
+                                @endif
                             </ul>
                         </div>
-                        <div>
+                        <div class="mt-4 md:mt-0">
                             <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
                                 <span clas="text-green-500">
                                     <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -243,14 +238,19 @@
                                 <span class="tracking-wide">Education</span>
                             </div>
                             <ul class="list-inside space-y-2">
+                                @if (App\Models\Education::all()->count())
+                                @foreach (App\Models\Education::all()->where('user_id', $user->id) as $item)
                                 <li>
-                                    <div class="text-teal-600">Masters Degree in Oxford</div>
-                                    <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                                    <div class="text-teal-600"><strong class="text-blue-800 capitalize">{{$item->formation}}</strong> at <strong class="capitalize">{{$item->institute}}</strong>.</div>
+                                    <div class="text-gray-500 text-xs">From <strong>{{$item->start_date}}</strong> To <strong>{{$item->end_date}}</strong></div>
                                 </li>
+                                @endforeach
+                                @else
                                 <li>
-                                    <div class="text-teal-600">Bachelors Degreen in LPU</div>
-                                    <div class="text-gray-500 text-xs">March 2020 - Now</div>
+                                    <div class="text-teal-600">No Education added!</div>
+                                    <div class="text-gray-500 text-xs">start date - end date</div>
                                 </li>
+                                @endif
                             </ul>
                         </div>
                     </div>

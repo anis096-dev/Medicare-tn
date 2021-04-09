@@ -27,6 +27,8 @@ class UserPermission extends Model
             'Specialties',
             'treatments',
             'sub-treatments',
+            'user-experience',
+            'user-education',
         ];
     }
 

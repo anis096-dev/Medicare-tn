@@ -22,7 +22,7 @@
                     @if(auth()->user()->role == 'E-health Care')
                     <div class="mt-4">
                         <x-jet-label for="bio" value="{{ __('Bio') }}" />
-                        <textarea id="bio" class="lg:h-40 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" type="text" name="bio" :value="old('bio')"></textarea>
+                        <textarea id="bio" class="lg:h-40 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" type="text" name="bio" value="{{ old('bio') }}"></textarea>
                         @error('bio') <span class="error">{{ $message }}</span> @enderror            
                     </div>
                     @endif

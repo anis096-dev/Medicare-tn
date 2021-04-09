@@ -15,9 +15,10 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead>
                             <tr>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Colums1</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Column2</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Column3</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Formation</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Institute/University</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Stat Date</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">End Date</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"></th>
                             </tr>
                         </thead>
@@ -25,9 +26,10 @@
                             @if ($data->count())
                                 @foreach ($data as $item)
                                     <tr>
-                                        <td class="px-6 py-2">{{ 'Record1' }}</td>
-                                        <td class="px-6 py-2">{{ 'Record2' }}</td>
-                                        <td class="px-6 py-2">{{ 'Record3' }}</td>                                         
+                                        <td class="px-6 py-2">{{ $item->formation }}</td>
+                                        <td class="px-6 py-2">{{ $item->institute }}</td>
+                                        <td class="px-6 py-2">{{ $item->start_date }}</td>                                         
+                                        <td class="px-6 py-2">{{ $item->end_date }}</td>                                         
                                         <td class="px-6 py-2 flex justify-end">
                                             <div class="flex space-x-1 justify-around">
                                                     <a  wire:click="updateShowModal({{ $item->id }})" target="_blank" class="p-1 text-blue-600 hover:bg-blue-600 hover:text-white rounded">
@@ -61,28 +63,38 @@
     <x-jet-dialog-modal wire:model="modalFormVisible">
         @if ($modelId)
         <x-slot name="title">
-            {{ __('Update Form') }}
+            {{ __('Update Education') }}
         </x-slot>
         @else
         <x-slot name="title">
-            {{ __('Add Form') }}
+            {{ __('Add Education') }}
         </x-slot>
         @endif
 
         <x-slot name="content">
             <div class="mt-4">
-                <x-jet-label for="" value="{{ __('Label') }}" />
-                <x-jet-input wire:model="" id="" class="block mt-1 w-full" type="text" />
-                @error('') <span class="error">{{ $message }}</span> @enderror
-            </div>  
+                <x-jet-label for="formation" value="{{ __('Formation') }}" />
+                <x-jet-input wire:model="formation" id="formation" class="block mt-1 w-full" type="text" />
+                @error('formation') <span class="error">{{ $message }}</span> @enderror
+            </div>
+
             <div class="mt-4">
-                <x-jet-label for="" value="{{ __('Type') }}" />
-                <select wire:model="" id="" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                    <option value="">Options1</option>
-                    <option value="">Option2</option>
-                </select>
-                @error('') <span class="error">{{ $message }}</span> @enderror
-            </div>      
+                <x-jet-label for="institute" value="{{ __('Institute') }}" />
+                <x-jet-input wire:model="institute" id="institute" class="block mt-1 w-full" type="text" />
+                @error('institute') <span class="error">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="start_date" value="{{ __('Start Date') }}" />
+                <x-jet-input wire:model="start_date" id="start_date" class="block mt-1 w-full" type="date" />
+                @error('start_date') <span class="error">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="end_date" value="{{ __('End Date') }}" />
+                <x-jet-input wire:model="end_date" id="end_date" class="block mt-1 w-full" type="date"/>
+                @error('end_date') <span class="error">{{ $message }}</span> @enderror
+            </div>        
         </x-slot>
 
         <x-slot name="footer">

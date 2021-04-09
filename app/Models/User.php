@@ -88,4 +88,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Rating');
     }
+
+    public function experiences()
+    {
+        return $this->belongsTo('App\Models\Experience');
+    }
+
+    public function educations()
+    {
+        return $this->belongsTo('App\Models\Education');
+    }
 }
