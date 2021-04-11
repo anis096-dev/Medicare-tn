@@ -29,6 +29,7 @@ class UserPermission extends Model
             'sub-treatments',
             'user-experience',
             'user-education',
+            'user-time-settings',
         ];
     }
 

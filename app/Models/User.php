@@ -97,5 +97,10 @@ class User extends Authenticatable
     public function educations()
     {
         return $this->belongsTo('App\Models\Education');
+    } 
+    
+    public function time_settings()
+    {
+        return $this->belongsTo('App\Models\TimeSetting');
     }
 }

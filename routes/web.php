@@ -70,6 +70,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], funct
         Route::get('/educations', function () {
             return view('admin.user-education');
         })->name('user-education');
+        
+        Route::get('/user-time-settings', function () {
+            return view('admin.user-time-settings');
+        })->name('user-time-settings');
     });
 });
 

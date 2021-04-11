@@ -25,7 +25,7 @@
             <!-- Left Side -->
             <div class="w-full md:w-3/12 md:mx-2">
                 <!-- Profile Card -->
-                <div class="bg-white p-3 border-t-4 border-green-400">
+                <div class="bg-white p-3 border-t-4 border-blue-400">
                     <div class="image overflow-hidden">
                         <img class="h-auto w-full mx-auto"
                             src="{{$user->profile_photo_url }}" alt="{{ $user->name }}" >
@@ -63,10 +63,39 @@
                 </div>
                 <!-- End of profile card -->
                 <div class="my-4"></div>
+                <!-- Calender -->
+                <div class="bg-white p-3">
+                    <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
+                        <span class="text-blue-500">
+                            <svg class="h-5 fill-current" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                        <span>Calender</span>
+                    </div>
+                    <div class="mt-4">
+                        <ul class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
+                            @foreach (App\Models\TimeSetting::days() as $day)
+                            <li class="flex items-center py-3">
+                            <span class="text-blue-800 text-sm font-bold">{{$day}}</span>
+                            </li>
+                                @if (App\Models\TimeSetting::all()->count())
+                                @foreach (App\Models\TimeSetting::all()->where('user_id', $user->id)->where('day', $day) as $item)
+                                <button class="bg-blue-500 px-2 py-2 ml-1 mb-2 rounded text-white text-xs font-bold items-center">
+                                    {{$item->time1}}-{{$item->time2}}
+                                </button>
+                                @endforeach
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+                <!-- End of Calender -->
+                <div class="my-4"></div>
                 <!-- Friends card -->
                 <div class="bg-white p-3 hover:shadow">
                     <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
-                        <span class="text-green-500">
+                        <span class="text-blue-500">
                             <svg class="h-5 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -186,9 +215,9 @@
                             </div>
                         </div>
                     </div>
-                    <button
-                        class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">Show
-                        Full Information</button>
+                    {{-- <button class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">Show
+                        Full Information
+                    </button> --}}
                 </div>
                 <!-- End of about section -->
                 <div class="my-4"></div>
@@ -257,9 +286,7 @@
                     <!-- End of Experience and education grid -->
                 </div>
                 <!-- End of experience and education -->
-
                 <div class="my-4"></div>
-
                 <!-- Rating -->
                 @if(($user->role == 'E-health Care'))
                 @livewire('user-ratings', ['user' => $user], key($user->id))
