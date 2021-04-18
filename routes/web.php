@@ -73,7 +73,11 @@ Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], funct
         
         Route::get('/user-time-settings', function () {
             return view('admin.user-time-settings');
-        })->name('user-time-settings');
+        })->name('user-time-settings'); 
+
+        Route::get('/user-appointments', function () {
+            return view('admin.user-appointments');
+        })->name('user-appointments');
     });
 });
 

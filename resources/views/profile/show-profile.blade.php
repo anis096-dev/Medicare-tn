@@ -72,6 +72,10 @@
                             </svg>
                         </span>
                         <span>Calender</span>
+                        <a href="{{route('')}}" :active="request()->routeIs('')" class="flex-auto text-center bg-blue-700 text-white py-3 rounded-md text-sm uppercase hover:shadow 
+                        hover:bg-blue-500 transform hover:scale-105 motion-reduce:transform-none">
+                            Appoint
+                        </a> 
                     </div>
                     <div class="mt-4">
                         <ul class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
@@ -81,7 +85,7 @@
                             </li>
                                 @if (App\Models\TimeSetting::all()->count())
                                 @foreach (App\Models\TimeSetting::all()->where('user_id', $user->id)->where('day', $day) as $item)
-                                <button class="bg-blue-500 px-2 py-2 ml-1 mb-2 rounded text-white text-xs font-bold items-center">
+                                <button class="bg-blue-500 px-2 py-2 ml-1 mb-2 rounded text-white text-xs font-bold items-center transform hover:scale-125 motion-reduce:transform-none">
                                     {{$item->time1}}-{{$item->time2}}
                                 </button>
                                 @endforeach

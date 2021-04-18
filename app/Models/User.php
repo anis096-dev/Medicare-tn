@@ -103,4 +103,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\TimeSetting');
     }
+    
+    public function appointments()
+    {
+        return $this->belongsTo('App\Models\Appointment');
+    }
 }
