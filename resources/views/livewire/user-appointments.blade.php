@@ -1,35 +1,5 @@
 <div class="p-6">
-    @if(auth()->user()->role != 'E-health Care')
-    @if(session()->has('message'))
-        <style>
-            /*Toast open/load animation*/
-            .alert-toast {
-                -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-                        animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-            }
-            /*Toast close animation*/
-            .alert-toast input:checked ~ * {
-                -webkit-animation: fade-out-right 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-                        animation: fade-out-right 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-            }
-            /* -------------------------------------------------------------
-            * Animations generated using Animista * w: http://animista.net, 
-            * ---------------------------------------------------------- */
-            @-webkit-keyframes slide-in-top{0%{-webkit-transform:translateY(-1000px);transform:translateY(-1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}@keyframes slide-in-top{0%{-webkit-transform:translateY(-1000px);transform:translateY(-1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}@-webkit-keyframes slide-out-top{0%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}100%{-webkit-transform:translateY(-1000px);transform:translateY(-1000px);opacity:0}}@keyframes slide-out-top{0%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}100%{-webkit-transform:translateY(-1000px);transform:translateY(-1000px);opacity:0}}@-webkit-keyframes slide-in-bottom{0%{-webkit-transform:translateY(1000px);transform:translateY(1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}@keyframes slide-in-bottom{0%{-webkit-transform:translateY(1000px);transform:translateY(1000px);opacity:0}100%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}}@-webkit-keyframes slide-out-bottom{0%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}100%{-webkit-transform:translateY(1000px);transform:translateY(1000px);opacity:0}}@keyframes slide-out-bottom{0%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}100%{-webkit-transform:translateY(1000px);transform:translateY(1000px);opacity:0}}@-webkit-keyframes slide-in-right{0%{-webkit-transform:translateX(1000px);transform:translateX(1000px);opacity:0}100%{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}}@keyframes slide-in-right{0%{-webkit-transform:translateX(1000px);transform:translateX(1000px);opacity:0}100%{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}}@-webkit-keyframes fade-out-right{0%{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}100%{-webkit-transform:translateX(50px);transform:translateX(50px);opacity:0}}@keyframes fade-out-right{0%{-webkit-transform:translateX(0);transform:translateX(0);opacity:1}100%{-webkit-transform:translateX(50px);transform:translateX(50px);opacity:0}}
-        </style>
-
-        <!--Toast-->
-        <div class="alert-toast fixed bottom-0 right-0 m-8 w-5/6 md:w-full max-w-sm">
-            <input type="checkbox" class="hidden" id="footertoast">
-
-            <label class="close cursor-pointer flex items-start justify-between w-full p-2 bg-blue-500 h-24 rounded shadow-lg text-white" title="close" for="footertoast">
-            {{session('message')}}            
-            <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-            </svg>
-            </label>
-        </div>
-    @endif
+    @if(auth()->user()->id != $user->id)
         <div class="flex items-center justify-end px-4 py-3 text-right sm:px-6">
             <a  wire:click="createShowModal" class="flex-auto text-center bg-blue-700 text-white py-3 rounded-md text-sm uppercase hover:shadow 
             hover:bg-blue-500 transform hover:scale-105 motion-reduce:transform-none">
@@ -122,20 +92,22 @@
                 <x-jet-label for="treatment" value="{{ __('Treatment') }}" />
                 <select wire:model="treatment" id="" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                     <option value="">-- Select a Treatment --</option>    
-                    @foreach (App\Models\Treatment::all() as $item)
+                    @foreach ($allTreatments->where('specialty', $user->specialty) as $item)
                         <option value="{{ $item->name }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
                 @error('treatment') <span class="error">{{ $message }}</span> @enderror
             </div>
-
+           
             <div class="mt-4">
                 <x-jet-label for="sub_treatment" value="{{ __('Sub Treatment') }}" />
                 <select wire:model="sub_treatment" id="" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                     <option value="">-- Select a Sub Treatment --</option>    
-                    @foreach (App\Models\SubTreatment::all() as $item)
-                        <option value="{{ $item->name }}">{{ $item->name }}</option>
-                    @endforeach
+                    @forelse ($allSubTreatments->where('treatment', $treatment) as $item)
+                        <option value="{{ $item->name }}">{{ $item->name }}</option>  
+                    @empty
+                        <option value="{{'empty'}}">Empty!!</option>  
+                    @endforelse
                 </select>
                 @error('sub_treatment') <span class="error">{{ $message }}</span> @enderror
             </div>
@@ -151,18 +123,18 @@
                 @error('passage_number') <span class="error">{{ $message }}</span> @enderror
             </div>
 
+            @if ($modelId)
             <div class="mt-4">
                 <x-jet-label for="status" value="{{ __('Status') }}" />
                 <select wire:model="status" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                    {{-- @if ($modelId) --}}
                     <option value="">-- Processing --</option>    
                         @foreach (App\Models\Appointment::status() as $item)
                             <option value="{{ $item }}">{{ $item }}</option>
                         @endforeach
-                    {{-- @endif --}}
                 </select>
                 @error('status') <span class="error">{{ $message }}</span> @enderror
             </div>
+            @endif
                  
             <div class="mt-4">
                 <x-jet-label for="certificate" value="{{ __('Certificate') }}" />

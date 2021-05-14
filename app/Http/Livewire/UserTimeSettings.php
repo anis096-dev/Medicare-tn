@@ -76,9 +76,25 @@ class UserTimeSettings extends Component
     public function create()
     {
         $this->validate();
-        TimeSetting::create($this->modelData());
-        $this->modalFormVisible = false;
-        $this->reset();
+        try{
+            TimeSetting::create($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your Time created Successfully!!"
+            ]);
+    
+            // Reset Form Fields After Creating Category
+            $this->reset();
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+            $this->reset();
+        }
     }
 
     /**
@@ -100,8 +116,22 @@ class UserTimeSettings extends Component
     public function update()
     {
         $this->validate();
-        TimeSetting::find($this->modelId)->update($this->modelData());
-        $this->modalFormVisible = false;
+        try{
+            TimeSetting::find($this->modelId)->update($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your Time updated Successfully!!"
+            ]);
+    
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+        }
     }
 
     /**
@@ -113,6 +143,10 @@ class UserTimeSettings extends Component
     {
         TimeSetting::destroy($this->modelId);
         $this->modalConfirmDeleteVisible = false;
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"Your Time deleted Successfully!!"
+        ]);
         $this->resetPage();
     }
 

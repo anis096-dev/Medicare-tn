@@ -68,9 +68,25 @@ class Specialties extends Component
     public function create()
     {
         $this->validate();
-        Specialty::create($this->modelData());
-        $this->modalFormVisible = false;
-        $this->reset();
+        try{
+            Specialty::create($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your Specialty created Successfully!!"
+            ]);
+    
+            // Reset Form Fields After Creating Category
+            $this->reset();
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+            $this->reset();
+        }
     }
 
     /**
@@ -91,8 +107,22 @@ class Specialties extends Component
     public function update()
     {
         $this->validate();
-        Specialty::find($this->modelId)->update($this->modelData());
-        $this->modalFormVisible = false;
+        try{
+            Specialty::find($this->modelId)->update($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your Specialty updated Successfully!!"
+            ]);
+    
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+        }
     }
 
     /**
@@ -104,6 +134,10 @@ class Specialties extends Component
     {
         Specialty::destroy($this->modelId);
         $this->modalConfirmDeleteVisible = false;
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"Your Specialty deleted Successfully!!"
+        ]);
         $this->resetPage();
     }
 

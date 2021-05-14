@@ -55,9 +55,25 @@ class Pages extends Component
         $this->validate();
         $this->unassignDefaultHomePage();
         $this->unassignDefaultNotFoundPage();
-        Page::create($this->modelData());
-        $this->modalFormVisible = false;
-        $this->reset();
+        try{
+            Page::create($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your Page created Successfully!!"
+            ]);
+    
+            // Reset Form Fields After Creating Category
+            $this->reset();
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+            $this->reset();
+        }
     }
     
     /**
@@ -80,8 +96,22 @@ class Pages extends Component
         $this->validate();
         $this->unassignDefaultHomePage();
         $this->unassignDefaultNotFoundPage();
-        Page::find($this->modelId)->update($this->modelData());
-        $this->modalFormVisible = false;
+        try{
+            Page::find($this->modelId)->update($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your Page updated Successfully!!"
+            ]);
+    
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+        }
     }
     
     /**
@@ -93,6 +123,10 @@ class Pages extends Component
     {
         page::destroy($this->modelId);
         $this->modalConfirmDeleteVisible = false;
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"Your Page deleted Successfully!!"
+        ]);
         $this->resetPage();
     }
 

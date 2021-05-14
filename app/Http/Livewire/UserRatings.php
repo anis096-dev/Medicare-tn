@@ -49,37 +49,54 @@ class UserRatings extends Component
             $this->rating  = '';
             $this->comment = '';
         }
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"Your Review deleted Successfully!!"
+        ]);
     }
 
     public function rate()
     {
         $rating = Rating::where('user_id', auth()->user()->id)->where('related_id', $this->user->id)->first();
         $this->validate();
-        if (!empty($rating)) {
-            $rating->user_id = auth()->user()->id;
-            $rating->related_id = $this->user->id;
-            $rating->rating = $this->rating;
-            $rating->comment = $this->comment;
-            $rating->status = 1;
-            try {
-                $rating->update();
-            } catch (\Throwable $th) {
-                throw $th;
+        try{
+            if (!empty($rating)) {
+                $rating->user_id = auth()->user()->id;
+                $rating->related_id = $this->user->id;
+                $rating->rating = $this->rating;
+                $rating->comment = $this->comment;
+                $rating->status = 1;
+                try {
+                    $rating->update();
+                } catch (\Throwable $th) {
+                    throw $th;
+                }
+            } else {
+                $rating = new Rating;
+                $rating->user_id = auth()->user()->id;
+                $rating->related_id = $this->user->id;
+                $rating->rating = $this->rating;
+                $rating->comment = $this->comment;
+                $rating->status = 1;
+                try {
+                    $rating->save();
+                } catch (\Throwable $th) {
+                    throw $th;
+                }
+                $this->hideForm = true;
             }
-            session()->flash('message', 'Success!');
-        } else {
-            $rating = new Rating;
-            $rating->user_id = auth()->user()->id;
-            $rating->related_id = $this->user->id;
-            $rating->rating = $this->rating;
-            $rating->comment = $this->comment;
-            $rating->status = 1;
-            try {
-                $rating->save();
-            } catch (\Throwable $th) {
-                throw $th;
-            }
-            $this->hideForm = true;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your Review added Successfully!!"
+            ]);
         }
+        catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+        }
+        
     }
 }

@@ -73,9 +73,25 @@ class Treatments extends Component
     public function create()
     {
         $this->validate();
-        Treatment::create($this->modelData());
-        $this->modalFormVisible = false;
-        $this->reset();
+        try{
+            Treatment::create($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your Treatment created Successfully!!"
+            ]);
+    
+            // Reset Form Fields After Creating Category
+            $this->reset();
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+            $this->reset();
+        }
     }
 
     /**
@@ -96,8 +112,22 @@ class Treatments extends Component
     public function update()
     {
         $this->validate();
-        Treatment::find($this->modelId)->update($this->modelData());
-        $this->modalFormVisible = false;
+        try{
+            Treatment::find($this->modelId)->update($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your Treatment updated Successfully!!"
+            ]);
+    
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+        }
     }
 
     /**
@@ -109,6 +139,10 @@ class Treatments extends Component
     {
         Treatment::destroy($this->modelId);
         $this->modalConfirmDeleteVisible = false;
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"Your Treatment deleted Successfully!!"
+        ]);
         $this->resetPage();
     }
 

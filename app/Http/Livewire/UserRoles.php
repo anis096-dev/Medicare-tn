@@ -64,9 +64,25 @@ class UserRoles extends Component
     public function create()
     {
         $this->validate();
-        Roles::create($this->modelData());
-        $this->modalFormVisible = false;
-        $this->reset();
+        try{
+            Roles::create($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your Role created Successfully!!"
+            ]);
+    
+            // Reset Form Fields After Creating Category
+            $this->reset();
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+            $this->reset();
+        }
     }
 
     /**
@@ -87,8 +103,22 @@ class UserRoles extends Component
     public function update()
     {
         $this->validate();
-        Roles::find($this->modelId)->update($this->modelData());
-        $this->modalFormVisible = false;
+        try{
+            Roles::find($this->modelId)->update($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your Role updated Successfully!!"
+            ]);
+    
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+        }
     }
 
     /**
@@ -100,6 +130,10 @@ class UserRoles extends Component
     {
         Roles::destroy($this->modelId);
         $this->modalConfirmDeleteVisible = false;
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"Your Role deleted Successfully!!"
+        ]);
         $this->resetPage();
     }
 

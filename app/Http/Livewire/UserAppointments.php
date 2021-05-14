@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use App\Models\Appointment;
 use App\Models\User;
+use Livewire\Component;
+use App\Models\Treatment;
+use App\Models\Appointment;
+use App\Models\SubTreatment;
 use Livewire\WithPagination;
 
 class UserAppointments extends Component
@@ -15,7 +17,8 @@ class UserAppointments extends Component
      * Put your custom public properties here!
      */
     public User $user;
-    public $selectedAppointment;
+    public $allTreatments;
+    public $allSubTreatments;
     public $treatment; 
     public $sub_treatment;
     public $passage_number;
@@ -31,6 +34,13 @@ class UserAppointments extends Component
     public $modalConfirmDeleteVisible;
     public $modelId;
     
+
+    public function mount()
+    {
+        $this->allTreatments = Treatment::all();
+        $this->allSubTreatments = SubTreatment::all();
+    }
+
     /**
      * The validation rules
      *
@@ -40,8 +50,8 @@ class UserAppointments extends Component
     {
         return [ 
             'treatment' => 'required',
-            'sub_treatment' => 'required',
-            'status' => 'required',
+            'sub_treatment' =>'required',
+            // 'status' => 'required',
             'passage_number' => 'required',
             'certificate' => 'required',
             'home_mention' => 'required',
@@ -95,7 +105,7 @@ class UserAppointments extends Component
             'related_name' => $this->user->name,
             'treatment' => $this->treatment,
             'sub_treatment' => $this->sub_treatment,
-            'status' => $this->status,
+            // 'status' => $this->status,
             'passage_number' => $this->passage_number,
             'certificate' => $this->certificate,
             'home_mention' => $this->home_mention,
@@ -115,10 +125,27 @@ class UserAppointments extends Component
     public function create()
     {
         $this->validate();
+        try{
         Appointment::create($this->modelData());
         $this->modalFormVisible = false;
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'success',
+            'message'=>"You demande has been sent Successfully!!"
+        ]);
+
+        // Reset Form Fields After Creating Category
         $this->cleanVars();
-        session()->flash('message', 'Your demand has been sent!! Wish you good luck!!');
+        }
+        catch(\Exception $e){
+        // Set Flash Message
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"Something goes wrong!!"
+        ]);
+
+        // Reset Form Fields After Creating Category
+        $this->cleanVars();
+        }
     }
     
     /**
@@ -193,10 +220,28 @@ class UserAppointments extends Component
     public function update()
     {
         $this->validate();
+        try{
         Appointment::find($this->modelId)->update($this->modelDataUpdate());
         $this->modalFormVisible = false;
+         // Set Flash Message
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'success',
+            'message'=>"You changed the Appointment data Successfully!!"
+        ]);
+
+        // Reset Form Fields After Creating Category
         $this->cleanVars();
-        session()->flash('message', 'You changed the Appointment data Successfully!!');
+        }
+        catch(\Exception $e){
+        // Set Flash Message
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"Something goes wrong!!"
+        ]);
+
+        // Reset Form Fields After Creating Category
+        $this->cleanVars();
+        }
     }
     
     /**
@@ -220,6 +265,10 @@ class UserAppointments extends Component
     {
         Appointment::destroy($this->modelId);
         $this->modalConfirmDeleteVisible = false;
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"Your Appointment deleted successfuly!!"
+        ]);
         $this->resetPage();
     }
     
@@ -240,7 +289,6 @@ class UserAppointments extends Component
         $this->care_place  = '';
         $this->covid_symptom  = '';
         $this->modelId = '';
-        $this->selectedAppointment = '';
        $this->resetValidation();
     }
 }
