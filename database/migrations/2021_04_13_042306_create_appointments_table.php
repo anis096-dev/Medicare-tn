@@ -17,10 +17,11 @@ class CreateAppointmentsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('related_id');
+            $table->string('related_name');
             $table->string('treatment');
             $table->string('sub_treatment');
-            $table->enum('status', ['accepted', 'refused', 'waiting'])->nullable();
-            $table->enum('passage_number', ['just once', 'recurrent treatment'])->nullable();
+            $table->enum('status', [ 'waiting', 'accepted', 'refused'])->default('waiting');
+            $table->string('passage_number')->nullable();
             $table->enum('certificate', ['yes', 'no'])->nullable();
             $table->enum('home_mention', ['yes', 'no'])->nullable();
             $table->string('start_date')->nullable();

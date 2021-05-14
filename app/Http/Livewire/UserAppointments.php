@@ -4,10 +4,19 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Appointment;
+use App\Models\User;
+use Livewire\WithPagination;
 
 class UserAppointments extends Component
 {
-    public $treatment;
+    use WithPagination;
+   
+    /**
+     * Put your custom public properties here!
+     */
+    public User $user;
+    public $selectedAppointment;
+    public $treatment; 
     public $sub_treatment;
     public $passage_number;
     public $status;
@@ -18,121 +27,220 @@ class UserAppointments extends Component
     public $user_dispo;
     public $care_place;
     public $covid_symptom;
-    public $currentId;
-    public $user;
-    public $hideForm;
+    public $modalFormVisible;
+    public $modalConfirmDeleteVisible;
+    public $modelId;
+    
+    /**
+     * The validation rules
+     *
+     * @return void
+     */
+    public function rules()
+    {
+        return [ 
+            'treatment' => 'required',
+            'sub_treatment' => 'required',
+            'status' => 'required',
+            'passage_number' => 'required',
+            'certificate' => 'required',
+            'home_mention' => 'required',
+            'start_date' => 'required',
+            'duration' => 'required',
+            'user_dispo' => 'required',
+            'care_place' => 'required',
+            'covid_symptom' => 'required',
+        ];
+    }
 
-    protected $rules = [
-        
-        'treatment' => 'required',
-        'sub_treatment' => 'required',
-        'status' => 'required',
-        'passage_number' => 'required',
-        'certificate' => 'required',
-        'home_mention' => 'required',
-        'start_date' => 'required',
-        'duration' => 'required',
-        'user_dispo' => 'required',
-        'care_place' => 'required',
-        'covid_symptom' => 'required',
-    ];
-
+     /**
+     * The read function.
+     *
+     * @return void
+     */
+    public function read()
+    {    
+        return Appointment::latest()->with('user')->paginate(5);
+    }
+    
     public function render()
     {
-        $appointments = Appointment::where('status', 'accepted')->with('user')->get();
-        return view('livewire.user-appointments', compact('appointments'));
+        return view('livewire.user-appointments', [
+            'data' => $this->read(),
+        ]);
+    }
+    
+    /**
+     * Shows the create modal
+     *
+     * @return void
+     */
+    public function createShowModal()
+    {
+        $this->cleanVars();
+        $this->modalFormVisible = true;
     }
 
-    public function mount(Appointment $appointment)
-    {
-        if(auth()->user()){
-            if (!empty($appointment)) {
-                $this->treatment  = $appointment->treatment;
-                $this->sub_treatment  = $appointment->sub_treatment;
-                $this->passage_number  = $appointment->passage_number;
-                $this->status  = $appointment->status;
-                $this->certificate  = $appointment->certificate;
-                $this->home_mention  = $appointment->home_mention;
-                $this->start_date  = $appointment->start_date;
-                $this->duration  = $appointment->duration;
-                $this->user_dispo  = $appointment->user_dispo;
-                $this->care_place  = $appointment->care_place;
-                $this->covid_symptom  = $appointment->covid_symptom;
-                $this->currentId = $appointment->id;
-            }
-        }
-        return view('livewire.user-appointments');
+     /**
+     * The data for the model mapped
+     * in this component.
+     *
+     * @return void
+     */
+    public function modelData()
+    {   
+        return [
+            'user_id' => auth()->user()->id,
+            'related_id' => $this->user->id,
+            'related_name' => $this->user->name,
+            'treatment' => $this->treatment,
+            'sub_treatment' => $this->sub_treatment,
+            'status' => $this->status,
+            'passage_number' => $this->passage_number,
+            'certificate' => $this->certificate,
+            'home_mention' => $this->home_mention,
+            'start_date' => $this->start_date,
+            'duration' => $this->duration,
+            'user_dispo' => $this->user_dispo,
+            'care_place' => $this->care_place,
+            'covid_symptom' => $this->covid_symptom,    
+        ];
     }
-
-    public function delete($id)
+    
+     /**
+     * The create function.
+     *
+     * @return void
+     */
+    public function create()
     {
-        $appointment = Appointment::where('id', $id)->first();
-        if ($appointment && ($appointment->user_id == auth()->user()->id)  || ('admin'== auth()->user()->role)) {
-            $appointment->delete();
-        }
-        if ($this->currentId) {
-            $this->currentId = '';
-            $this->treatment  = '';
-            $this->sub_treatment = '';
-            $this->passage_number = '';
-            $this->status = '';
-            $this->certificate = '';
-            $this->home_mention = '';
-            $this->start_date = '';
-            $this->duration = '';
-            $this->user_dispo = '';
-            $this->care_place = '';
-            $this->covid_symptom = '';
-        }
-    }
-
-    public function appoint()
-    {
-        $appointment = Appointment::where('user_id', auth()->user()->id)->where('related_id', $this->user->id)->first();
         $this->validate();
-        if (!empty($appointment)) {
-            $appointment->user_id = auth()->user()->id;
-            $appointment->related_id = $this->user->id;
-            $appointment->treatment = $this->treatment;
-            $appointment->sub_treatment = $this->sub_treatment;
-            $appointment->passage_number = $this->passage_number;
-            $appointment->sub_treatment = $this->sub_treatment;
-            $appointment->status = $this->status;
-            $appointment->certificate = $this->certificate;
-            $appointment->home_mention = $this->home_mention;
-            $appointment->start_date = $this->start_date;
-            $appointment->duration = $this->duration;
-            $appointment->user_dispo = $this->user_dispo;
-            $appointment->care_place = $this->care_place;
-            $appointment->covid_symptom = $this->covid_symptom;
-            try {
-                $appointment->update();
-            } catch (\Throwable $th) {
-                throw $th;
-            }
-            session()->flash('message', 'Success!');
-        } else {
-            $appointment = new Appointment;
-            $appointment->user_id = auth()->user()->id;
-            $appointment->related_id = $this->user->id;
-            $appointment->treatment = $this->treatment;
-            $appointment->sub_treatment = $this->sub_treatment;
-            $appointment->passage_number = $this->passage_number;
-            $appointment->sub_treatment = $this->sub_treatment;
-            $appointment->status = 'waiting';
-            $appointment->certificate = $this->certificate;
-            $appointment->home_mention = $this->home_mention;
-            $appointment->start_date = $this->start_date;
-            $appointment->duration = $this->duration;
-            $appointment->user_dispo = $this->user_dispo;
-            $appointment->care_place = $this->care_place;
-            $appointment->covid_symptom = $this->covid_symptom;
-            try {
-                $appointment->save();
-            } catch (\Throwable $th) {
-                throw $th;
-            }
-            $this->hideForm = true;
-        }
+        Appointment::create($this->modelData());
+        $this->modalFormVisible = false;
+        $this->cleanVars();
+        session()->flash('message', 'Your demand has been sent!! Wish you good luck!!');
+    }
+    
+    /**
+     * Loads the model data
+     * of this component.
+     *
+     * @return void
+     */
+    public function loadModel()
+    {
+        $data = Appointment::find($this->modelId);
+        // Assign the variables here
+        $this->user_id = $data->user_id;
+        $this->related_id = $data->related_id;
+        $this->related_name = $data->related_name;
+        $this->treatment  = $data->treatment;
+        $this->sub_treatment  = $data->sub_treatment;
+        $this->passage_number  = $data->passage_number;
+        $this->status  = $data->status;
+        $this->certificate  = $data->certificate;
+        $this->home_mention  = $data->home_mention;
+        $this->start_date  = $data->start_date;
+        $this->duration  = $data->duration;
+        $this->user_dispo  = $data->user_dispo;
+        $this->care_place  = $data->care_place;
+        $this->covid_symptom  = $data->covid_symptom;
+    }
+
+     /**
+     * Shows the form modal
+     * in update mode.
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function updateShowModal($id)
+    {
+        $this->modelId = $id;
+        $this->loadModel();
+        $this->modalFormVisible = true;
+    }
+
+     /**
+     * The data for the model mapped
+     * in this component.
+     *
+     * @return void
+     */
+    public function modelDataUpdate()
+    {   
+        return [  
+            'treatment' => $this->treatment,
+            'sub_treatment' => $this->sub_treatment,
+            'status' => $this->status,
+            'passage_number' => $this->passage_number,
+            'certificate' => $this->certificate,
+            'home_mention' => $this->home_mention,
+            'start_date' => $this->start_date,
+            'duration' => $this->duration,
+            'user_dispo' => $this->user_dispo,
+            'care_place' => $this->care_place,
+            'covid_symptom' => $this->covid_symptom,      
+        ];
+    }
+    
+    
+    /**
+     * The update function
+     *
+     * @return void
+     */
+    public function update()
+    {
+        $this->validate();
+        Appointment::find($this->modelId)->update($this->modelDataUpdate());
+        $this->modalFormVisible = false;
+        $this->cleanVars();
+        session()->flash('message', 'You changed the Appointment data Successfully!!');
+    }
+    
+    /**
+     * Shows the delete confirmation modal.
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function deleteShowModal($id)
+    {
+        $this->modelId = $id;
+        $this->modalConfirmDeleteVisible = true;
+    } 
+    
+    /**
+     * The delete function.
+     *
+     * @return void
+     */
+    public function delete()
+    {
+        Appointment::destroy($this->modelId);
+        $this->modalConfirmDeleteVisible = false;
+        $this->resetPage();
+    }
+    
+    public function cleanVars()
+    {
+        $this->user_id = '';
+        $this->related_id ='';
+        $this->related_name ='';
+        $this->treatment  = '';
+        $this->sub_treatment = '';
+        $this->passage_number  = '';
+        $this->status  = '';
+        $this->certificate  = '';
+        $this->home_mention  = '';
+        $this->start_date  = '';
+        $this->duration  = '';
+        $this->user_dispo  = '';
+        $this->care_place  = '';
+        $this->covid_symptom  = '';
+        $this->modelId = '';
+        $this->selectedAppointment = '';
+       $this->resetValidation();
     }
 }

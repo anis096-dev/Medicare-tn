@@ -21,11 +21,11 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">                           
                             @if ($data->count())
-                                @foreach ($data->unique('day') as $item)
+                                @foreach ($data->where('user_id', auth()->user()->id)->unique('day') as $item)
                                     <tr>
                                         <td class="px-6 py-2">{{ $item->day }}</td>
                                         <td class="px-6 py-2" x-data="{ show: false }">
-                                            @foreach ($data->where('day', $item->day) as $item)
+                                            @foreach ($data->where('user_id', auth()->user()->id)->where('day', $item->day) as $item)
                                             <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'" :class="{ 'active': show }" 
                                             class="bg-blue-500 px-2 py-2 ml-2 mb-2 rounded text-white text-xs font-bold items-center">
                                                 {{$item->time1}}-{{$item->time2}}

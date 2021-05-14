@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use App\Models\Roles;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -106,6 +104,6 @@ class User extends Authenticatable
     
     public function appointments()
     {
-        return $this->belongsTo('App\Models\Appointment');
+        return $this->hasMany('App\Models\Appointment');
     }
 }

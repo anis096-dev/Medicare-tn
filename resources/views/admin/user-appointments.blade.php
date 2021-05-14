@@ -10,6 +10,5 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 @livewire('user-appointments')
             </div>
-        </div>
     </div>
 </x-app-layout>

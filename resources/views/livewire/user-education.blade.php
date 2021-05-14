@@ -24,7 +24,7 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">                           
                             @if ($data->count())
-                                @foreach ($data as $item)
+                                @foreach ($data->where('user_id', auth()->user()->id) as $item)
                                     <tr>
                                         <td class="px-6 py-2">{{ $item->formation }}</td>
                                         <td class="px-6 py-2">{{ $item->institute }}</td>

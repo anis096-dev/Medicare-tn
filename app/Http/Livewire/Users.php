@@ -50,7 +50,7 @@ class Users extends Component
         if ($user->role == 'E-health Care') {
             # code...
             $avgrating = Rating::all()->where('related_id', $user->id );
-            return view('profile.show-profile',compact('user', 'avgrating'));
+            return view('livewire.show-profile',compact('user', 'avgrating'));
         }
         else 
         {

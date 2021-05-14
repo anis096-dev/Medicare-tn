@@ -9,7 +9,10 @@ use Livewire\WithPagination;
 class UserEducation extends Component
 {
     use WithPagination;
-    
+
+    /**
+     * Put your custom public properties here!
+     */
     public $user_id;
     public $formation;
     public $institute;
@@ -18,11 +21,7 @@ class UserEducation extends Component
     public $modalFormVisible;
     public $modalConfirmDeleteVisible;
     public $modelId;
-
-    /**
-     * Put your custom public properties here!
-     */
-
+    
     /**
      * The validation rules
      *
