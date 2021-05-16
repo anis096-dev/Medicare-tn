@@ -1,6 +1,6 @@
 <div>
     @if(auth()->user()->id != $user->id)
-        <div class="flex items-center justify-end px-4 text-right sm:px-8">
+        <div class="flex items-center justify-end px-4 pt-2 text-right sm:px-8">
             <a  wire:click="createShowModal" class="flex-auto text-center bg-blue-700 text-white py-3 rounded-md text-sm uppercase hover:shadow 
             hover:bg-blue-500 transform scale-105 hover:scale-100 motion-reduce:transform-none">
                 Appoint
@@ -11,13 +11,13 @@
     @if(auth()->user()->role != 'Patient')
     {{-- The data table --}}
     <div class="flex flex-col pt-2">
+        <div class="flex items-center justify-end px-4 py-3 text-right sm:px-1">
+            <button wire:click.prevent="deleteSelected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"
+            class="@if($bulkDisabled) opacity-50 @endif bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
+                Delete Selected
+            </button>
+        </div>
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="flex items-center justify-end px-4 py-3 text-right sm:px-8">
-                <button wire:click.prevent="deleteSelected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"
-                class="@if($bulkDisabled) opacity-50 @endif bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
-                    Delete Selected
-                </button>
-            </div>
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                     <table class="min-w-full divide-y divide-gray-200">
