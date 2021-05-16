@@ -10,7 +10,7 @@
         {{--The data table--}}
         <div class="flex flex-col">
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="flex items-center justify-end px-4 py-3 text-right sm:px-6">
+                <div class="flex items-center justify-end px-4 py-3 text-right sm:px-8">
                     <button wire:click.prevent="deleteSelected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"
                     class="@if($bulkDisabled) opacity-50 @endif bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
                         Delete Selected

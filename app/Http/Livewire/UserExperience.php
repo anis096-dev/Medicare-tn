@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Experience;
+use Exception;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -18,6 +19,9 @@ class UserExperience extends Component
     public $modalFormVisible;
     public $modalConfirmDeleteVisible;
     public $modelId;
+    public $selectedExperiences = [];
+    public $selectAll = false;
+    public $bulkDisabled = true;
 
     /**
      * Put your custom public properties here!
@@ -154,6 +158,35 @@ class UserExperience extends Component
     }
 
     /**
+     * The Selecteddelete function.
+     *
+     * @return void
+     */
+    public function deleteSelected()
+    {
+        Experience::query()
+        ->whereIn('id', $this->selectedExperiences)
+        ->delete();
+        $this->selectedExperiences = [];
+        $this->selectAll = false;
+        $this->resetPage();
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"all selected Items deleted Successfully!!"
+        ]);
+    }
+
+    public function updatedSelectAll($value)
+    {
+        if($value){
+            $this->selectedExperiences = Experience::pluck('id');
+        }else{
+            $this->selectedExperiences = [];
+        }
+        
+    }
+
+    /**
      * Shows the create modal
      *
      * @return void
@@ -195,6 +228,7 @@ class UserExperience extends Component
 
     public function render()
     {
+        $this->bulkDisabled = count($this->selectedExperiences) < 1;
         return view('livewire.user-experience', [
             'data' => $this->read(),
         ]);

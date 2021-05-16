@@ -21,6 +21,10 @@ class UserEducation extends Component
     public $modalFormVisible;
     public $modalConfirmDeleteVisible;
     public $modelId;
+    public $selectedEducations = [];
+    public $selectAll = false;
+    public $bulkDisabled = true;
+
     
     /**
      * The validation rules
@@ -153,6 +157,35 @@ class UserEducation extends Component
     }
 
     /**
+     * The Selecteddelete function.
+     *
+     * @return void
+     */
+    public function deleteSelected()
+    {
+        Education::query()
+        ->whereIn('id', $this->selectedEducations)
+        ->delete();
+        $this->selectedEducations = [];
+        $this->selectAll = false;
+        $this->resetPage();
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"all selected Items deleted Successfully!!"
+        ]);
+    }
+
+    public function updatedSelectAll($value)
+    {
+        if($value){
+            $this->selectedEducations = Education::pluck('id');
+        }else{
+            $this->selectedEducations = [];
+        }
+        
+    }
+
+    /**
      * Shows the create modal
      *
      * @return void
@@ -194,6 +227,7 @@ class UserEducation extends Component
 
     public function render()
     {
+        $this->bulkDisabled = count($this->selectedEducations) < 1;
         return view('livewire.user-education', [
             'data' => $this->read(),
         ]);
