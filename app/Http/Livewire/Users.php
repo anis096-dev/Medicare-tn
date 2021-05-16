@@ -170,6 +170,7 @@ class Users extends Component
         ->delete();
         $this->selectedUsers = [];
         $this->selectAll = false;
+        $this->resetPage();
         $this->dispatchBrowserEvent('alert',[
             'type'=>'error',
             'message'=>"all selected Items deleted Successfully!!"

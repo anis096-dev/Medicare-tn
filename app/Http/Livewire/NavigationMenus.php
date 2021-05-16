@@ -14,8 +14,10 @@ class NavigationMenus extends Component
 
     public $modalFormVisible;
     public $modalConfirmDeleteVisible;
-
     public $modelId;
+    public $selectedNavigationMenus = [];
+    public $selectAll = false;
+    public $bulkDisabled = true;
     public $label;
     public $slug;
     public $sequence = 1;
@@ -148,7 +150,36 @@ class NavigationMenus extends Component
         $this->resetPage();
     }
 
-        /**
+    
+    /**
+     * The Selecteddelete function.
+     *
+     * @return void
+     */
+    public function deleteSelected()
+    {
+        NavigationMenu::query()
+        ->whereIn('id', $this->selectedNavigationMenus)
+        ->delete();
+        $this->selectedNavigationMenus = [];
+        $this->selectAll = false;
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"all selected Items deleted Successfully!!"
+        ]);
+    }
+
+    public function updatedSelectAll($value)
+    {
+        if($value){
+            $this->selectedNavigationMenus = NavigationMenu::pluck('id');
+        }else{
+            $this->selectedNavigationMenus = [];
+        }
+        
+    }
+
+    /**
      * Runs everytime the title
      * variable is updated.
      *
@@ -202,6 +233,7 @@ class NavigationMenus extends Component
 
     public function render()
     {
+        $this->bulkDisabled = count($this->selectedNavigationMenus) < 1;
         return view('livewire.navigation-menus', [
             'data' => $this->read(),
         ]);

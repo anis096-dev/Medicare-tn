@@ -13,7 +13,7 @@ class UserRoles extends Component
     public $modalFormVisible;
     public $modalConfirmDeleteVisible;
     public $modelId;
-
+    
     /**
      * Put your custom public properties here!
      */

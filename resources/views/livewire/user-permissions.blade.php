@@ -10,11 +10,20 @@
     {{-- The data table --}}
     <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="flex items-center justify-end px-4 py-3 text-right sm:px-6">
+                <button wire:click.prevent="deleteSelected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"
+                class="@if($bulkDisabled) opacity-50 @endif bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
+                    Delete Selected
+                </button>
+            </div>
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                 <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead>
                             <tr>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                    <input type="checkbox" wire:model="selectAll">
+                                </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Role</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Route Name</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"></th>
@@ -24,6 +33,9 @@
                             @if ($data->count())
                                 @foreach ($data as $item)
                                     <tr>
+                                        <td class="px-6 py-2">
+                                            <input type="checkbox" wire:model="selectedPermissions" value="{{$item->id}}">
+                                        </td>
                                         <td class="px-6 py-2">{{ $item->role }}</td>
                                         <td class="px-6 py-2">{{ $item->route_name }}</td>                                        
                                         <td class="px-6 py-2 flex justify-end">

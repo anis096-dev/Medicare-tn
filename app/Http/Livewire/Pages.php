@@ -14,6 +14,9 @@ class Pages extends Component
     public $modalFormVisible = false;
     public $modalConfirmDeleteVisible = false;
     public $modelId;
+    public $selectedPages = [];
+    public $selectAll = false;
+    public $bulkDisabled = true;
     public $title;
     public $slug;
     public $content;
@@ -128,6 +131,35 @@ class Pages extends Component
             'message'=>"Your Page deleted Successfully!!"
         ]);
         $this->resetPage();
+    }
+
+    /**
+     * The Selecteddelete function.
+     *
+     * @return void
+     */
+    public function deleteSelected()
+    {
+        Page::query()
+        ->whereIn('id', $this->selectedPages)
+        ->delete();
+        $this->selectedPages = [];
+        $this->selectAll = false;
+        $this->resetPage();
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"all selected Items deleted Successfully!!"
+        ]);
+    }
+
+    public function updatedSelectAll($value)
+    {
+        if($value){
+            $this->selectedPages = Page::pluck('id');
+        }else{
+            $this->selectedPages = [];
+        }
+        
     }
 
     /**
@@ -270,6 +302,7 @@ class Pages extends Component
      */
     public function render()
     {
+        $this->bulkDisabled = count($this->selectedPages) < 1;
         return view('livewire.pages', [
             'data' => $this->read(),
         ]);

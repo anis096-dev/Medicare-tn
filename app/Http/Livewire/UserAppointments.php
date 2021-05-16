@@ -286,6 +286,7 @@ class UserAppointments extends Component
         ->delete();
         $this->selectedAppointments = [];
         $this->selectAll = false;
+        $this->resetPage();
         $this->dispatchBrowserEvent('alert',[
             'type'=>'error',
             'message'=>"all selected Items deleted Successfully!!"

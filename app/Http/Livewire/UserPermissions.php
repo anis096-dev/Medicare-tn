@@ -13,6 +13,9 @@ class UserPermissions extends Component
     public $modalFormVisible;
     public $modalConfirmDeleteVisible;
     public $modelId;
+    public $selectedPermissions = [];
+    public $selectAll = false;
+    public $bulkDisabled = true;
 
     /**
      * Put your custom public properties here!
@@ -143,6 +146,36 @@ class UserPermissions extends Component
     }
 
     /**
+     * The Selecteddelete function.
+     *
+     * @return void
+     */
+    public function deleteSelected()
+    {
+        UserPermission::query()
+        ->whereIn('id', $this->selectedPermissions)
+        ->delete();
+        $this->selectedPermissions = [];
+        $this->selectAll = false;
+        $this->resetPage();
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"all selected Items deleted Successfully!!"
+        ]);
+    }
+
+    public function updatedSelectAll($value)
+    {
+        if($value){
+            $this->selectedPermissions = UserPermission::pluck('id');
+        }else{
+            $this->selectedPermissions = [];
+        }
+        
+    }
+
+
+    /**
      * Shows the create modal
      *
      * @return void
@@ -184,6 +217,7 @@ class UserPermissions extends Component
 
     public function render()
     {
+        $this->bulkDisabled = count($this->selectedPermissions) < 1;
         return view('livewire.user-permissions', [
             'data' => $this->read(),
         ]);

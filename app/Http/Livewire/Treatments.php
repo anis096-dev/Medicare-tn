@@ -13,6 +13,9 @@ class Treatments extends Component
     public $modalFormVisible;
     public $modalConfirmDeleteVisible;
     public $modelId;
+    public $selectedTreatments = [];
+    public $selectAll = false;
+    public $bulkDisabled = true;
 
     /**
      * Put your custom public properties here!
@@ -147,6 +150,35 @@ class Treatments extends Component
     }
 
     /**
+     * The Selecteddelete function.
+     *
+     * @return void
+     */
+    public function deleteSelected()
+    {
+        Treatment::query()
+        ->whereIn('id', $this->selectedTreatments)
+        ->delete();
+        $this->selectedTreatments = [];
+        $this->selectAll = false;
+        $this->resetPage();
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"all selected Items deleted Successfully!!"
+        ]);
+    }
+
+    public function updatedSelectAll($value)
+    {
+        if($value){
+            $this->selectedTreatments = Treatment::pluck('id');
+        }else{
+            $this->selectedTreatments = [];
+        }
+        
+    }
+
+    /**
      * Shows the create modal
      *
      * @return void
@@ -188,6 +220,7 @@ class Treatments extends Component
 
     public function render()
     {
+        $this->bulkDisabled = count($this->selectedTreatments) < 1;
         return view('livewire.treatments', [
             'data' => $this->read(),
         ]);

@@ -13,6 +13,10 @@ class SubTreatments extends Component
     public $modalFormVisible;
     public $modalConfirmDeleteVisible;
     public $modelId;
+    public $selectedSubTreatments = [];
+    public $selectAll = false;
+    public $bulkDisabled = true;
+
 
     /**
      * Put your custom public properties here!
@@ -147,6 +151,35 @@ class SubTreatments extends Component
     }
 
     /**
+     * The Selecteddelete function.
+     *
+     * @return void
+     */
+    public function deleteSelected()
+    {
+        SubTreatment::query()
+        ->whereIn('id', $this->selectedSubTreatments)
+        ->delete();
+        $this->selectedSubTreatments = [];
+        $this->selectAll = false;
+        $this->resetPage();
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"all selected Items deleted Successfully!!"
+        ]);
+    }
+
+    public function updatedSelectAll($value)
+    {
+        if($value){
+            $this->selectedSubTreatments = SubTreatment::pluck('id');
+        }else{
+            $this->selectedSubTreatments = [];
+        }
+        
+    } 
+
+    /**
      * Shows the create modal
      *
      * @return void
@@ -188,6 +221,7 @@ class SubTreatments extends Component
 
     public function render()
     {
+        $this->bulkDisabled = count($this->selectedSubTreatments) < 1;
         return view('livewire.sub-treatments', [
             'data' => $this->read(),
         ]);

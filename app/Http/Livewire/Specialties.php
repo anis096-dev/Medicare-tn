@@ -13,6 +13,9 @@ class Specialties extends Component
     public $modalFormVisible;
     public $modalConfirmDeleteVisible;
     public $modelId;
+    public $selectedSpecialties = [];
+    public $selectAll = false;
+    public $bulkDisabled = true;
 
     /**
      * Put your custom public properties here!
@@ -142,6 +145,35 @@ class Specialties extends Component
     }
 
     /**
+     * The Selecteddelete function.
+     *
+     * @return void
+     */
+    public function deleteSelected()
+    {
+        Specialty::query()
+        ->whereIn('id', $this->selectedSpecialties)
+        ->delete();
+        $this->selectedSpecialties = [];
+        $this->selectAll = false;
+        $this->resetPage();
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"all selected Items deleted Successfully!!"
+        ]);
+    }
+
+    public function updatedSelectAll($value)
+    {
+        if($value){
+            $this->selectedSpecialties = Specialty::pluck('id');
+        }else{
+            $this->selectedSpecialties = [];
+        }
+        
+    }
+
+    /**
      * Shows the create modal
      *
      * @return void
@@ -183,6 +215,7 @@ class Specialties extends Component
 
     public function render()
     {
+        $this->bulkDisabled = count($this->selectedSpecialties) < 1;
         return view('livewire.specialties', [
             'data' => $this->read(),
         ]);
