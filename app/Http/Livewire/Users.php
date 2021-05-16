@@ -120,8 +120,22 @@ class Users extends Component
     public function update()
     {
         $this->validate();
-        User::find($this->modelId)->update($this->modelData());
-        $this->modalFormVisible = false;
+        try{
+            User::find($this->modelId)->update($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your E-health Care updated Successfully!!"
+            ]);
+    
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+        }
     }
 
     /**
@@ -133,6 +147,10 @@ class Users extends Component
     {
         User::destroy($this->modelId);
         $this->modalConfirmDeleteVisible = false;
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"Your E-health Care deleted Successfully!!"
+        ]);
         $this->resetPage();
     }
 

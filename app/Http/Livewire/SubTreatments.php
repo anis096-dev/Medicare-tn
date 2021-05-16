@@ -73,9 +73,25 @@ class SubTreatments extends Component
     public function create()
     {
         $this->validate();
-        SubTreatment::create($this->modelData());
-        $this->modalFormVisible = false;
-        $this->reset();
+        try{
+            SubTreatment::create($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your SubTreatment created Successfully!!"
+            ]);
+    
+            // Reset Form Fields After Creating Category
+            $this->reset();
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+            $this->reset();
+        }
     }
 
     /**
@@ -96,8 +112,22 @@ class SubTreatments extends Component
     public function update()
     {
         $this->validate();
-        SubTreatment::find($this->modelId)->update($this->modelData());
-        $this->modalFormVisible = false;
+        try{
+            SubTreatment::find($this->modelId)->update($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your SubTreatment updated Successfully!!"
+            ]);
+    
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+        }
     }
 
     /**
@@ -109,6 +139,10 @@ class SubTreatments extends Component
     {
         SubTreatment::destroy($this->modelId);
         $this->modalConfirmDeleteVisible = false;
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"Your SubTreatment deleted Successfully!!"
+        ]);
         $this->resetPage();
     }
 

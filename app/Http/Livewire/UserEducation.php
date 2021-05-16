@@ -79,9 +79,25 @@ class UserEducation extends Component
     public function create()
     {
         $this->validate();
-        Education::create($this->modelData());
-        $this->modalFormVisible = false;
-        $this->reset();
+        try{
+            Education::create($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your Education level created Successfully!!"
+            ]);
+    
+            // Reset Form Fields After Creating Category
+            $this->reset();
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+            $this->reset();
+        }
     }
 
     /**
@@ -102,8 +118,22 @@ class UserEducation extends Component
     public function update()
     {
         $this->validate();
-        Education::find($this->modelId)->update($this->modelData());
-        $this->modalFormVisible = false;
+        try{
+            Education::find($this->modelId)->update($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your Education level updated Successfully!!"
+            ]);
+    
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+        }
     }
 
     /**
@@ -115,6 +145,10 @@ class UserEducation extends Component
     {
         Education::destroy($this->modelId);
         $this->modalConfirmDeleteVisible = false;
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"Your Education level deleted Successfully!!"
+        ]);
         $this->resetPage();
     }
 

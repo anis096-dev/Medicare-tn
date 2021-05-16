@@ -75,9 +75,25 @@ class NavigationMenus extends Component
     public function create()
     {
         $this->validate();
+        try{
         NavigationMenu::create($this->modelData());
         $this->modalFormVisible = false;
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'success',
+            'message'=>"Your NavigationMenu created Successfully!!"
+        ]);
+
+        // Reset Form Fields After Creating Category
         $this->reset();
+        }
+        catch(\Exception $e){
+        // Set Flash Message
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"Something goes wrong!!"
+        ]);
+        $this->reset();
+        }
     }
 
     /**
@@ -98,8 +114,22 @@ class NavigationMenus extends Component
     public function update()
     {
         $this->validate();
-        NavigationMenu::find($this->modelId)->update($this->modelData());
-        $this->modalFormVisible = false;
+        try{
+            NavigationMenu::find($this->modelId)->update($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your NavigationMenu updated Successfully!!"
+            ]);
+    
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+        }
     }
 
     /**
@@ -108,9 +138,13 @@ class NavigationMenus extends Component
      * @return void
      */
     public function delete()
-    {
+    { 
         NavigationMenu::destroy($this->modelId);
         $this->modalConfirmDeleteVisible = false;
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"Your NavigationMenu deleted Successfully!!"
+        ]);
         $this->resetPage();
     }
 

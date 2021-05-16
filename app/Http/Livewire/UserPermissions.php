@@ -69,9 +69,25 @@ class UserPermissions extends Component
     public function create()
     {
         $this->validate();
-        UserPermission::create($this->modelData());
-        $this->modalFormVisible = false;
-        $this->reset();
+        try{
+            UserPermission::create($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your Permission created Successfully!!"
+            ]);
+    
+            // Reset Form Fields After Creating Category
+            $this->reset();
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+            $this->reset();
+        }
     }
 
     /**
@@ -92,8 +108,22 @@ class UserPermissions extends Component
     public function update()
     {
         $this->validate();
-        UserPermission::find($this->modelId)->update($this->modelData());
-        $this->modalFormVisible = false;
+        try{
+            UserPermission::find($this->modelId)->update($this->modelData());
+            $this->modalFormVisible = false;
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"Your Permission updated Successfully!!"
+            ]);
+    
+            }
+            catch(\Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+        }
     }
 
     /**
@@ -105,6 +135,10 @@ class UserPermissions extends Component
     {
         UserPermission::destroy($this->modelId);
         $this->modalConfirmDeleteVisible = false;
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"Your Permission deleted Successfully!!"
+        ]);
         $this->resetPage();
     }
 
