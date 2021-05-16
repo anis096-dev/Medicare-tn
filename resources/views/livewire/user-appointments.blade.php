@@ -1,8 +1,8 @@
-<div class="p-6">
+<div class="p-3">
     @if(auth()->user()->id != $user->id)
         <div class="flex items-center justify-end px-4 py-3 text-right sm:px-6">
             <a  wire:click="createShowModal" class="flex-auto text-center bg-blue-700 text-white py-3 rounded-md text-sm uppercase hover:shadow 
-            hover:bg-blue-500 transform hover:scale-105 motion-reduce:transform-none">
+            hover:bg-blue-500 transform scale-105 hover:scale-100 motion-reduce:transform-none">
                 Appoint
             </a> 
         </div>

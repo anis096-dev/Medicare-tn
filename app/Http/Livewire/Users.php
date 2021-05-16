@@ -14,6 +14,10 @@ class Users extends Component
     public $modalFormVisible;
     public $modalConfirmDeleteVisible;
     public $modelId;
+    public $selectedUsers = [];
+    public $selectAll = false;
+    public $bulkDisabled = true;
+
 
     /**
      * Put your custom public properties here!
@@ -153,6 +157,34 @@ class Users extends Component
         ]);
         $this->resetPage();
     }
+    
+    /**
+     * The Selecteddelete function.
+     *
+     * @return void
+     */
+    public function deleteSelected()
+    {
+        User::query()
+        ->whereIn('id', $this->selectedUsers)
+        ->delete();
+        $this->selectedUsers = [];
+        $this->selectAll = false;
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"all selected Items deleted Successfully!!"
+        ]);
+    }
+
+    public function updatedSelectAll($value)
+    {
+        if($value){
+            $this->selectedUsers = User::pluck('id');
+        }else{
+            $this->selectedUsers = [];
+        }
+        
+    }
 
     /**
      * Shows the create modal
@@ -195,7 +227,8 @@ class Users extends Component
     }
 
     public function render()
-    {   
+    {  
+        $this->bulkDisabled = count($this->selectedUsers) < 1;
         return view('livewire.users', [
             'data' => $this->read(),
         ]);
