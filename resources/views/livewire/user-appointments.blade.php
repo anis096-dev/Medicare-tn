@@ -40,8 +40,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">                           
-                            @if ($data->count())
-                                @foreach ($data->where('related_id', $user->id) as $item)
+                                @forelse ($data->where('related_id', $user->id) as $item)
                                     <tr>
                                         <td class="px-6 py-2">
                                             <input type="checkbox" wire:model="selectedAppointments" value="{{$item->id}}">
@@ -70,12 +69,11 @@
                                             </div>
                                         </td>
                                     </tr>
-                                @endforeach
-                            @else 
+                                @empty
                                 <tr>
                                     <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">No Results Found</td>
                                 </tr>
-                            @endif
+                                @endforelse
                         </tbody>
                     </table>
                 </div>

@@ -83,13 +83,13 @@
                             <li class="flex items-center py-3">
                             <span class="text-blue-800 text-sm font-bold">{{$day}}</span>
                             </li>
-                                @if (App\Models\TimeSetting::all()->count())
-                                @foreach (App\Models\TimeSetting::all()->where('user_id', $user->id)->where('day', $day) as $item)
+                                @forelse (App\Models\TimeSetting::all()->where('user_id', $user->id)->where('day', $day) as $item)
                                 <button class="bg-blue-500 px-2 py-2 ml-1 mb-2 rounded text-white text-xs font-bold items-center transform hover:scale-125 motion-reduce:transform-none">
                                     {{$item->time1}}-{{$item->time2}}
                                 </button>
-                                @endforeach
-                                @endif
+                                @empty
+                                <div class="text-teal-600">No Times added!</div>
+                                @endforelse
                             @endforeach
                         </ul>
                     </div>
@@ -242,19 +242,17 @@
                                 <span class="tracking-wide">Experience</span>
                             </div>
                             <ul class="list-inside space-y-2">
-                                @if (App\Models\Experience::all()->count())
-                                @foreach (App\Models\Experience::all()->where('user_id', $user->id) as $item)
+                                @forelse (App\Models\Experience::all()->where('user_id', $user->id) as $item)
                                 <li>
                                     <div class="text-teal-600"><strong class="text-blue-800 capitalize">{{$item->occupation}}</strong> at <strong class="capitalize">{{$item->company}}</strong>.</div>
                                     <div class="text-gray-500 text-xs">From <strong>{{$item->start_date}}</strong> To <strong>{{$item->end_date}}</strong></div>
                                 </li>
-                                @endforeach
-                                @else
+                                @empty
                                 <li>
                                     <div class="text-teal-600">No experiences added!</div>
                                     <div class="text-gray-500 text-xs">start date - end date</div>
                                 </li>
-                                @endif
+                                @endforelse
                             </ul>
                         </div>
                         <div class="mt-4 md:mt-0">
@@ -272,19 +270,17 @@
                                 <span class="tracking-wide">Education</span>
                             </div>
                             <ul class="list-inside space-y-2">
-                                @if (App\Models\Education::all()->count())
-                                @foreach (App\Models\Education::all()->where('user_id', $user->id) as $item)
+                                @forelse (App\Models\Education::all()->where('user_id', $user->id) as $item)
                                 <li>
                                     <div class="text-teal-600"><strong class="text-blue-800 capitalize">{{$item->formation}}</strong> at <strong class="capitalize">{{$item->institute}}</strong>.</div>
                                     <div class="text-gray-500 text-xs">From <strong>{{$item->start_date}}</strong> To <strong>{{$item->end_date}}</strong></div>
                                 </li>
-                                @endforeach
-                                @else
+                                @empty
                                 <li>
                                     <div class="text-teal-600">No Education added!</div>
                                     <div class="text-gray-500 text-xs">start date - end date</div>
                                 </li>
-                                @endif
+                                @endforelse
                             </ul>
                         </div>
                     </div>

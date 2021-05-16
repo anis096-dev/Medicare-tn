@@ -17,6 +17,9 @@ class UserTimeSettings extends Component
     public $modalFormVisible;
     public $modalConfirmDeleteVisible;
     public $modelId;
+    public $selectedTimes = [];
+    public $selectAll = false;
+    public $bulkDisabled = true;
 
     /**
      * Put your custom public properties here!
@@ -151,6 +154,35 @@ class UserTimeSettings extends Component
     }
 
     /**
+     * The Selecteddelete function.
+     *
+     * @return void
+     */
+    public function deleteSelected()
+    {
+        TimeSetting::query()
+        ->whereIn('id', $this->selectedTimes)
+        ->delete();
+        $this->selectedTimes = [];
+        $this->selectAll = false;
+        $this->resetPage();
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"all selected Items deleted Successfully!!"
+        ]);
+    }
+
+    public function updatedSelectAll($value)
+    {
+        if($value){
+            $this->selectedTimes = TimeSetting::pluck('id');
+        }else{
+            $this->selectedTimes = [];
+        }
+        
+    }
+
+    /**
      * Shows the create modal
      *
      * @return void
@@ -192,6 +224,7 @@ class UserTimeSettings extends Component
 
     public function render()
     {
+        $this->bulkDisabled = count($this->selectedTimes) < 1;
         return view('livewire.user-time-settings', [
             'data' => $this->read(),
         ]);
