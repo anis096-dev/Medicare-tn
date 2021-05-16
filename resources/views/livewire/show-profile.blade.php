@@ -88,7 +88,7 @@
                                     {{$item->time1}}-{{$item->time2}}
                                 </button>
                                 @empty
-                                <div class="text-teal-600">No Times added!</div>
+                                <div class="text-teal-600"><span class=" text-gray-400 text-xs">No Times added!</span></div>
                                 @endforelse
                             @endforeach
                         </ul>
