@@ -163,6 +163,7 @@ class NavigationMenus extends Component
         ->delete();
         $this->selectedNavigationMenus = [];
         $this->selectAll = false;
+        $this->resetPage();
         $this->dispatchBrowserEvent('alert',[
             'type'=>'error',
             'message'=>"all selected Items deleted Successfully!!"
