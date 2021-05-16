@@ -33,6 +33,9 @@ class UserAppointments extends Component
     public $modalFormVisible;
     public $modalConfirmDeleteVisible;
     public $modelId;
+    public $selectedAppointments = [];
+    public $selectAll = false;
+    public $bulkDisabled = true;
     
 
     public function mount()
@@ -51,7 +54,6 @@ class UserAppointments extends Component
         return [ 
             'treatment' => 'required',
             'sub_treatment' =>'required',
-            // 'status' => 'required',
             'passage_number' => 'required',
             'certificate' => 'required',
             'home_mention' => 'required',
@@ -75,6 +77,7 @@ class UserAppointments extends Component
     
     public function render()
     {
+        $this->bulkDisabled = count($this->selectedAppointments) < 1;
         return view('livewire.user-appointments', [
             'data' => $this->read(),
         ]);
@@ -105,7 +108,6 @@ class UserAppointments extends Component
             'related_name' => $this->user->name,
             'treatment' => $this->treatment,
             'sub_treatment' => $this->sub_treatment,
-            // 'status' => $this->status,
             'passage_number' => $this->passage_number,
             'certificate' => $this->certificate,
             'home_mention' => $this->home_mention,
@@ -270,6 +272,34 @@ class UserAppointments extends Component
             'message'=>"Your Appointment deleted successfuly!!"
         ]);
         $this->resetPage();
+    }
+
+    /**
+    * The Selecteddelete function.
+    *
+    * @return void
+    */
+    public function deleteSelected()
+    {
+        Appointment::query()
+        ->whereIn('id', $this->selectedAppointments)
+        ->delete();
+        $this->selectedAppointments = [];
+        $this->selectAll = false;
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"all selected Items deleted Successfully!!"
+        ]);
+    }
+
+    public function updatedSelectAll($value)
+    {
+        if($value){
+            $this->selectedAppointments = Appointment::pluck('id');
+        }else{
+            $this->selectedAppointments = [];
+        }
+        
     }
     
     public function cleanVars()
