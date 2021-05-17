@@ -22,6 +22,9 @@ class Users extends Component
     /**
      * Put your custom public properties here!
      */
+    public $perPage = 10;
+    public $search = '';
+
     public $user;
     public $role;
     public $specialty;
@@ -104,16 +107,6 @@ class Users extends Component
         User::create($this->modelData());
         $this->modalFormVisible = false;
         $this->reset();
-    }
-
-    /**
-     * The read function.
-     *
-     * @return void
-     */
-    public function read()
-    {
-        return User::paginate(5);
     }
 
     /**
@@ -227,11 +220,22 @@ class Users extends Component
         $this->modalConfirmDeleteVisible = true;
     }
 
+    /**
+     * The searchclear function.
+     *
+     * @return void
+     */
+    public function searchClear()
+    {
+        $this->search = '';
+    }
+
     public function render()
     {  
         $this->bulkDisabled = count($this->selectedUsers) < 1;
         return view('livewire.users', [
-            'data' => $this->read(),
+            'data' => User::search($this->search)
+            ->paginate($this->perPage),
         ]);
     }
 }

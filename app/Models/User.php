@@ -106,4 +106,11 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Appointment');
     }
+
+    public static function search($query)
+    {
+        return empty($query) ? static::query()
+            : static::where('name', 'like', '%'.$query.'%')
+                ->orWhere('email', 'like', '%'.$query.'%');
+    }
 }

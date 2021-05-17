@@ -1,6 +1,6 @@
 <div>
     @if(auth()->user()->id != $user->id)
-        <div class="flex items-center justify-end px-4 pt-2 text-right sm:px-8">
+        <div class="flex items-center justify-end px-4 pt-2 pb-2 text-right sm:px-8">
             <a  wire:click="createShowModal" class="flex-auto text-center bg-blue-700 text-white py-3 rounded-md text-sm uppercase hover:shadow 
             hover:bg-blue-500 transform scale-105 hover:scale-100 motion-reduce:transform-none">
                 Appoint
@@ -8,6 +8,7 @@
         </div>
     @endif
 
+    {{-- @if(auth()->user()->role != 'Patient' && auth()->user()->id == $user->id) --}}
     @if(auth()->user()->role != 'Patient')
     {{-- The data table --}}
     <div class="flex flex-col pt-2">
