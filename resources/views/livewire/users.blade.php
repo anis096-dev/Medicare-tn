@@ -1,34 +1,38 @@
 <div class="p-6">
-    {{-- <div class="flex items-center justify-end px-4 py-3 text-right sm:px-6">
-        <a class="w-8 h-8 text-blue-600 box-border hover:bg-blue-600 hover:text-white rounded" wire:click="createShowModal">
+    <div class="flex items-center sm:justify-end justify-center px-4 py-3 text-right sm:px-6">
+        <a class="w-8 h-8 text-blue-500 hover:text-blue-700" wire:click="createShowModal">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
         </a>
-    </div> --}}
+        @if($bulkDisabled)
+            <button wire:click.prevent="NodeleteSelected" class="opacity-50 p-1 text-red-500 hover:text-red-700">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+            </button>
+        @else
+            <button wire:click.prevent="deleteSelected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"
+                class="p-1 text-red-500 hover:text-red-700">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+            </button>
+        @endif
+    </div>
     {{-- The data table --}}
     <div class="flex flex-col">
         <div class="mb-1">
-            <div class="flex items-center justify-end px-4 py-3 text-right sm:px-8">
+            <div class="flex items-center sm:justify-end justify-center px-4 py-3 text-right sm:px-8">
                 &nbsp;
                 <select wire:model="perPage">
                     <option>10</option>
                     <option>15</option>
                     <option>25</option>
                 </select>
-                <input wire:model="search" class="sm:px-8" type="text" placeholder="search...">
+                <input wire:model="search" wire:click="alertInfo" class="sm:px-8" type="text" placeholder="search...">
                 <button class="-ml-8" wire:click="searchClear">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
-        </div>
-        <div class="flex items-center justify-end px-4 py-3 text-right sm:px-6">
-            <button wire:click.prevent="deleteSelected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"
-            class="@if($bulkDisabled) opacity-50 @endif bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
-                Delete Selected
-            </button>
         </div>
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -37,7 +41,7 @@
                         <thead>
                             <tr>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    <input type="checkbox" wire:model="selectAll">
+                                    <input type="checkbox" wire:model="selectAll" onclick="confirm('Are you sure? You want to delete the Admin too? it may cause a problem!!') || event.stopImmediatePropagation()">
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Photo</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Name</th>
@@ -59,7 +63,10 @@
                                         </td>
                                         @else
                                         <td class="px-6 py-2">
-                                            <input type="checkbox" checked class=" text-red-500">
+                                            <input type="checkbox" wire:model="selectedUsers" onclick="confirm('Are you sure? You want to delete the Admin? it may cause a problem!!') || event.stopImmediatePropagation()" value="{{$item->id}}" checked class=" text-red-500 bg-red-500">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01" />
+                                            </svg>
                                         </td>
                                         @endif
                                         <td class="px-6 py-2">

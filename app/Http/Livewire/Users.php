@@ -163,12 +163,26 @@ class Users extends Component
         ->delete();
         $this->selectedUsers = [];
         $this->selectAll = false;
-        $this->resetPage();
         $this->dispatchBrowserEvent('alert',[
             'type'=>'error',
             'message'=>"all selected Items deleted Successfully!!"
         ]);
-    }
+        $this->resetPage();
+    } 
+    
+    /**
+    * The Selecteddelete function.
+    *
+    * @return void
+    */
+   public function NodeleteSelected()
+   {
+       $this->dispatchBrowserEvent('alert',[
+           'type'=>'error',
+           'message'=>"No Item selected to delete!!"
+       ]);
+       $this->resetPage();
+   }
 
     public function updatedSelectAll($value)
     {
@@ -228,6 +242,19 @@ class Users extends Component
     public function searchClear()
     {
         $this->search = '';
+    }
+    
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function alertInfo()
+    {
+        $this->dispatchBrowserEvent('alert', 
+            ['type' => 'info',  
+            'message' => 'Search by Name, Email & phone or Specialty!'
+            ]);
     }
 
     public function render()

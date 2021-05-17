@@ -17,6 +17,8 @@ class Pages extends Component
     public $selectedPages = [];
     public $selectAll = false;
     public $bulkDisabled = true;
+    public $perPage = 10;
+    public $search = '';
     public $title;
     public $slug;
     public $content;
@@ -77,16 +79,6 @@ class Pages extends Component
             ]);
             $this->reset();
         }
-    }
-    
-    /**
-     * The read function.
-     *
-     * @return void
-     */
-    public function read()
-    {
-        return Page::paginate(5);
     }
         
     /**
@@ -151,6 +143,20 @@ class Pages extends Component
             'message'=>"all selected Items deleted Successfully!!"
         ]);
     }
+
+    /**
+    * The Selecteddelete function.
+    *
+    * @return void
+    */
+   public function NodeleteSelected()
+   {
+       $this->dispatchBrowserEvent('alert',[
+           'type'=>'error',
+           'message'=>"No Item selected to delete!!"
+       ]);
+       $this->resetPage();
+   }
 
     public function updatedSelectAll($value)
     {
@@ -294,7 +300,28 @@ class Pages extends Component
             ]);
         }
     }
-        
+     
+    /**
+     * The searchclear function.
+     *
+     * @return void
+     */
+    public function searchClear()
+    {
+        $this->search = '';
+    }
+    
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function alertInfo()
+    {
+        $this->dispatchBrowserEvent('alert', 
+                ['type' => 'info',  'message' => 'Search by Title!']);
+    }
+
     /**
      * The livewire render function.
      *
@@ -304,7 +331,8 @@ class Pages extends Component
     {
         $this->bulkDisabled = count($this->selectedPages) < 1;
         return view('livewire.pages', [
-            'data' => $this->read(),
+            'data' => Page::search($this->search)
+            ->paginate($this->perPage),
         ]);
     }
 }
