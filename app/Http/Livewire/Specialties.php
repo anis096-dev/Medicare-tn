@@ -16,6 +16,8 @@ class Specialties extends Component
     public $selectedSpecialties = [];
     public $selectAll = false;
     public $bulkDisabled = true;
+    public $perPage = 10;
+    public $search = '';
 
     /**
      * Put your custom public properties here!
@@ -93,16 +95,6 @@ class Specialties extends Component
     }
 
     /**
-     * The read function.
-     *
-     * @return void
-     */
-    public function read()
-    {
-        return Specialty::paginate(5);
-    }
-
-    /**
      * The update function
      *
      * @return void
@@ -163,6 +155,20 @@ class Specialties extends Component
         ]);
     }
 
+    /**
+    * The Selecteddelete function.
+    *
+    * @return void
+    */
+   public function NodeleteSelected()
+   {
+       $this->dispatchBrowserEvent('alert',[
+           'type'=>'error',
+           'message'=>"No Item selected to delete!!"
+       ]);
+       $this->resetPage();
+   }
+
     public function updatedSelectAll($value)
     {
         if($value){
@@ -211,13 +217,35 @@ class Specialties extends Component
     {
         $this->modelId = $id;
         $this->modalConfirmDeleteVisible = true;
-    }    
+    } 
+    
+    /**
+     * The searchclear function.
+     *
+     * @return void
+     */
+    public function searchClear()
+    {
+        $this->search = '';
+    }
+    
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function alertInfo()
+    {
+        $this->dispatchBrowserEvent('alert', 
+                ['type' => 'info',  'message' => 'Search by Name!']);
+    }
 
     public function render()
     {
         $this->bulkDisabled = count($this->selectedSpecialties) < 1;
         return view('livewire.specialties', [
-            'data' => $this->read(),
+            'data' => Specialty::search($this->search)
+            ->paginate($this->perPage),
         ]);
     }
 }

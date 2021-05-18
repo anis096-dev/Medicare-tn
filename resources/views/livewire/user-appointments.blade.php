@@ -1,6 +1,6 @@
 <div>
     @if(auth()->user()->id != $user->id)
-        <div class="flex items-center justify-end px-4 pt-2 pb-2 text-right sm:px-8">
+        <div class="flex items-center justify-end px-4 pt-2 text-right sm:px-8">
             <a  wire:click="createShowModal" class="flex-auto text-center bg-blue-700 text-white py-3 rounded-md text-sm uppercase hover:shadow 
             hover:bg-blue-500 transform scale-105 hover:scale-100 motion-reduce:transform-none">
                 Appoint
@@ -11,12 +11,29 @@
     {{-- @if(auth()->user()->role != 'Patient' && auth()->user()->id == $user->id) --}}
     @if(auth()->user()->role != 'Patient')
     {{-- The data table --}}
-    <div class="flex flex-col pt-2">
-        <div class="flex items-center justify-end px-4 py-3 text-right sm:px-1">
-            <button wire:click.prevent="deleteSelected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"
-            class="@if($bulkDisabled) opacity-50 @endif bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4">
-                Delete Selected
-            </button>
+    <div class="flex flex-col">
+        <div class="mb-1">
+            <div class="flex items-center sm:justify-end justify-center px-4 py-3 text-right sm:px-8">
+                &nbsp;
+                <select wire:model="perPage">
+                    <option>10</option>
+                    <option>15</option>
+                    <option>25</option>
+                </select>
+                <input wire:model="search" wire:click="alertInfo" class="sm:px-8" type="text" placeholder="search...">
+                <button class="-ml-8" wire:click="searchClear">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <button @if($bulkDisabled) wire:click.prevent="NodeleteSelected" @endif  wire:click.prevent="deleteSelected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"
+                class="@if($bulkDisabled) opacity-50 @endif ml-2 p-1 text-red-500 hover:text-red-700">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+            <div class="flex items-center sm:justify-end justify-center text-left sm:px-20">
+                <span class=" text-gray-400 text-xs font-bold">Search for RDV by date(YYYY-MM-DD)!!</span>
+            </div>
         </div>
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -27,6 +44,7 @@
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                     <input type="checkbox" wire:model="selectAll">
                                 </th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">RDV Time</th> 
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Patient</th> 
                                 @if(auth()->user()->role != 'E-health Care')
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">E-health Care</th>
@@ -46,6 +64,7 @@
                                         <td class="px-6 py-2">
                                             <input type="checkbox" wire:model="selectedAppointments" value="{{$item->id}}">
                                         </td>
+                                        <td class="px-6 py-2">{{ $item->created_at->format('d M Y') }}</td>
                                         <td class="px-6 py-2">{{ $item->user->name }}</td>
                                         @if(auth()->user()->role != 'E-health Care')
                                         <td class="px-6 py-2">{{ $item->related_name }}</td>

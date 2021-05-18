@@ -38,4 +38,12 @@ class TimeSetting extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public static function search($query)
+    {
+        return empty($query) ? static::query()
+            : static::where('day', 'like', '%'.$query.'%')
+            ->orwhere('time1', 'like', '%'.$query.'%')
+            ->orwhere('time2', 'like', '%'.$query.'%');
+    }
 }

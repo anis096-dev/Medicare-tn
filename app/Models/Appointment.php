@@ -81,4 +81,15 @@ class Appointment extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public static function search($query)
+    {
+        return empty($query) ? static::query()
+            : static::where('related_name', 'like', '%'.$query.'%')
+            ->Orwhere('treatment', 'like', '%'.$query.'%')
+            ->Orwhere('status', 'like', '%'.$query.'%')
+            ->Orwhere('care_place', 'like', '%'.$query.'%')
+            ->Orwhere('status', 'like', '%'.$query.'%')
+            ->Orwhere('created_at', 'like', '%'.$query.'%');
+    }
 }

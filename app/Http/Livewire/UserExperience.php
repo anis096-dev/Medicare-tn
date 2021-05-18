@@ -22,6 +22,8 @@ class UserExperience extends Component
     public $selectedExperiences = [];
     public $selectAll = false;
     public $bulkDisabled = true;
+    public $perPage = 10;
+    public $search = '';
 
     /**
      * Put your custom public properties here!
@@ -106,16 +108,6 @@ class UserExperience extends Component
     }
 
     /**
-     * The read function.
-     *
-     * @return void
-     */
-    public function read()
-    {
-        return Experience::paginate(5);
-    }
-
-    /**
      * The update function
      *
      * @return void
@@ -176,6 +168,20 @@ class UserExperience extends Component
         ]);
     }
 
+    /**
+    * The Selecteddelete function.
+    *
+    * @return void
+    */
+    public function NodeleteSelected()
+    {
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"No Item selected to delete!!"
+        ]);
+        $this->resetPage();
+    }
+
     public function updatedSelectAll($value)
     {
         if($value){
@@ -224,13 +230,40 @@ class UserExperience extends Component
     {
         $this->modelId = $id;
         $this->modalConfirmDeleteVisible = true;
-    }    
+    } 
+    
+    /**
+     * The searchclear function.
+     *
+     * @return void
+     */
+    public function searchClear()
+    {
+        $this->search = '';
+    }
+    
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function alertInfo()
+    {
+        $this->dispatchBrowserEvent('alert', 
+                ['type' => 'info',  'message' => 'Search by occupation or company name!']);
+    }
 
+    /**
+     * The livewire render function.
+     *
+     * @return void
+     */
     public function render()
     {
         $this->bulkDisabled = count($this->selectedExperiences) < 1;
         return view('livewire.user-experience', [
-            'data' => $this->read(),
+            'data' => Experience::search($this->search)
+            ->paginate($this->perPage),
         ]);
     }
 }

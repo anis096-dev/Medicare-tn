@@ -24,7 +24,8 @@ class UserEducation extends Component
     public $selectedEducations = [];
     public $selectAll = false;
     public $bulkDisabled = true;
-
+    public $perPage = 10;
+    public $search = '';
     
     /**
      * The validation rules
@@ -105,16 +106,6 @@ class UserEducation extends Component
     }
 
     /**
-     * The read function.
-     *
-     * @return void
-     */
-    public function read()
-    {
-        return Education::paginate(5);
-    }
-
-    /**
      * The update function
      *
      * @return void
@@ -175,6 +166,20 @@ class UserEducation extends Component
         ]);
     }
 
+    /**
+    * The Selecteddelete function.
+    *
+    * @return void
+    */
+    public function NodeleteSelected()
+    {
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"No Item selected to delete!!"
+        ]);
+        $this->resetPage();
+    }
+
     public function updatedSelectAll($value)
     {
         if($value){
@@ -223,13 +228,35 @@ class UserEducation extends Component
     {
         $this->modelId = $id;
         $this->modalConfirmDeleteVisible = true;
-    }    
+    } 
+    
+    /**
+     * The searchclear function.
+     *
+     * @return void
+     */
+    public function searchClear()
+    {
+        $this->search = '';
+    }
+    
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function alertInfo()
+    {
+        $this->dispatchBrowserEvent('alert', 
+                ['type' => 'info',  'message' => 'Search by formation or institute name!']);
+    }
 
     public function render()
     {
         $this->bulkDisabled = count($this->selectedEducations) < 1;
         return view('livewire.user-education', [
-            'data' => $this->read(),
+            'data' => Education::search($this->search)
+            ->paginate($this->perPage),
         ]);
     }
 }

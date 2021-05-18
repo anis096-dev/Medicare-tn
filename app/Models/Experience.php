@@ -21,4 +21,11 @@ class Experience extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public static function search($query)
+    {
+        return empty($query) ? static::query()
+            : static::where('occupation', 'like', '%'.$query.'%')
+            ->orwhere('company', 'like', '%'.$query.'%');
+    }
 }

@@ -16,8 +16,8 @@ class SubTreatments extends Component
     public $selectedSubTreatments = [];
     public $selectAll = false;
     public $bulkDisabled = true;
-
-
+    public $perPage = 10;
+    public $search = '';
     /**
      * Put your custom public properties here!
      */
@@ -169,6 +169,20 @@ class SubTreatments extends Component
         ]);
     }
 
+    /**
+    * The Selecteddelete function.
+    *
+    * @return void
+    */
+   public function NodeleteSelected()
+   {
+       $this->dispatchBrowserEvent('alert',[
+           'type'=>'error',
+           'message'=>"No Item selected to delete!!"
+       ]);
+       $this->resetPage();
+   }
+
     public function updatedSelectAll($value)
     {
         if($value){
@@ -217,13 +231,40 @@ class SubTreatments extends Component
     {
         $this->modelId = $id;
         $this->modalConfirmDeleteVisible = true;
-    }    
+    }
+    
+    /**
+     * The searchclear function.
+     *
+     * @return void
+     */
+    public function searchClear()
+    {
+        $this->search = '';
+    }
+    
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function alertInfo()
+    {
+        $this->dispatchBrowserEvent('alert', 
+                ['type' => 'info',  'message' => 'Search by treatment or name!']);
+    }
 
+    /**
+     * The livewire render function.
+     *
+     * @return void
+     */
     public function render()
     {
         $this->bulkDisabled = count($this->selectedSubTreatments) < 1;
         return view('livewire.sub-treatments', [
-            'data' => $this->read(),
+            'data' => SubTreatment::search($this->search)
+            ->paginate($this->perPage),
         ]);
     }
 }

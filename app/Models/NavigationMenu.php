@@ -15,4 +15,10 @@ class NavigationMenu extends Model
         'sequence',
         'type',
     ];
+    public static function search($query)
+    {
+        return empty($query) ? static::query()
+            : static::where('label', 'like', '%'.$query.'%')
+            ->orwhere('type', 'like', '%'.$query.'%');
+    }
 }

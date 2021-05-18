@@ -9,4 +9,10 @@ class SubTreatment extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'description', 'treatment'];
+    public static function search($query)
+    {
+        return empty($query) ? static::query()
+            : static::where('name', 'like', '%'.$query.'%')
+            ->orwhere('treatment', 'like', '%'.$query.'%');
+    }
 }

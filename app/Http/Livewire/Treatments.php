@@ -16,6 +16,8 @@ class Treatments extends Component
     public $selectedTreatments = [];
     public $selectAll = false;
     public $bulkDisabled = true;
+    public $perPage = 10;
+    public $search = '';
 
     /**
      * Put your custom public properties here!
@@ -168,6 +170,20 @@ class Treatments extends Component
         ]);
     }
 
+    /**
+    * The Selecteddelete function.
+    *
+    * @return void
+    */
+   public function NodeleteSelected()
+   {
+       $this->dispatchBrowserEvent('alert',[
+           'type'=>'error',
+           'message'=>"No Item selected to delete!!"
+       ]);
+       $this->resetPage();
+   }
+
     public function updatedSelectAll($value)
     {
         if($value){
@@ -216,13 +232,40 @@ class Treatments extends Component
     {
         $this->modelId = $id;
         $this->modalConfirmDeleteVisible = true;
-    }    
+    }
+    
+    /**
+     * The searchclear function.
+     *
+     * @return void
+     */
+    public function searchClear()
+    {
+        $this->search = '';
+    }
+    
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function alertInfo()
+    {
+        $this->dispatchBrowserEvent('alert', 
+                ['type' => 'info',  'message' => 'Search by name or specialty!']);
+    }
 
+    /**
+     * The livewire render function.
+     *
+     * @return void
+     */
     public function render()
     {
         $this->bulkDisabled = count($this->selectedTreatments) < 1;
         return view('livewire.treatments', [
-            'data' => $this->read(),
+            'data' => Treatment::search($this->search)
+            ->paginate($this->perPage),
         ]);
     }
 }

@@ -53,4 +53,11 @@ class UserPermission extends Model
             return false;
         }
     }
+
+    public static function search($query)
+    {
+        return empty($query) ? static::query()
+            : static::where('role', 'like', '%'.$query.'%')
+            ->orwhere('route_name', 'like', '%'.$query.'%');
+    }
 }

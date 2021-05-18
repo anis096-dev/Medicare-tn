@@ -18,6 +18,8 @@ class NavigationMenus extends Component
     public $selectedNavigationMenus = [];
     public $selectAll = false;
     public $bulkDisabled = true;
+    public $perPage = 10;
+    public $search = '';
     public $label;
     public $slug;
     public $sequence = 1;
@@ -99,16 +101,6 @@ class NavigationMenus extends Component
     }
 
     /**
-     * The read function.
-     *
-     * @return void
-     */
-    public function read()
-    {
-        return NavigationMenu::paginate(5);
-    }
-
-    /**
      * The update function
      *
      * @return void
@@ -169,6 +161,20 @@ class NavigationMenus extends Component
             'message'=>"all selected Items deleted Successfully!!"
         ]);
     }
+
+    /**
+    * The Selecteddelete function.
+    *
+    * @return void
+    */
+   public function NodeleteSelected()
+   {
+       $this->dispatchBrowserEvent('alert',[
+           'type'=>'error',
+           'message'=>"No Item selected to delete!!"
+       ]);
+       $this->resetPage();
+   }
 
     public function updatedSelectAll($value)
     {
@@ -232,11 +238,33 @@ class NavigationMenus extends Component
         $this->modalConfirmDeleteVisible = true;
     }    
 
+    /**
+     * The searchclear function.
+     *
+     * @return void
+     */
+    public function searchClear()
+    {
+        $this->search = '';
+    }
+    
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function alertInfo()
+    {
+        $this->dispatchBrowserEvent('alert', 
+                ['type' => 'info',  'message' => 'Search by label or type!']);
+    }
+
     public function render()
     {
         $this->bulkDisabled = count($this->selectedNavigationMenus) < 1;
         return view('livewire.navigation-menus', [
-            'data' => $this->read(),
+            'data' => NavigationMenu::search($this->search)
+            ->paginate($this->perPage),
         ]);
     }
 }

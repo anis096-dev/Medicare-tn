@@ -16,6 +16,8 @@ class UserPermissions extends Component
     public $selectedPermissions = [];
     public $selectAll = false;
     public $bulkDisabled = true;
+    public $perPage = 10;
+    public $search = '';
 
     /**
      * Put your custom public properties here!
@@ -94,16 +96,6 @@ class UserPermissions extends Component
     }
 
     /**
-     * The read function.
-     *
-     * @return void
-     */
-    public function read()
-    {
-        return UserPermission::paginate(5);
-    }
-
-    /**
      * The update function
      *
      * @return void
@@ -164,6 +156,21 @@ class UserPermissions extends Component
         ]);
     }
 
+    /**
+    * The Selecteddelete function.
+    *
+    * @return void
+    */
+   public function NodeleteSelected()
+   {
+       $this->dispatchBrowserEvent('alert',[
+           'type'=>'error',
+           'message'=>"No Item selected to delete!!"
+       ]);
+       $this->resetPage();
+   }
+
+
     public function updatedSelectAll($value)
     {
         if($value){
@@ -215,11 +222,34 @@ class UserPermissions extends Component
         $this->modalConfirmDeleteVisible = true;
     }
 
+      
+    /**
+     * The searchclear function.
+     *
+     * @return void
+     */
+    public function searchClear()
+    {
+        $this->search = '';
+    }
+    
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function alertInfo()
+    {
+        $this->dispatchBrowserEvent('alert', 
+                ['type' => 'info',  'message' => 'Search by role & route name!']);
+    }
+
     public function render()
     {
         $this->bulkDisabled = count($this->selectedPermissions) < 1;
         return view('livewire.user-permissions', [
-            'data' => $this->read(),
+            'data' => UserPermission::search($this->search)
+            ->paginate($this->perPage),
         ]);
     }
 }

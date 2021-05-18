@@ -20,6 +20,8 @@ class UserTimeSettings extends Component
     public $selectedTimes = [];
     public $selectAll = false;
     public $bulkDisabled = true;
+    public $perPage = 10;
+    public $search = '';
 
     /**
      * Put your custom public properties here!
@@ -101,17 +103,6 @@ class UserTimeSettings extends Component
     }
 
     /**
-     * The read function.
-     *
-     * @return void
-     */
-    public function read()
-    {
-        // return TimeSetting::paginate(5);
-        return TimeSetting::all();
-    }
-
-    /**
      * The update function
      *
      * @return void
@@ -172,6 +163,20 @@ class UserTimeSettings extends Component
         ]);
     }
 
+    /**
+    * The Selecteddelete function.
+    *
+    * @return void
+    */
+    public function NodeleteSelected()
+    {
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"No Item selected to delete!!"
+        ]);
+        $this->resetPage();
+    }
+
     public function updatedSelectAll($value)
     {
         if($value){
@@ -220,13 +225,40 @@ class UserTimeSettings extends Component
     {
         $this->modelId = $id;
         $this->modalConfirmDeleteVisible = true;
-    }    
+    }
+    
+    /**
+     * The searchclear function.
+     *
+     * @return void
+     */
+    public function searchClear()
+    {
+        $this->search = '';
+    }
+    
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function alertInfo()
+    {
+        $this->dispatchBrowserEvent('alert', 
+                ['type' => 'info',  'message' => 'Search by day or times!']);
+    }
 
+    /**
+     * The livewire render function.
+     *
+     * @return void
+     */
     public function render()
     {
         $this->bulkDisabled = count($this->selectedTimes) < 1;
         return view('livewire.user-time-settings', [
-            'data' => $this->read(),
+            'data' => TimeSetting::search($this->search)
+            ->paginate($this->perPage),
         ]);
     }
 }

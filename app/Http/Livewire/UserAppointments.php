@@ -36,6 +36,8 @@ class UserAppointments extends Component
     public $selectedAppointments = [];
     public $selectAll = false;
     public $bulkDisabled = true;
+    public $perPage = 10;
+    public $search = '';
     
 
     public function mount()
@@ -64,22 +66,15 @@ class UserAppointments extends Component
             'covid_symptom' => 'required',
         ];
     }
-
-     /**
-     * The read function.
-     *
-     * @return void
-     */
-    public function read()
-    {    
-        return Appointment::latest()->with('user')->paginate(5);
-    }
-    
+   
     public function render()
     {
         $this->bulkDisabled = count($this->selectedAppointments) < 1;
         return view('livewire.user-appointments', [
-            'data' => $this->read(),
+            'data' => Appointment::search($this->search)
+            ->with('user')
+            ->latest()
+            ->paginate($this->perPage),
         ]);
     }
     
@@ -164,7 +159,7 @@ class UserAppointments extends Component
         $this->related_id = $data->related_id;
         $this->related_name = $data->related_name;
         $this->treatment  = $data->treatment;
-        $this->sub_treatment  = $data->sub_treatment;
+        // $this->sub_treatment  = $data->sub_treatment;
         $this->passage_number  = $data->passage_number;
         $this->status  = $data->status;
         $this->certificate  = $data->certificate;
@@ -293,6 +288,20 @@ class UserAppointments extends Component
         ]);
     }
 
+    /**
+    * The Selecteddelete function.
+    *
+    * @return void
+    */
+    public function NodeleteSelected()
+    {
+        $this->dispatchBrowserEvent('alert',[
+            'type'=>'error',
+            'message'=>"No Item selected to delete!!"
+        ]);
+        $this->resetPage();
+    }
+
     public function updatedSelectAll($value)
     {
         if($value){
@@ -321,5 +330,26 @@ class UserAppointments extends Component
         $this->covid_symptom  = '';
         $this->modelId = '';
        $this->resetValidation();
+    }
+
+    /**
+     * The searchclear function.
+     *
+     * @return void
+     */
+    public function searchClear()
+    {
+        $this->search = '';
+    }
+    
+    /**
+     * Write code on Method
+     *
+     * @return response()
+     */
+    public function alertInfo()
+    {
+        $this->dispatchBrowserEvent('alert', 
+                ['type' => 'info',  'message' => 'Search by e-health care name, date, care place or status!']);
     }
 }
