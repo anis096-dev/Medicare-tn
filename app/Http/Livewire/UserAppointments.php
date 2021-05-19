@@ -19,7 +19,9 @@ class UserAppointments extends Component
     public User $user;
     public $allTreatments;
     public $allSubTreatments;
+    public $related_name; 
     public $treatment; 
+    public $created_at; 
     public $sub_treatment;
     public $passage_number;
     public $status;
@@ -31,6 +33,7 @@ class UserAppointments extends Component
     public $care_place;
     public $covid_symptom;
     public $modalFormVisible;
+    public $modalShowVisible;
     public $modalConfirmDeleteVisible;
     public $modelId;
     public $selectedAppointments = [];
@@ -240,6 +243,37 @@ class UserAppointments extends Component
         $this->cleanVars();
         }
     }
+
+    /**Show appointment */
+
+    /**
+     * Shows the form modal
+     * in update mode.
+     *
+     * @param  mixed $id
+     * @return void
+    */
+    public function showModal($id)
+    {
+        $data = Appointment::find($id);
+        // Assign the variables here
+        $this->related_name = $data->related_name;
+        $this->treatment  = $data->treatment;
+        $this->sub_treatment  = $data->sub_treatment;
+        $this->passage_number  = $data->passage_number;
+        $this->status  = $data->status;
+        $this->certificate  = $data->certificate;
+        $this->home_mention  = $data->home_mention;
+        $this->start_date  = $data->start_date;
+        $this->duration  = $data->duration;
+        $this->user_dispo  = $data->user_dispo;
+        $this->care_place  = $data->care_place;
+        $this->covid_symptom  = $data->covid_symptom;
+        $this->created_at  = $data->created_at;
+        $this->modalShowVisible = true;
+    }
+        
+    /**End */
     
     /**
      * Shows the delete confirmation modal.
