@@ -94,24 +94,24 @@ class UserPermissionsTableSeeder extends Seeder
             9 => 
             array (
                 'id' => 10,
-                'role' => 'admin',
-                'route_name' => 'user-appointments',
-                'created_at' => '2021-03-24 23:24:29',
-                'updated_at' => '2021-03-24 23:24:29',
-            ),
-            10 => 
-            array (
-                'id' => 11,
                 'role' => 'Patient',
                 'route_name' => 'dashboard',
                 'created_at' => '2021-03-24 23:24:38',
                 'updated_at' => '2021-03-24 23:24:38',
             ),
+            10 => 
+            array (
+                'id' => 11,
+                'role' => 'E-health Care',
+                'route_name' => 'dashboard',
+                'created_at' => '2021-03-24 23:24:47',
+                'updated_at' => '2021-03-24 23:24:47',
+            ),
             11 => 
             array (
                 'id' => 12,
                 'role' => 'E-health Care',
-                'route_name' => 'dashboard',
+                'route_name' => 'user-experience',
                 'created_at' => '2021-03-24 23:24:47',
                 'updated_at' => '2021-03-24 23:24:47',
             ),
@@ -119,21 +119,13 @@ class UserPermissionsTableSeeder extends Seeder
             array (
                 'id' => 13,
                 'role' => 'E-health Care',
-                'route_name' => 'user-experience',
+                'route_name' => 'user-education',
                 'created_at' => '2021-03-24 23:24:47',
                 'updated_at' => '2021-03-24 23:24:47',
             ),
             13 => 
             array (
                 'id' => 14,
-                'role' => 'E-health Care',
-                'route_name' => 'user-education',
-                'created_at' => '2021-03-24 23:24:47',
-                'updated_at' => '2021-03-24 23:24:47',
-            ),
-            14 => 
-            array (
-                'id' => 15,
                 'role' => 'E-health Care',
                 'route_name' => 'user-time-settings',
                 'created_at' => '2021-03-24 23:24:47',

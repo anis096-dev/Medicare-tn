@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Livewire;
+
 use App\Models\User;
 use Livewire\Component;
 use App\Models\Treatment;
@@ -8,7 +9,7 @@ use App\Models\Appointment;
 use App\Models\SubTreatment;
 use Livewire\WithPagination;
 
-class UserAppointments extends Component
+class AllAppointments extends Component
 {
     use WithPagination;
    
@@ -38,7 +39,7 @@ class UserAppointments extends Component
     public $selectedAppointments = [];
     public $selectAll = false;
     public $bulkDisabled = true;
-    public $perPage = 5;
+    public $perPage = 10;
     public $search = '';
     
 
@@ -72,23 +73,12 @@ class UserAppointments extends Component
     public function render()
     {
         $this->bulkDisabled = count($this->selectedAppointments) < 1;
-        return view('livewire.user-appointments', [
+        return view('livewire.all-appointments', [
             'data' => Appointment::search($this->search)
             ->with('user')
             ->latest()
             ->paginate($this->perPage),
         ]);
-    }
-    
-    /**
-     * Shows the create modal
-     *
-     * @return void
-     */
-    public function createShowModal()
-    {
-        $this->cleanVars();
-        $this->modalFormVisible = true;
     }
 
      /**
@@ -114,37 +104,6 @@ class UserAppointments extends Component
             'care_place' => $this->care_place,
             'covid_symptom' => $this->covid_symptom,    
         ];
-    }
-    
-     /**
-     * The create function.
-     *
-     * @return void
-     */
-    public function create()
-    {
-        $this->validate();
-        try{
-        Appointment::create($this->modelData());
-        $this->modalFormVisible = false;
-        $this->dispatchBrowserEvent('alert',[
-            'type'=>'success',
-            'message'=>"You demande has been sent Successfully!!"
-        ]);
-
-        // Reset Form Fields After Creating Category
-        $this->cleanVars();
-        }
-        catch(\Exception $e){
-        // Set Flash Message
-        $this->dispatchBrowserEvent('alert',[
-            'type'=>'error',
-            'message'=>"Something goes wrong!!"
-        ]);
-
-        // Reset Form Fields After Creating Category
-        $this->cleanVars();
-        }
     }
     
     /**

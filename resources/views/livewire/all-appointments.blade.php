@@ -1,23 +1,12 @@
-<div>
-    @if(auth()->user()->id != $user->id)
-        <div class="flex items-center justify-end px-4 pt-2 mb-3 text-right sm:px-8">
-            <a  wire:click="createShowModal" class="flex-auto text-center bg-blue-700 text-white py-3 rounded-md text-sm uppercase hover:shadow 
-            hover:bg-blue-500 transform scale-105 hover:scale-100 motion-reduce:transform-none">
-                Appoint
-            </a> 
-        </div>
-    @endif
-
-    @if(auth()->user()->role != 'Patient' && auth()->user()->id == $user->id)
-    {{-- The data table --}}
+<div class="p-6">
     <div class="flex flex-col">
         <div class="mb-1">
             <div class="flex items-center sm:justify-end justify-center px-4 py-3 text-right sm:px-8">
                 &nbsp;
                 <select wire:model="perPage">
-                    <option>5</option>
                     <option>10</option>
                     <option>15</option>
+                    <option>25</option>
                 </select>
                 <input wire:model="search" wire:click="alertInfo" class="sm:px-8" type="text" placeholder="search...">
                 <button class="-ml-8" wire:click="searchClear">
@@ -45,9 +34,7 @@
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">RDV Time</th> 
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Patient</th> 
-                                @if(auth()->user()->role != 'E-health Care')
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">E-health Care</th>
-                                @endif
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Treatment</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Passage Nbr</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Start Date (From:)</th>
@@ -58,16 +45,14 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">                           
-                                @forelse ($data->where('related_id', $user->id) as $item)
+                                @forelse ($data as $item)
                                     <tr>
                                         <td class="px-6 py-2">
                                             <input type="checkbox" wire:model="selectedAppointments" value="{{$item->id}}">
                                         </td>
                                         <td class="px-6 py-2 text-xs">{{ $item->created_at->format('d M Y') }}</td>
                                         <td class="px-6 py-2 text-xs capitalize">{{ $item->user->name }}</td>
-                                        @if(auth()->user()->role != 'E-health Care')
                                         <td class="px-6 py-2 text-xs capitalize">{{ $item->related_name }}</td>
-                                        @endif
                                         <td class="px-6 py-2 text-xs capitalize">{{ $item->treatment }}</td>                                        
                                         <td class="px-6 py-2 text-xs capitalize">{{ $item->passage_number }}</td>                                        
                                         <td class="px-6 py-2 text-xs">{{ $item->start_date }}</td>                                        
@@ -79,7 +64,7 @@
                                         <td class="px-6 py-2 text-xs mb-2"><span class="p-1 text-gray-50 font-bold bg-red-500 rounded">{{$item->status}}</span></td>
                                         @else
                                         <td class="px-6 py-2 text-xs mb-2"><span class="p-1 text-gray-50 font-bold bg-yellow-500 rounded">{{$item->status}}</span></td>
-                                        @endif                                                                              
+                                        @endif                                                                                 
                                         <td class="px-6 py-2 flex justify-end">
                                             <div class="flex space-x-1 justify-around mt-1">
                                                 <a wire:click="showModal({{ $item->id }})" class="p-1 text-yellow-600 hover:bg-yellow-600 hover:text-white rounded">
@@ -97,7 +82,7 @@
                                     <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">No Results Found</td>
                                 </tr>
                                 @endforelse
-                        </tbody>
+                        </tbody>                        
                     </table>
                 </div>
             </div>
@@ -106,26 +91,19 @@
     <div class="mt-5">
     {{ $data->links() }}
     </div>
-    @endif
 
     {{-- Modal Form --}}
     <x-jet-dialog-modal wire:model="modalFormVisible">
-        @if ($modelId)
         <x-slot name="title">
             {{ __('Update Appointment') }}
         </x-slot>
-        @else
-        <x-slot name="title">
-            {{ __('Add Appointment') }}
-        </x-slot>
-        @endif
 
         <x-slot name="content">
             <div class="mt-4">
                 <x-jet-label for="treatment" value="{{ __('Treatment') }}" />
                 <select wire:model="treatment" id="" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                     <option value="">-- Select a Treatment --</option>    
-                    @foreach ($allTreatments->where('specialty', $user->specialty) as $item)
+                    @foreach ($allTreatments as $item)
                         <option value="{{ $item->name }}">{{ $item->name }}</option>
                     @endforeach
                 </select>
@@ -146,18 +124,6 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="passage_number" value="{{ __('Passage Nbr') }}" />
-                <select wire:model="passage_number" id="" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                    <option value="">-- Select a nbr of passage --</option>    
-                    @foreach (App\Models\Appointment::passage_nbr() as $item)
-                        <option value="{{ $item }}">{{ $item }}</option>
-                    @endforeach
-                </select>
-                @error('passage_number') <span class="error">{{ $message }}</span> @enderror
-            </div>
-
-            @if ($modelId)
-            <div class="mt-4">
                 <x-jet-label for="status" value="{{ __('Status') }}" />
                 <select wire:model="status" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                     <option value="">-- Processing --</option>    
@@ -167,7 +133,6 @@
                 </select>
                 @error('status') <span class="error">{{ $message }}</span> @enderror
             </div>
-            @endif
                  
             <div class="mt-4">
                 <x-jet-label for="certificate" value="{{ __('Certificate') }}" />

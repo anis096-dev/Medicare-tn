@@ -30,7 +30,6 @@ class UserPermission extends Model
             'user-experience',
             'user-education',
             'user-time-settings',
-            'user-appointments',
         ];
     }
 
