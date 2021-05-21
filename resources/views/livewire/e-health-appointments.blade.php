@@ -34,7 +34,6 @@
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">RDV Time</th> 
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Patient</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">E-health Care</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Treatment</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Passage Nbr</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Start Date (From:)</th>
@@ -45,14 +44,13 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse ($data as $item)
+                            @forelse ($data->whereIn('related_id', auth()->user()->id) as $item)
                                 <tr>
                                     <td class="px-6 py-2">
                                         <input type="checkbox" wire:model="selectedAppointments" value="{{$item->id}}">
                                     </td>
                                     <td class="px-6 py-2 text-xs">{{ $item->created_at->format('d M Y') }}</td>
                                     <td class="px-6 py-2 text-xs capitalize">{{ $item->user->name }}</td>
-                                    <td class="px-6 py-2 text-xs capitalize">{{ $item->related_name }}</td>
                                     <td class="px-6 py-2 text-xs capitalize">{{ $item->treatment }}</td>                                        
                                     <td class="px-6 py-2 text-xs capitalize">{{ $item->passage_number }}</td>                                        
                                     <td class="px-6 py-2 text-xs">{{ $item->start_date }}</td>                                        

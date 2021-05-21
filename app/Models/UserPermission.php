@@ -30,6 +30,9 @@ class UserPermission extends Model
             'user-experience',
             'user-education',
             'user-time-settings',
+            'all-appointments',
+            'e-health-appointments',
+            'patient-appointments',
         ];
     }
 

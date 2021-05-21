@@ -72,10 +72,7 @@
                             </svg>
                         </span>
                         <span>Calender</span>
-                        {{-- <a  wire:click="createShowModal" class="flex-auto text-center bg-blue-700 text-white py-3 rounded-md text-sm uppercase hover:shadow 
-                        hover:bg-blue-500 transform hover:scale-105 motion-reduce:transform-none">
-                            Appoint
-                        </a>  --}}
+                        @livewire('user-appointments', ['user' => $user], key($user->id))
                     </div>
                     <div class="mt-4">
                         <ul class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
@@ -155,7 +152,6 @@
             <!-- Right Side -->
             <div class="w-full md:w-9/12">
                 <!-- Profile tab -->                
-                @livewire('user-appointments', ['user' => $user], key($user->id))
                 <!-- About Section -->
                 <div class=" mt-4 md:mt-0 bg-white p-3 shadow-sm rounded-sm">
                     <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">

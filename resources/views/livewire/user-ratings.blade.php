@@ -1,15 +1,15 @@
 <div>
     @if((auth()->user()->name != $user->name))
-    <section class="w-full px-8 pt-4 pb-10 xl:px-8">
-        <div class="max-w-5xl mx-auto">
-            <div class="flex flex-col items-center md:flex-row">
+    <section class="w-full pt-2 pb-6">
+        <div class=" max-w-full">
+            <div class="flex items-center">
 
-                <div class="w-full mt-16 md:mt-0">
-                    <div class=" h-auto p-4 py-10 overflow-hidden bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7">
+                <div class="w-full">
+                    <div class=" h-auto p-6 py-3 overflow-hidden bg-white border-b-2 border-gray-300 rounded-md">
                         @auth
                             <div class="w-full space-y-5">
                                 <p class="font-medium text-blue-500 uppercase">
-                                    Rate {{$user->name}}
+                                   Rate <span class="font-bold">{{$user->name}}</span> 
                                 </p>
                             </div>
                             

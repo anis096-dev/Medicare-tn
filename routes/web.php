@@ -68,6 +68,18 @@ Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], funct
         Route::get('/user-time-settings', function () {
             return view('admin.user-time-settings');
         })->name('user-time-settings');
+
+        Route::get('/all-appointments', function () {
+            return view('admin.all-appointments');
+        })->name('all-appointments');
+
+        Route::get('/e-health-appointments', function () {
+            return view('admin.e-health-appointments');
+        })->name('e-health-appointments');
+
+        Route::get('/patient-appointments', function () {
+            return view('admin.patient-appointments');
+        })->name('patient-appointments');
     });
 });
 
