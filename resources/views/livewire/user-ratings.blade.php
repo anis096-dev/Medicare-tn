@@ -83,7 +83,7 @@
             <div class="box-border flex flex-wrap justify-start gap-10 -mx-4 text-start text-indigo-900 lg:gap-16 lg:justify-start lg:text-left">
                 @forelse ($comments as $comment)
                     <div class="flex col-span-1">
-                        <div class="relative flex-shrink-0 w-20 h-20 text-left">
+                        <div class="relative text-left">
                             <a href="{{ '@' . $comment->user->name }}">
                             </a>
                         </div>
