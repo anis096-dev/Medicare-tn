@@ -57,7 +57,6 @@ class Appointment extends Model
     public static function status()
     {
         return [
-            'waiting',
             'refused',
             'accepted',
         ];

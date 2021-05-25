@@ -18,7 +18,7 @@
     }
 </style>
 
-<div class="bg-gray-100">
+<div class="bg-blue-50 -mb-6">
     <div class="container mx-auto my-5 p-5">
         <div class="md:flex no-wrap md:-mx-2 ">
             

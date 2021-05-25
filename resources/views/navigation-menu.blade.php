@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center font-bold">
-                    <a href="{{ url('/') }}">
+                    <a class="font-bold text-blue-500 text-xl" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -156,6 +156,15 @@
                         <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
+                        @if($count = App\Models\Appointment::all()->where('related_id', auth()->user()->id)->whereIn('status', 'waiting')->count()>0) 
+                        <span class="bg-red-400 rounded-md -ml-2 px-1 -mt-2 text-xs text-white font-bold">
+                            {{$count}}
+                        </span>
+                        @else
+                        <span class="hidden">
+                            {{$count}}
+                        </span>
+                        @endif
                     </x-jet-nav-link>
 
                     <x-jet-nav-link class="mt-4 pb-4" href="{{ route('user.show', auth()->user()->id ) }}" :active="request()->routeIs('user.show')">
