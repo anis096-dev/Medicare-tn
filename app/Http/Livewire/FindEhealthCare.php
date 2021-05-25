@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Rating;
+use App\Models\Specialty;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -17,13 +19,21 @@ class FindEhealthCare extends Component
     public User $user;
     public $perPage = 10;
     public $search = '';
-
+    public $ratings;
+    public $specialties;
+    
     /**
      * mount
      *
      * @param  mixed $id
      * @return void
      */
+    public function mount()
+    {
+        $this->ratings = Rating::all();
+        $this->specialties = Specialty::all();
+    }
+
     public function show ($user)
     {   
         if ($user->role == 'E-health Care') {
@@ -64,7 +74,7 @@ class FindEhealthCare extends Component
     { 
         return view('livewire.find-ehealth-care', [
             'data' => User::search($this->search)
-            ->paginate($this->perPage),
-        ]);
+            ->paginate($this->perPage),        
+            ]);
     }
 }
