@@ -139,6 +139,22 @@ class UserPermissionsTableSeeder extends Seeder
                 'created_at' => '2021-03-24 23:24:47',
                 'updated_at' => '2021-03-24 23:24:47',
             ),
+            15 => 
+            array (
+                'id' => 16,
+                'role' => 'E-health Care',
+                'route_name' => 'e-health-appointments',
+                'created_at' => '2021-05-25 01:22:44',
+                'updated_at' => '2021-05-25 01:22:44',
+            ),
+            16 => 
+            array (
+                'id' => 17,
+                'role' => 'Patient',
+                'route_name' => 'patient-appointments',
+                'created_at' => '2021-05-25 01:22:54',
+                'updated_at' => '2021-05-25 01:22:54',
+            ),
         ));
         
         

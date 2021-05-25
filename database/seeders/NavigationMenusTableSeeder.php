@@ -39,6 +39,16 @@ class NavigationMenusTableSeeder extends Seeder
                 'created_at' => '2021-03-21 07:23:25',
                 'updated_at' => '2021-03-21 07:23:25',
             ),
+            2 => 
+            array (
+                'id' => 3,
+                'sequence' => 3,
+                'type' => 'TopNav',
+                'label' => 'Contact',
+                'slug' => 'contact',
+                'created_at' => '2021-05-25 01:28:09',
+                'updated_at' => '2021-05-25 01:28:09',
+            ),
         ));
         
         

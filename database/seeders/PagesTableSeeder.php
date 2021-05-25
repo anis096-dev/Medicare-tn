@@ -52,6 +52,17 @@ class PagesTableSeeder extends Seeder
                 'created_at' => '2021-03-21 07:22:36',
                 'updated_at' => '2021-03-21 07:22:36',
             ),
+            3 => 
+            array (
+                'id' => 4,
+                'is_default_home' => NULL,
+                'is_default_not_found' => NULL,
+                'title' => 'Contact',
+                'slug' => 'contact',
+                'content' => 'The contact page.',
+                'created_at' => '2021-05-25 01:27:44',
+                'updated_at' => '2021-05-25 01:27:44',
+            ),
         ));
         
         

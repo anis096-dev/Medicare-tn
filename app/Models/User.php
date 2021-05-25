@@ -113,7 +113,7 @@ class User extends Authenticatable
             : static::where('name', 'like', '%'.$query.'%')
                 ->orWhere('email', 'like', '%'.$query.'%')
                 ->orWhere('tel', 'like', '%'.$query.'%')
-                ->orWhereHas('specialty', 'like', '%'.$query.'%')
-                ->orWhereHas('adresse', 'like', '%'.$query.'%');
+                ->orWhere('specialty', 'like', '%'.$query.'%')
+                ->orWhere('adresse', 'like', '%'.$query.'%');
     }
 }
