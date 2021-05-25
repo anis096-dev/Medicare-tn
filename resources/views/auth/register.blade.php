@@ -14,8 +14,8 @@
             
             <div class="mt-4">
                 <x-jet-label for="gender" class="mb-2" value="{{ __('Gender') }}"/>
-                <x-jet-input id="gender" class=" mr-0.5" type="radio" name="gender" value="male" required checked/><span class="font-bold">Male</span>
-                <x-jet-input id="gender" class=" ml-2 mr-0.5" type="radio" name="gender" value="female" required/><span class="font-bold">Female</span>
+                <x-jet-input id="gender" class=" mr-0.5" type="radio" name="gender" value="m" required checked/><span class="font-bold">Male</span>
+                <x-jet-input id="gender" class=" ml-2 mr-0.5" type="radio" name="gender" value="f" required/><span class="font-bold">Female</span>
             </div>
             
             <div class="mt-4">

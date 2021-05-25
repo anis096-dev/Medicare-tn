@@ -41,8 +41,8 @@
                     
                         <div class="mt-4">
                         <x-jet-label for="adresse2" value="{{ __('Adresse 2') }}" />
-                        <span class="font-bold text-yellow-600">Add second address, enter in <span class=" font-extrabold text-yellow-700">Arabic</span> if you want!!</span>
-                        <input type="text" id="adresse2" name="adresse2" class="block mt-2 w-full" placeholder="Try &quot;Rue el mar&quot;" /></div>
+                        <span class="font-bold text-yellow-600">Add Your Cabinet address, enter in <span class=" font-extrabold text-yellow-700">Arabic</span> if you want!!</span>
+                        <input type="text" id="adresse2" name="adresse2" class="block mt-2 w-full" placeholder="Exemple &quot;Rue el mar&quot;" /></div>
                         @error('adresse2') <span class="error">{{ $message }}</span> @enderror            
                         </div>
                     </div>

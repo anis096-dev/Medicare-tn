@@ -3,12 +3,12 @@
         <div class="mb-1">
             <div class="flex items-center sm:justify-end justify-center px-4 py-3 text-right sm:px-8">
                 &nbsp;
-                <select wire:model="perPage">
+                <select class="border border-gray-300 text-gray-600 h-14 pl-5 pr-10 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none" wire:model="perPage">
                     <option>10</option>
                     <option>15</option>
                     <option>25</option>
                 </select>
-                <input wire:model="search" wire:click="alertInfo" class="sm:px-8" type="text" placeholder="search...">
+                <input wire:model="search" wire:click="alertInfo" type="text" class="h-14 sm:w-96 md:pr-8 sm:pl-10 rounded focus:shadow focus:outline-none" placeholder="Search...">
                 <button class="-ml-8" wire:click="searchClear">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

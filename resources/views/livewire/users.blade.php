@@ -1,25 +1,43 @@
 <div class="p-6">
-    <div class="flex items-center sm:justify-end justify-center px-4 py-3 text-right sm:px-6">
-        <button @if($bulkDisabled) wire:click.prevent="NodeleteSelected" @endif  wire:click.prevent="deleteSelected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"
-        class="@if($bulkDisabled) opacity-50 @endif p-1 text-red-500 hover:text-red-700">
-            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-        </button>
+    <div class="bg-blue-100 p-4 auto-cols-max rounded-md">
+        <div class="flex">
+            <span class=" text-red-600 pr-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class=" h-5 w-5 " viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                </svg>
+            </span>
+            <span class="font-bold">E-Health Care:</span>
+            <span class=" bg-red-500 rounded-md box-border text-white text-xs font-bold p-1 ml-2">{{App\Models\User::where('role','E-health Care')->count()}}</span>
+        </div>
+        <div class="flex mt-2">
+            <span class=" text-blue-600 pr-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                </svg>
+            </span>
+            <span class="font-bold">Patients:</span>
+            <span class=" bg-blue-500 rounded-md box-border text-white text-xs font-bold p-1 ml-2">{{App\Models\User::where('role','Patient')->count()}}</span>
+        </div>
     </div>
     {{-- The data table --}}
     <div class="flex flex-col">
         <div class="mb-1">
             <div class="flex items-center sm:justify-end justify-center px-4 py-3 text-right sm:px-8">
                 &nbsp;
-                <select wire:model="perPage">
+                <select class="border border-gray-300 text-gray-600 h-14 pl-5 pr-10 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none" wire:model="perPage">
                     <option>10</option>
                     <option>15</option>
                     <option>25</option>
                 </select>
-                <input wire:model="search" wire:click="alertInfo" class="sm:px-8" type="text" placeholder="search...">
+                <input wire:model="search" wire:click="alertInfo" type="text" class="h-14 sm:w-96 md:pr-8 sm:pl-10 rounded focus:shadow focus:outline-none" placeholder="Search...">
                 <button class="-ml-8" wire:click="searchClear">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
+                </button>
+                <button @if($bulkDisabled) wire:click.prevent="NodeleteSelected" @endif  wire:click.prevent="deleteSelected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"
+                class="@if($bulkDisabled) opacity-50 @endif ml-2 p-1 text-red-500 hover:text-red-700">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
                 </button>
             </div>
         </div>

@@ -16,8 +16,9 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('role')->default('admin');
+            $table->string('specialty')->nullable();
             $table->string('name');
-            $table->enum('gender', ['male', 'female']);;
+            $table->enum('gender', ['m', 'f']);;
             $table->enum('marital_status', ['single', 'married']);;
             $table->string('date_of_birth')->nullable();
             $table->string('tel')->nullable();
@@ -31,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->text('profile_photo_path')->nullable();
             $table->timestamps();
+            $table->timestamp('last_seen')->nullable();
         });
     }
 

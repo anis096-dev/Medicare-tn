@@ -3,6 +3,7 @@
 use App\Http\Livewire\Frontpage;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -83,5 +84,5 @@ Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], funct
     });
 });
 
-Route::get('/{urlslug}', Frontpage::class);
 Route::get('/', Frontpage::class);
+Route::get('/{urlslug}', Frontpage::class);

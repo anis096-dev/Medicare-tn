@@ -7,10 +7,11 @@ use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -114,6 +115,7 @@ class User extends Authenticatable
                 ->orWhere('email', 'like', '%'.$query.'%')
                 ->orWhere('tel', 'like', '%'.$query.'%')
                 ->orWhere('specialty', 'like', '%'.$query.'%')
-                ->orWhere('adresse', 'like', '%'.$query.'%');
+                ->orWhere('adresse', 'like', '%'.$query.'%')
+                ->orWhere('adresse2', 'like', '%'.$query.'%');
     }
 }
