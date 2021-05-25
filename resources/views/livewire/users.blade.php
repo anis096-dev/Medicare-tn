@@ -81,7 +81,11 @@
                                         </td>
                                         <td class="px-6 py-2">{{ $item->name }}</td>
                                         <td class="px-6 py-2">{{ $item->email }}</td>
-                                        <td class="px-6 py-2">{{ $item->gender }}</td>
+                                        @if($item->gender=='m')
+                                        <td class="px-6 py-2">Male</td>
+                                        @else
+                                        <td class="px-6 py-2">Female</td>
+                                        @endif
                                         <td class="px-6 py-2">{{ $item->date_of_birth }}</td>
                                         <td class="px-6 py-2">{{ $item->tel }}</td>
                                         <td class="px-6 py-2">{{ $item->role }}</td>

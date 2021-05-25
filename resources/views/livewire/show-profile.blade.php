@@ -176,7 +176,11 @@
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Gender</div>
-                                <div class="px-4 py-2 capitalize">{{$user->gender}}</div>
+                                @if($user->gender=='m')
+                                <div class="px-4 py-2 capitalize">male</div>
+                                @else
+                                <div class="px-4 py-2 capitalize">female</div>
+                                @endif
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-bold">Contact No.</div>
