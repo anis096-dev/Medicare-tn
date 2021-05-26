@@ -19,13 +19,11 @@ class FindEhealthCare extends Component
     public User $user;
     public $perPage = 10;
     public $selectedAdresse = null;
-    public $selectedC_Adresse = null;
     public $selectedSpecialty = null;
     public $selectedGender = null;
     public $ratings;
     public $specialties;
     public $adresses;
-    public $c_adresses;
     public $genders;
     
     
@@ -40,7 +38,6 @@ class FindEhealthCare extends Component
         $this->ratings = Rating::all();
         $this->specialties = Specialty::all();
         $this->adresses = User::all()->where('role', 'E-health Care')->unique('adresse');
-        $this->c_adresses = User::all()->where('role', 'E-health Care')->unique('adresse2');
         $this->genders = ['m', 'f'];
     }
 
@@ -65,7 +62,6 @@ class FindEhealthCare extends Component
     public function resetFilter()
     {
         $this->selectedAdresse= null;
-        $this->selectedC_Adresse= null;
         $this->selectedSpecialty= null;
         $this->selectedGender= null;
         $this->resetPage();
@@ -74,10 +70,9 @@ class FindEhealthCare extends Component
     public function render()
     { 
         return view('livewire.find-ehealth-care', [
-            'data' => User::Where('adresse', 'like', '%'.$this->selectedAdresse.'%')
+            'data' => User::Where('specialty', 'like', '%'.$this->selectedSpecialty.'%')
+            ->Where('adresse', 'like', '%'.$this->selectedAdresse.'%')
             ->Where('gender', 'like', '%'.$this->selectedGender.'%')
-            ->Where('specialty', 'like', '%'.$this->selectedSpecialty.'%')
-            ->orWhere('adresse2', 'like', '%'.$this->selectedC_Adresse.'%')
             ->paginate($this->perPage),        
             ]);
     }

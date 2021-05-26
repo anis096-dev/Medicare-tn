@@ -51,16 +51,21 @@
                 <ul class="text-blue-500 text-sm font-bold">
                     @foreach ($topNavLinks as $item)
                         <a href="{{ url('/'.$item->slug) }}">
+                            @if($item->slug == 'contact')
+                            <li class="cursor-pointer px-4 py-2 hover:bg-blue-100"><a href="#contact">{{$item->label}}</a></li>
+                            @else
                             <li class="cursor-pointer px-4 py-2 hover:bg-blue-100">{{ $item->label }}</li>
+                            @endif
                         </a>
                     @endforeach 
                 </ul>
             </div>
         </aside>
-        <main class="bg-blue-50 p-12">
+        <div class="border-t border-blue-600"></div>
+        <main class="bg-blue-50">
             <section class="divide-y text-gray-900">
                 <!-- header -->
-                <div id="header" class="relative bg-white overflow-hidden rounded-lg">
+                <div id="header" class="relative bg-white overflow-hidden pb-2">
                     <div class="max-w-full mx-auto">
                     <div class="relative z-10 pb-8 bg-transparent sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
                         <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
@@ -89,7 +94,7 @@
                     </div>
                     </div>
                     <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                    <img class="h-56 w-full rounded-l-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80" alt="">
+                    <img class="h-65 w-full rounded-b-full rounded-bl-full rounded-l-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full shadow-2xl" src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80" alt="">
                     </div>
                 </div>
                 <!-- health Care --> 
@@ -167,7 +172,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="lg:w-1/3 md:w-1/2 bg-white p-5 rounded-md flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
+                      <div class="lg:w-1/3 md:w-1/2 bg-white p-6 rounded-md flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0">
                         <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">Feedback</h2>
                         <p class="leading-relaxed mb-5 text-gray-600">Post-ironic portland shabby chic echo park, banjo fashion axe</p>
                         <div class="relative mb-4">
