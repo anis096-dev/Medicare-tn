@@ -41,6 +41,7 @@ class AllAppointments extends Component
     public $bulkDisabled = true;
     public $perPage = 10;
     public $search = '';
+    public $selectedDate = null;
     
 
     public function mount()
@@ -75,6 +76,7 @@ class AllAppointments extends Component
         $this->bulkDisabled = count($this->selectedAppointments) < 1;
         return view('livewire.all-appointments', [
             'data' => Appointment::search($this->search)
+            ->Where('created_at', 'like', '%'.$this->selectedDate.'%')
             ->with('user')
             ->latest()
             ->paginate($this->perPage),
@@ -332,6 +334,7 @@ class AllAppointments extends Component
     public function searchClear()
     {
         $this->search = '';
+        $this->selectedDate = null;
     }
     
     /**

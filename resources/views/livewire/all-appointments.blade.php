@@ -2,6 +2,7 @@
     <div class="flex flex-col">
         <div class="mb-1">
             <div class="flex items-center sm:justify-end justify-center px-4 py-3 text-right sm:px-8">
+                <x-jet-input wire:model="selectedDate" id="start_date" class="border border-gray-300 text-gray-600 h-14 pl-5 pr-10 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none" type="date" />
                 &nbsp;
                 <select class="border border-gray-300 text-gray-600 h-14 pl-5 pr-10 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none" wire:model="perPage">
                     <option>10</option>

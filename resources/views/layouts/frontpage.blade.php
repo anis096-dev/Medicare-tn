@@ -24,7 +24,7 @@
 
         <div class="min-h-screen bg-gray-50"> 
             <!-- Page Content -->
-            <main id="m">
+            <main id="top">
                 {{ $slot }}
             </main>
         </div>
@@ -62,7 +62,7 @@
                 </a>
               </span>
               <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start text-blue-800 ">
-                <a href="#m">
+                <a href="#top">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 11l3-3m0 0l3 3m-3-3v8m0-13a9 9 0 110 18 9 9 0 010-18z" />
                   </svg>
@@ -74,5 +74,27 @@
         @stack('modals')
 
         @livewireScripts
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                showCloseButton: true,
+                timer: 5000,
+                timerProgressBar:true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
+
+            window.addEventListener('alert',({detail:{type,message}})=>{
+                Toast.fire({
+                    icon:type,
+                    title:message
+                })
+            })
+        </script> 
     </body>
 </html>
