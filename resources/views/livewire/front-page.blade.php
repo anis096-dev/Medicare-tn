@@ -60,7 +60,7 @@
         <main class="bg-blue-50 p-12">
             <section class="divide-y text-gray-900">
                 <!-- header -->
-                <div class="relative bg-white overflow-hidden rounded-lg">
+                <div id="header" class="relative bg-white overflow-hidden rounded-lg">
                     <div class="max-w-full mx-auto">
                     <div class="relative z-10 pb-8 bg-transparent sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
                         <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
@@ -91,7 +91,7 @@
                     <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
                     <img class="h-56 w-full rounded-l-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80" alt="">
                     </div>
-                </div> 
+                </div>
                 <!-- health Care --> 
                 <div id="RDV">
                     @livewire('find-ehealth-care')
