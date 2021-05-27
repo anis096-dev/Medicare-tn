@@ -33,6 +33,7 @@ class UserPermission extends Model
             'all-appointments',
             'e-health-appointments',
             'patient-appointments',
+            'contacts-from-website',
         ];
     }
 

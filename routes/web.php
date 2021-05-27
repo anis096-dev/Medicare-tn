@@ -81,6 +81,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], funct
         Route::get('/patient-appointments', function () {
             return view('admin.patient-appointments');
         })->name('patient-appointments');
+
+        Route::get('/contacts-from-website', function () {
+            return view('admin.contacts-from-website');
+        })->name('contacts-from-website');
     });
 });
 

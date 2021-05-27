@@ -150,6 +150,17 @@
                         </svg>
                     </x-jet-nav-link>
 
+                    <x-jet-nav-link class="mt-4 pb-4" href="{{ route('contacts-from-website') }}" :active="request()->routeIs('contact-from-website')">
+                        <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        @if(($count = App\Models\Message::all()->count())>0) 
+                        <span class="bg-red-400 rounded-md -ml-3 px-1 -mt-4  text-xs text-white font-bold">
+                            {{$count}}
+                        </span>
+                        @endif
+                    </x-jet-nav-link>
+
                     @elseif(auth()->user()->role == 'E-health Care')
                     
                     <x-jet-nav-link class="mt-4 pb-4" href="{{ route('e-health-appointments') }}" :active="request()->routeIs('e-health-appointments')">

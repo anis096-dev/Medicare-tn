@@ -19,4 +19,11 @@ class Message extends Model
         'message', 
     ];
 
+    public static function search($query)
+    {
+        return empty($query) ? static::query()
+            : static::where('name', 'like', '%'.$query.'%')
+            ->Orwhere('email', 'like', '%'.$query.'%');
+    }
+
 }
