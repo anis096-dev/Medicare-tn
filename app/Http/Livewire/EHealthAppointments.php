@@ -8,6 +8,8 @@ use App\Models\Treatment;
 use App\Models\Appointment;
 use App\Models\SubTreatment;
 use Livewire\WithPagination;
+use App\Mail\PatientApptNotif;
+use Illuminate\Support\Facades\Mail;
 
 class EHealthAppointments extends Component
 {
@@ -19,7 +21,9 @@ class EHealthAppointments extends Component
     public User $user;
     public $allTreatments;
     public $allSubTreatments;
-    public $related_name; 
+    public $related_name;
+    public $patient_name; 
+    public $patient_email;  
     public $treatment; 
     public $created_at; 
     public $sub_treatment;
@@ -57,16 +61,8 @@ class EHealthAppointments extends Component
     public function rules()
     {
         return [ 
-            'treatment' => 'required',
-            'sub_treatment' =>'required',
-            'passage_number' => 'required',
-            'certificate' => 'required',
-            'home_mention' => 'required',
-            'start_date' => 'required',
-            'duration' => 'required',
-            'user_dispo' => 'required',
-            'care_place' => 'required',
-            'covid_symptom' => 'required',
+            'patient_email' => 'required',
+            'status' => 'required',
         ];
     }
    
@@ -79,31 +75,6 @@ class EHealthAppointments extends Component
             ->latest()
             ->paginate($this->perPage),
         ]);
-    }
-
-     /**
-     * The data for the model mapped
-     * in this component.
-     *
-     * @return void
-     */
-    public function modelData()
-    {   
-        return [
-            'user_id' => auth()->user()->id,
-            'related_id' => $this->user->id,
-            'related_name' => $this->user->name,
-            'treatment' => $this->treatment,
-            'sub_treatment' => $this->sub_treatment,
-            'passage_number' => $this->passage_number,
-            'certificate' => $this->certificate,
-            'home_mention' => $this->home_mention,
-            'start_date' => $this->start_date,
-            'duration' => $this->duration,
-            'user_dispo' => $this->user_dispo,
-            'care_place' => $this->care_place,
-            'covid_symptom' => $this->covid_symptom,    
-        ];
     }
     
     /**
@@ -119,10 +90,12 @@ class EHealthAppointments extends Component
         $this->user_id = $data->user_id;
         $this->related_id = $data->related_id;
         $this->related_name = $data->related_name;
+        $this->patient_name = $data->patient_name;
+        $this->patient_email = $data->patient_email;
         $this->treatment  = $data->treatment;
-        // $this->sub_treatment  = $data->sub_treatment;
+        $this->sub_treatment  = $data->sub_treatment;
         $this->passage_number  = $data->passage_number;
-        $this->status  = $data->status;
+        // $this->status  = $data->status;
         $this->certificate  = $data->certificate;
         $this->home_mention  = $data->home_mention;
         $this->start_date  = $data->start_date;
@@ -154,18 +127,9 @@ class EHealthAppointments extends Component
      */
     public function modelDataUpdate()
     {   
-        return [  
-            'treatment' => $this->treatment,
-            'sub_treatment' => $this->sub_treatment,
+        return [
+            'patient_email' => $this->patient_email,
             'status' => $this->status,
-            'passage_number' => $this->passage_number,
-            'certificate' => $this->certificate,
-            'home_mention' => $this->home_mention,
-            'start_date' => $this->start_date,
-            'duration' => $this->duration,
-            'user_dispo' => $this->user_dispo,
-            'care_place' => $this->care_place,
-            'covid_symptom' => $this->covid_symptom,      
         ];
     }
     
@@ -180,11 +144,17 @@ class EHealthAppointments extends Component
         $this->validate();
         try{
         Appointment::find($this->modelId)->update($this->modelDataUpdate());
-        $this->modalFormVisible = false;
-         // Set Flash Message
+        $this->modalFormVisible = false; 
+        if($this->status == 'accepted'){
+        Mail::to($this->patient_email)->send(new PatientApptNotif(
+            auth()->user()->name,auth()->user()->specialty, auth()->user()->tel, auth()->user()->adresse,
+            $this->status,$this->treatment, $this->sub_treatment,
+            $this->passage_number,$this->start_date,$this->care_place));
+        }   
+        // Set Flash Message
         $this->dispatchBrowserEvent('alert',[
             'type'=>'success',
-            'message'=>"You changed the Appointment data Successfully!!"
+            'message'=>"A confirmation email was sent to $this->patient_name!!"
         ]);
 
         // Reset Form Fields After Creating Category
@@ -216,6 +186,8 @@ class EHealthAppointments extends Component
         $data = Appointment::find($id);
         // Assign the variables here
         $this->related_name = $data->related_name;
+        $this->patient_name = $data->patient_name;
+        $this->patient_email = $data->patient_email;
         $this->treatment  = $data->treatment;
         $this->sub_treatment  = $data->sub_treatment;
         $this->passage_number  = $data->passage_number;
@@ -309,6 +281,8 @@ class EHealthAppointments extends Component
         $this->user_id = '';
         $this->related_id ='';
         $this->related_name ='';
+        $this->patient_name ='';
+        $this->patient_email ='';
         $this->treatment  = '';
         $this->sub_treatment = '';
         $this->passage_number  = '';

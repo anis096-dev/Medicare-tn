@@ -215,8 +215,8 @@
                                 </div>
                             </div>
                             <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Birthday</div>
-                                <div class="px-4 py-2">{{$user->date_of_birth}}</div>
+                                <div class="px-4 py-2 font-semibold">Age</div>
+                                <div class="px-4 py-2">{{\Carbon\Carbon::parse($user->date_of_birth)->diffForHumans()}}</div>
                             </div>
                         </div>
                     </div>

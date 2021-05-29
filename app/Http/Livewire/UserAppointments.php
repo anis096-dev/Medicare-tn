@@ -7,6 +7,8 @@ use App\Models\Treatment;
 use App\Models\Appointment;
 use App\Models\SubTreatment;
 use Livewire\WithPagination;
+use App\Mail\EhealthApptNotif;
+use Illuminate\Support\Facades\Mail;
 
 class UserAppointments extends Component
 {
@@ -19,6 +21,8 @@ class UserAppointments extends Component
     public $allTreatments;
     public $allSubTreatments;
     public $related_name; 
+    public $patient_name; 
+    public $patient_email; 
     public $treatment; 
     public $created_at; 
     public $sub_treatment;
@@ -92,6 +96,8 @@ class UserAppointments extends Component
             'user_id' => auth()->user()->id,
             'related_id' => $this->user->id,
             'related_name' => $this->user->name,
+            'patient_name' => auth()->user()->name,
+            'patient_email' => auth()->user()->email,
             'treatment' => $this->treatment,
             'sub_treatment' => $this->sub_treatment,
             'passage_number' => $this->passage_number,
@@ -116,9 +122,15 @@ class UserAppointments extends Component
         try{
         Appointment::create($this->modelData());
         $this->modalFormVisible = false;
+        Mail::to($this->user->email)->send(new EhealthApptNotif(
+            auth()->user()->name, auth()->user()->tel,auth()->user()->adresse,
+            $this->treatment, $this->sub_treatment, $this->passage_number,
+            $this->start_date,$this->care_place));
         $this->dispatchBrowserEvent('alert',[
             'type'=>'success',
-            'message'=>"You demande has been sent Successfully!!"
+            'message'=>"You demande has been sent Successfully!!
+                        You will recieve a confirmation email from {$this->user->name}
+                        Thanks!!"
         ]);
 
         // Reset Form Fields After Creating Category
@@ -143,6 +155,8 @@ class UserAppointments extends Component
         $this->user_id = '';
         $this->related_id ='';
         $this->related_name ='';
+        $this->patient_name ='';
+        $this->patient_email ='';
         $this->treatment  = '';
         $this->sub_treatment = '';
         $this->passage_number  = '';

@@ -20,9 +20,6 @@
                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
                 </button>
             </div>
-            <div class="flex items-center sm:justify-end justify-center text-left sm:px-20">
-                <span class=" text-gray-400 text-xs font-bold">Search for RDV by date(YYYY-MM-DD)!!</span>
-            </div>
         </div>
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -33,15 +30,15 @@
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                     <input type="checkbox" wire:model="selectAll">
                                 </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">RDV Time</th> 
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">RDV Date</th> 
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Patient</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">E-health Care</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Treatment</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Passage Nbr</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Start Date (From:)</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Duration (To:)</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Patient Disponibility</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">status</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Start Date</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Duration</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Disponibility/Day</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Status</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"></th>
                             </tr>
                         </thead>
@@ -56,7 +53,7 @@
                                     <td class="px-6 py-2 text-xs capitalize">{{ $item->related_name }}</td>
                                     <td class="px-6 py-2 text-xs capitalize">{{ $item->treatment }}</td>                                        
                                     <td class="px-6 py-2 text-xs capitalize">{{ $item->passage_number }}</td>                                        
-                                    <td class="px-6 py-2 text-xs">{{ $item->start_date }}</td>                                        
+                                    <td class="px-6 py-2 text-xs">{{  Carbon\Carbon::parse($item->start_date)->format('d M Y') }}</td>                                        
                                     <td class="px-6 py-2 text-xs">{{ $item->duration }}</td>                                        
                                     <td class="px-6 py-2 text-xs">{{ $item->user_dispo }}</td>  
                                     @if($item->status=='accepted')
@@ -72,7 +69,7 @@
                                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
                                             </a>
 
-                                            <a  wire:click="updateShowModal({{ $item->id }})" class="p-1 text-blue-600 hover:bg-blue-600 hover:text-white rounded">
+                                            <a wire:click="updateShowModal({{ $item->id }})" class="p-1 text-blue-600 hover:bg-blue-600 hover:text-white rounded">
                                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg>
                                             </a>
                                         </div>
@@ -100,30 +97,6 @@
         </x-slot>
 
         <x-slot name="content">
-            <div class="mt-4">
-                <x-jet-label for="treatment" value="{{ __('Treatment') }}" />
-                <select wire:model="treatment" id="" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                    <option value="">-- Select a Treatment --</option>    
-                    @foreach ($allTreatments as $item)
-                        <option value="{{ $item->name }}">{{ $item->name }}</option>
-                    @endforeach
-                </select>
-                @error('treatment') <span class="error">{{ $message }}</span> @enderror
-            </div>
-           
-            <div class="mt-4">
-                <x-jet-label for="sub_treatment" value="{{ __('Sub Treatment') }}" />
-                <select wire:model="sub_treatment" id="" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                    <option value="">-- Select a Sub Treatment --</option>    
-                    @forelse ($allSubTreatments->where('treatment', $treatment) as $item)
-                        <option value="{{ $item->name }}">{{ $item->name }}</option>  
-                    @empty
-                        <option value="{{'empty'}}">Empty!!</option>  
-                    @endforelse
-                </select>
-                @error('sub_treatment') <span class="error">{{ $message }}</span> @enderror
-            </div>
-
             <div class="mt-4">
                 <x-jet-label for="status" value="{{ __('Status') }}" />
                 <select wire:model="status" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
@@ -164,25 +137,7 @@
                 </div>
                 @error('home_mention') <span class="error">{{ $message }}</span> @enderror
             </div>
-
-            <div class="mt-4">
-                <x-jet-label for="start_date" value="{{ __('Start Date') }}" />
-                <x-jet-input wire:model="start_date" id="start_date" class="block mt-1 w-full" type="date" />
-                @error('start_date') <span class="error">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="duration" value="{{ __('To') }}" />
-                <x-jet-input wire:model="duration" id="duration" class="block mt-1 w-full" type="date"/>
-                @error('duration') <span class="error">{{ $message }}</span> @enderror
-            </div>
-            
-            <div class="mt-4">
-                <x-jet-label for="user_dispo" value="{{ __('Patient disponibility') }}" />
-                <x-jet-input wire:model="user_dispo" id="user_dispo" class="block mt-1 w-full" type="time"/>
-                @error('user_dispo') <span class="error">{{ $message }}</span> @enderror
-            </div>
-
+        
             <div class="mt-4">
                 <x-jet-label for="care_place" value="{{ __('Care Place') }}" />
                 <select wire:model="care_place" id="" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
@@ -249,6 +204,8 @@
                     <li class="mb-2"><span class=" font-bold pr-2">Treatment:</span> {{$this->treatment}}</li>
                     <li class="mb-2"><span class=" font-bold pr-2">Sub Treatment:</span> {{$this->sub_treatment}}</li>
                     <li class="mb-2"><span class=" font-bold pr-2">Passage Nbre:</span> {{$this->passage_number}}</li>
+                    <li class="mb-2"><span class=" font-bold pr-2">Start Date:</span> {{Carbon\Carbon::parse($this->start_date)->format('d M Y')}}</li>
+                    <li class="mb-2"><span class=" font-bold pr-2">Duration:</span> {{$this->duration}}</li>
                     <li class="mb-2"><span class=" font-bold pr-2">Certificate:</span> {{$this->certificate}}</li>
                     <li class="mb-3"><span class=" font-bold pr-2">Home Mention:</span> {{$this->home_mention}}</li>
                     <li class="mb-2"><span class=" font-bold pr-2">Care place:</span> {{$this->care_place}}</li>

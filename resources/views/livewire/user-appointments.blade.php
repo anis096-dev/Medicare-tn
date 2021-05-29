@@ -53,11 +53,11 @@
                 <div class="mt-3">
                     <label class="inline-flex items-center">
                       <input wire:model="certificate" type="radio" class="form-radio" name="certificate" id="certificate" value="Yes">
-                      <span class="ml-2">Yes</span>
+                      <span class="ml-2  text-sm">Yes</span>
                     </label>
                     <label class="inline-flex items-center ml-6">
                       <input  wire:model="certificate" type="radio" class="form-radio" name="certificate" id="certificate" value="No">
-                      <span class="ml-2">No</span>
+                      <span class="ml-2  text-sm">No</span>
                     </label>
                 </div>
                 @error('certificate') <span class="error">{{ $message }}</span> @enderror
@@ -68,11 +68,11 @@
                 <div class="mt-3">
                     <label class="inline-flex items-center">
                       <input wire:model="home_mention" type="radio" class="form-radio" name="home_mention" id="home_mention" value="Yes">
-                      <span class="ml-2">Yes</span>
+                      <span class="ml-2  text-sm">Yes</span>
                     </label>
                     <label class="inline-flex items-center ml-6">
                       <input wire:model="home_mention" type="radio" class="form-radio" name="home_mention" id="home_mention" value="No">
-                      <span class="ml-2">No</span>
+                      <span class="ml-2  text-sm">No</span>
                     </label>
                 </div>
                 @error('home_mention') <span class="error">{{ $message }}</span> @enderror
@@ -85,13 +85,18 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="duration" value="{{ __('To') }}" />
-                <x-jet-input wire:model="duration" id="duration" class="block mt-1 w-full" type="date"/>
+                <x-jet-label for="duration" value="{{ __('Duration') }}" />
+                <select wire:model="duration" id="" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                    <option value="">-- Select a period (day) --</option>    
+                    @foreach (App\Models\Appointment::duration() as $item)
+                        <option value="{{ $item }}">{{ $item }}</option>
+                    @endforeach
+                </select>
                 @error('duration') <span class="error">{{ $message }}</span> @enderror
             </div>
             
             <div class="mt-4">
-                <x-jet-label for="user_dispo" value="{{ __('Patient disponibility') }}" />
+                <x-jet-label for="user_dispo" value="{{ __('Disponibility / day') }}" />
                 <x-jet-input wire:model="user_dispo" id="user_dispo" class="block mt-1 w-full" type="time"/>
                 @error('user_dispo') <span class="error">{{ $message }}</span> @enderror
             </div>
@@ -112,11 +117,11 @@
                 <div class="mt-3">
                     <label class="inline-flex items-center">
                       <input  wire:model="covid_symptom" type="radio" class="form-radio" name="covid_symptom" id="covid_symptom" value="Yes">
-                      <span class="ml-2">Yes</span>
+                      <span class="ml-2 text-sm">Yes</span>
                     </label>
                     <label class="inline-flex items-center ml-6">
                       <input  wire:model="covid_symptom" type="radio" class="form-radio" name="covid_symptom" id="covid_symptom" value="No">
-                      <span class="ml-2">No</span>
+                      <span class="ml-2 text-sm">No</span>
                     </label>
                 </div>
                 @error('covid_symptom') <span class="error">{{ $message }}</span> @enderror

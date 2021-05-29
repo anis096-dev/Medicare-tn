@@ -18,13 +18,15 @@ class CreateAppointmentsTable extends Migration
             $table->integer('user_id');
             $table->integer('related_id');
             $table->string('related_name');
+            $table->string('patient_name');
+            $table->string('patient_email');
             $table->string('treatment');
             $table->string('sub_treatment');
             $table->enum('status', [ 'waiting', 'accepted', 'refused'])->default('waiting');
             $table->string('passage_number')->nullable();
             $table->enum('certificate', ['yes', 'no'])->nullable();
             $table->enum('home_mention', ['yes', 'no'])->nullable();
-            $table->string('start_date')->nullable();
+            $table->date('start_date')->nullable();
             $table->string('duration')->nullable();
             $table->string('user_dispo')->nullable();
             $table->enum('care_place', ['home', 'cabinet', 'both']);
