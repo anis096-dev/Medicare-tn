@@ -17,6 +17,7 @@ class Appointment extends Model
         'related_name',
         'patient_name',
         'patient_email',
+        'patient_tel',
         'treatment',
         'sub_treatment',
         'status',
@@ -26,6 +27,7 @@ class Appointment extends Model
         'start_date',
         'duration',
         'user_dispo',
+        'user_dispo2',
         'care_place',
         'covid_symptom',
     ];
@@ -143,9 +145,9 @@ class Appointment extends Model
     public static function careplace()
     {
         return [
-            'home',
-            'cabinet',
-            'both',
+            'Home',
+            'Cabinet',
+            'Both',
         ];
     }
 
@@ -158,10 +160,13 @@ class Appointment extends Model
     {
         return empty($query) ? static::query()
             : static::where('related_name', 'like', '%'.$query.'%')
-            ->Orwhere('treatment', 'like', '%'.$query.'%')
-            ->Orwhere('status', 'like', '%'.$query.'%')
-            ->Orwhere('care_place', 'like', '%'.$query.'%')
-            ->Orwhere('status', 'like', '%'.$query.'%')
-            ->Orwhere('created_at', 'like', '%'.$query.'%');
+                        ->Orwhere('patient_name', 'like', '%'.$query.'%')
+                        ->Orwhere('patient_email', 'like', '%'.$query.'%')
+                        ->Orwhere('patient_tel', 'like', '%'.$query.'%')
+                        ->Orwhere('treatment', 'like', '%'.$query.'%')
+                        ->Orwhere('status', 'like', '%'.$query.'%')
+                        ->Orwhere('care_place', 'like', '%'.$query.'%')
+                        ->Orwhere('status', 'like', '%'.$query.'%')
+                        ->Orwhere('created_at', 'like', '%'.$query.'%');
     }
 }

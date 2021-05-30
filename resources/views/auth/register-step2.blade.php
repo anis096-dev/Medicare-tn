@@ -28,22 +28,26 @@
                     @endif
 
                     <div class="mt-4">
+                        <x-jet-label for="Governorate" value="{{ __('Governorate') }}" />
+                            <select id="Governorate" name="Governorate" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md">
+                                <option value="">-- Select a Governorate --</option>    
+                            @foreach (App\Models\User::governorates() as $item)
+                                <option value="{{ $item }}">{{ $item }}</option>
+                            @endforeach
+                            </select>
+                        @error('Governorate') <span class="error">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="mt-4">
                         <div>
                             @if(auth()->user()->role == 'E-health Care') 
-                            <x-jet-label for="adresse" value="{{ __('Cabinet Adresse') }}" />
+                            <x-jet-label for="adresse" value="{{ __('Adresse or Cabinet Adresse') }}" />
                             @else
                             <x-jet-label for="adresse" value="{{ __('Adresse') }}" />
                             @endif
-                            <span class="font-bold text-yellow-600">If you do not find your address, try in <span class=" font-extrabold text-yellow-700">Arabic</span> or please enter your city!!</span>
-                            <input type="search" id="adresse" name="adresse" class="block mt-2 w-full" placeholder="Try &quot;Rue el mar&quot;" /></div>
+                            <span class="font-bold text-yellow-600">If you do not find your address, try in <span class=" font-extrabold text-yellow-700">Arabic</span> or please enter your own adress!!</span>
+                            <input type="search" id="adresse" name="adresse" class="block mt-2 mb-4 w-full" placeholder="Try &quot;Rue el mar&quot;" /></div>
                             @error('adresse') <span class="error">{{ $message }}</span> @enderror            
-                        </div>
-                    
-                        <div class="mt-4">
-                        <x-jet-label for="adresse2" value="{{ __('Adresse 2') }}" />
-                        <span class="font-bold text-yellow-600">Add Your Cabinet address, enter in <span class=" font-extrabold text-yellow-700">Arabic</span> if you want!!</span>
-                        <input type="text" id="adresse2" name="adresse2" class="block mt-2 w-full" placeholder="Exemple &quot;Rue el mar&quot;" /></div>
-                        @error('adresse2') <span class="error">{{ $message }}</span> @enderror            
                         </div>
                     </div>
                 </form>

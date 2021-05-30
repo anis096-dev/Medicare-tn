@@ -9,6 +9,7 @@ use App\Models\Appointment;
 use App\Models\SubTreatment;
 use Livewire\WithPagination;
 use App\Mail\PatientApptNotif;
+use App\Mail\PatientApptNotifRefuse;
 use Illuminate\Support\Facades\Mail;
 
 class EHealthAppointments extends Component
@@ -24,6 +25,7 @@ class EHealthAppointments extends Component
     public $related_name;
     public $patient_name; 
     public $patient_email;  
+    public $patient_tel;  
     public $treatment; 
     public $created_at; 
     public $sub_treatment;
@@ -34,6 +36,7 @@ class EHealthAppointments extends Component
     public $start_date;
     public $duration;
     public $user_dispo;
+    public $user_dispo2;
     public $care_place;
     public $covid_symptom;
     public $modalFormVisible;
@@ -45,6 +48,7 @@ class EHealthAppointments extends Component
     public $bulkDisabled = true;
     public $perPage = 10;
     public $search = '';
+    public $selectedDate = null;
     
 
     public function mount()
@@ -71,6 +75,7 @@ class EHealthAppointments extends Component
         $this->bulkDisabled = count($this->selectedAppointments) < 1;
         return view('livewire.e-health-appointments', [
             'data' => Appointment::search($this->search)
+            ->Where('created_at', 'like', '%'.$this->selectedDate.'%')
             ->with('user')
             ->latest()
             ->paginate($this->perPage),
@@ -92,6 +97,7 @@ class EHealthAppointments extends Component
         $this->related_name = $data->related_name;
         $this->patient_name = $data->patient_name;
         $this->patient_email = $data->patient_email;
+        $this->patient_tel = $data->patient_tel;
         $this->treatment  = $data->treatment;
         $this->sub_treatment  = $data->sub_treatment;
         $this->passage_number  = $data->passage_number;
@@ -101,6 +107,7 @@ class EHealthAppointments extends Component
         $this->start_date  = $data->start_date;
         $this->duration  = $data->duration;
         $this->user_dispo  = $data->user_dispo;
+        $this->user_dispo2  = $data->user_dispo2;
         $this->care_place  = $data->care_place;
         $this->covid_symptom  = $data->covid_symptom;
     }
@@ -146,11 +153,15 @@ class EHealthAppointments extends Component
         Appointment::find($this->modelId)->update($this->modelDataUpdate());
         $this->modalFormVisible = false; 
         if($this->status == 'accepted'){
-        Mail::to($this->patient_email)->send(new PatientApptNotif(
+            Mail::to($this->patient_email)->send(new PatientApptNotif(
             auth()->user()->name,auth()->user()->specialty, auth()->user()->tel, auth()->user()->adresse,
             $this->status,$this->treatment, $this->sub_treatment,
             $this->passage_number,$this->start_date,$this->care_place));
-        }   
+        }else{
+            Mail::to($this->patient_email)->send(new PatientApptNotifRefuse(
+                auth()->user()->name,auth()->user()->specialty,
+                $this->status,$this->treatment, $this->sub_treatment));
+        } 
         // Set Flash Message
         $this->dispatchBrowserEvent('alert',[
             'type'=>'success',
@@ -188,6 +199,7 @@ class EHealthAppointments extends Component
         $this->related_name = $data->related_name;
         $this->patient_name = $data->patient_name;
         $this->patient_email = $data->patient_email;
+        $this->patient_tel = $data->patient_tel;
         $this->treatment  = $data->treatment;
         $this->sub_treatment  = $data->sub_treatment;
         $this->passage_number  = $data->passage_number;
@@ -197,6 +209,7 @@ class EHealthAppointments extends Component
         $this->start_date  = $data->start_date;
         $this->duration  = $data->duration;
         $this->user_dispo  = $data->user_dispo;
+        $this->user_dispo2  = $data->user_dispo2;
         $this->care_place  = $data->care_place;
         $this->covid_symptom  = $data->covid_symptom;
         $this->created_at  = $data->created_at;
@@ -283,6 +296,7 @@ class EHealthAppointments extends Component
         $this->related_name ='';
         $this->patient_name ='';
         $this->patient_email ='';
+        $this->patient_tel ='';
         $this->treatment  = '';
         $this->sub_treatment = '';
         $this->passage_number  = '';
@@ -292,6 +306,7 @@ class EHealthAppointments extends Component
         $this->start_date  = '';
         $this->duration  = '';
         $this->user_dispo  = '';
+        $this->user_dispo2  = '';
         $this->care_place  = '';
         $this->covid_symptom  = '';
         $this->modelId = '';
@@ -306,6 +321,7 @@ class EHealthAppointments extends Component
     public function searchClear()
     {
         $this->search = '';
+        $this->selectedDate = null;
     }
     
     /**

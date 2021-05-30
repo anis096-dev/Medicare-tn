@@ -20,6 +20,9 @@ class AllAppointments extends Component
     public $allTreatments;
     public $allSubTreatments;
     public $related_name; 
+    public $patient_name; 
+    public $patient_email; 
+    public $patient_tel; 
     public $treatment; 
     public $created_at; 
     public $sub_treatment;
@@ -30,6 +33,7 @@ class AllAppointments extends Component
     public $start_date;
     public $duration;
     public $user_dispo;
+    public $user_dispo2;
     public $care_place;
     public $covid_symptom;
     public $modalFormVisible;
@@ -66,6 +70,7 @@ class AllAppointments extends Component
             'start_date' => 'required',
             'duration' => 'required',
             'user_dispo' => 'required',
+            'user_dispo2' => 'required',
             'care_place' => 'required',
             'covid_symptom' => 'required',
         ];
@@ -82,31 +87,6 @@ class AllAppointments extends Component
             ->paginate($this->perPage),
         ]);
     }
-
-     /**
-     * The data for the model mapped
-     * in this component.
-     *
-     * @return void
-     */
-    public function modelData()
-    {   
-        return [
-            'user_id' => auth()->user()->id,
-            'related_id' => $this->user->id,
-            'related_name' => $this->user->name,
-            'treatment' => $this->treatment,
-            'sub_treatment' => $this->sub_treatment,
-            'passage_number' => $this->passage_number,
-            'certificate' => $this->certificate,
-            'home_mention' => $this->home_mention,
-            'start_date' => $this->start_date,
-            'duration' => $this->duration,
-            'user_dispo' => $this->user_dispo,
-            'care_place' => $this->care_place,
-            'covid_symptom' => $this->covid_symptom,    
-        ];
-    }
     
     /**
      * Loads the model data
@@ -121,6 +101,9 @@ class AllAppointments extends Component
         $this->user_id = $data->user_id;
         $this->related_id = $data->related_id;
         $this->related_name = $data->related_name;
+        $this->patient_name = $data->patient_name;
+        $this->patient_email = $data->patient_email;
+        $this->patient_tel = $data->patient_tel;
         $this->treatment  = $data->treatment;
         // $this->sub_treatment  = $data->sub_treatment;
         $this->passage_number  = $data->passage_number;
@@ -130,6 +113,7 @@ class AllAppointments extends Component
         $this->start_date  = $data->start_date;
         $this->duration  = $data->duration;
         $this->user_dispo  = $data->user_dispo;
+        $this->user_dispo2  = $data->user_dispo2;
         $this->care_place  = $data->care_place;
         $this->covid_symptom  = $data->covid_symptom;
     }
@@ -166,6 +150,7 @@ class AllAppointments extends Component
             'start_date' => $this->start_date,
             'duration' => $this->duration,
             'user_dispo' => $this->user_dispo,
+            'user_dispo2' => $this->user_dispo2,
             'care_place' => $this->care_place,
             'covid_symptom' => $this->covid_symptom,      
         ];
@@ -218,6 +203,9 @@ class AllAppointments extends Component
         $data = Appointment::find($id);
         // Assign the variables here
         $this->related_name = $data->related_name;
+        $this->patient_name = $data->patient_name;
+        $this->patient_email = $data->patient_email;
+        $this->patient_tel = $data->patient_tel;
         $this->treatment  = $data->treatment;
         $this->sub_treatment  = $data->sub_treatment;
         $this->passage_number  = $data->passage_number;
@@ -227,6 +215,7 @@ class AllAppointments extends Component
         $this->start_date  = $data->start_date;
         $this->duration  = $data->duration;
         $this->user_dispo  = $data->user_dispo;
+        $this->user_dispo2  = $data->user_dispo2;
         $this->care_place  = $data->care_place;
         $this->covid_symptom  = $data->covid_symptom;
         $this->created_at  = $data->created_at;
@@ -311,6 +300,9 @@ class AllAppointments extends Component
         $this->user_id = '';
         $this->related_id ='';
         $this->related_name ='';
+        $this->patient_name ='';
+        $this->patient_email ='';
+        $this->patient_tel ='';
         $this->treatment  = '';
         $this->sub_treatment = '';
         $this->passage_number  = '';
@@ -320,6 +312,7 @@ class AllAppointments extends Component
         $this->start_date  = '';
         $this->duration  = '';
         $this->user_dispo  = '';
+        $this->user_dispo2  = '';
         $this->care_place  = '';
         $this->covid_symptom  = '';
         $this->modelId = '';

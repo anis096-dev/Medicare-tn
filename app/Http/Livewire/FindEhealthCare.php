@@ -18,6 +18,7 @@ class FindEhealthCare extends Component
      */
     public User $user;
     public $perPage = 10;
+    public $selectedGovernorate = null;
     public $selectedAdresse = null;
     public $selectedSpecialty = null;
     public $selectedGender = null;
@@ -61,6 +62,7 @@ class FindEhealthCare extends Component
      */
     public function resetFilter()
     {
+        $this->selectedGovernorate= null;
         $this->selectedAdresse= null;
         $this->selectedSpecialty= null;
         $this->selectedGender= null;
@@ -71,6 +73,7 @@ class FindEhealthCare extends Component
     { 
         return view('livewire.find-ehealth-care', [
             'data' => User::Where('specialty', 'like', '%'.$this->selectedSpecialty.'%')
+            ->Where('Governorate', 'like', '%'.$this->selectedGovernorate.'%')
             ->Where('adresse', 'like', '%'.$this->selectedAdresse.'%')
             ->Where('gender', 'like', '%'.$this->selectedGender.'%')
             ->paginate($this->perPage),        

@@ -27,6 +27,14 @@
                 <option>empty..</option>
                 @endforelse
             </select>
+            <select wire:model="selectedGovernorate" class="border border-gray-300 text-gray-600 h-14 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                <option value="">--Governorate--</option>
+                @forelse(App\Models\User::governorates() as $item)
+                <option>{{$item}}</option>
+                @empty
+                <option>empty..</option>
+                @endforelse
+            </select>
             <select wire:model="selectedAdresse" class="border border-gray-300 text-gray-600 h-14 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none">
                 <option value="">--adresse--</option>
                 @forelse($adresses as $item)

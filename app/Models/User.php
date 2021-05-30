@@ -11,7 +11,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable 
+// implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -34,9 +35,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'gender', 
         'marital_status', 
         'date_of_birth', 
-        'tel', 
+        'tel',
+        'Governorate',
         'adresse',
-        'adresse2',
         'bio',
     ];
 
@@ -107,6 +108,41 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\Models\Appointment');
     }
+    
+    /**
+     * The list of governorates
+     *
+     * @return void
+     */
+    public static function governorates()
+    {
+        return [
+            'Ariana',
+            'Béja',
+            'Ben Arous',
+            'Bizerte',
+            'Gabès',
+            'Gafsa',
+            'Jendouba',
+            'Kairouan',
+            'Kasserine',
+            'Kebili',
+            'kef',
+            'Mahdia',
+            'Manouba',
+            'Medenine',
+            'Monastir',
+            'Nabeul',
+            'Sfax',
+            'Sidi Bouzid',
+            'Siliana',
+            'Sousse',
+            'Tataouine',
+            'Tozeur',
+            'Tunis',
+            'Zaghouan',
+        ];
+    }
 
     public static function search($query)
     {
@@ -115,6 +151,7 @@ class User extends Authenticatable implements MustVerifyEmail
                 ->orWhere('email', 'like', '%'.$query.'%')
                 ->orWhere('tel', 'like', '%'.$query.'%')
                 ->orWhere('specialty', 'like', '%'.$query.'%')
+                ->orWhere('Governorate', 'like', '%'.$query.'%')
                 ->orWhere('adresse', 'like', '%'.$query.'%')
                 ->orWhere('adresse2', 'like', '%'.$query.'%');
     }

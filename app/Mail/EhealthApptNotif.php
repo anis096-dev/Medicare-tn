@@ -11,7 +11,6 @@ class EhealthApptNotif extends Mailable
     use Queueable, SerializesModels;
 
     protected $name;
-    protected $phone;
     protected $adresse;
     protected $treatment;
     protected $sub_treatment;
@@ -23,10 +22,9 @@ class EhealthApptNotif extends Mailable
      *
      * @return void
      */
-    public function __construct($name,$phone,$adresse,$treatment,$sub_treatment,$passage_number,$start_date,$care_place)
+    public function __construct($name,$adresse,$treatment,$sub_treatment,$passage_number,$start_date,$care_place)
     {
         $this->name = $name;
-        $this->phone = $phone;
         $this->adresse = $adresse;
         $this->treatment = $treatment;
         $this->sub_treatment = $sub_treatment;
@@ -45,7 +43,6 @@ class EhealthApptNotif extends Mailable
         return $this->from('admin@medicare.tn')->subject('New appoitment Medicare.TN')
         ->view('emails.ehealth-appointment-notification')->with([
             'patientname' => $this->name,
-            'phone' => $this->phone,
             'adresse' => $this->adresse,
             'treatment' => $this->treatment,
             'sub_treatment' => $this->sub_treatment,

@@ -23,6 +23,7 @@ class UserAppointments extends Component
     public $related_name; 
     public $patient_name; 
     public $patient_email; 
+    public $patient_tel; 
     public $treatment; 
     public $created_at; 
     public $sub_treatment;
@@ -33,6 +34,7 @@ class UserAppointments extends Component
     public $start_date;
     public $duration;
     public $user_dispo;
+    public $user_dispo2;
     public $care_place;
     public $covid_symptom;
     public $modalFormVisible;
@@ -61,6 +63,7 @@ class UserAppointments extends Component
             'start_date' => 'required',
             'duration' => 'required',
             'user_dispo' => 'required',
+            'user_dispo2' => 'required',
             'care_place' => 'required',
             'covid_symptom' => 'required',
         ];
@@ -98,6 +101,7 @@ class UserAppointments extends Component
             'related_name' => $this->user->name,
             'patient_name' => auth()->user()->name,
             'patient_email' => auth()->user()->email,
+            'patient_tel' => auth()->user()->tel,
             'treatment' => $this->treatment,
             'sub_treatment' => $this->sub_treatment,
             'passage_number' => $this->passage_number,
@@ -106,6 +110,7 @@ class UserAppointments extends Component
             'start_date' => $this->start_date,
             'duration' => $this->duration,
             'user_dispo' => $this->user_dispo,
+            'user_dispo2' => $this->user_dispo2,
             'care_place' => $this->care_place,
             'covid_symptom' => $this->covid_symptom,    
         ];
@@ -123,14 +128,13 @@ class UserAppointments extends Component
         Appointment::create($this->modelData());
         $this->modalFormVisible = false;
         Mail::to($this->user->email)->send(new EhealthApptNotif(
-            auth()->user()->name, auth()->user()->tel,auth()->user()->adresse,
+            auth()->user()->name, auth()->user()->adresse,
             $this->treatment, $this->sub_treatment, $this->passage_number,
             $this->start_date,$this->care_place));
         $this->dispatchBrowserEvent('alert',[
             'type'=>'success',
-            'message'=>"You demande has been sent Successfully!!
-                        You will recieve a confirmation email from {$this->user->name}
-                        Thanks!!"
+            'message'=>"Your demande has been sent Successfully!!
+                        If you don't recieve a confirmation email from {$this->user->name} for '1h', So find other {$this->user->specialty}!!"
         ]);
 
         // Reset Form Fields After Creating Category
@@ -157,6 +161,7 @@ class UserAppointments extends Component
         $this->related_name ='';
         $this->patient_name ='';
         $this->patient_email ='';
+        $this->patient_tel ='';
         $this->treatment  = '';
         $this->sub_treatment = '';
         $this->passage_number  = '';
@@ -166,6 +171,7 @@ class UserAppointments extends Component
         $this->start_date  = '';
         $this->duration  = '';
         $this->user_dispo  = '';
+        $this->user_dispo2  = '';
         $this->care_place  = '';
         $this->covid_symptom  = '';
         $this->modelId = '';

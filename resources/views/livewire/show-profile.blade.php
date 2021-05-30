@@ -125,9 +125,15 @@
                                         <div class="text-gray-700 font-semibold">
                                             {{$item->specialty}}
                                         </div>
+                                        @if($item->gender == 'm')
                                         <div class="text-gray-600 text-xs font-thin">
-                                            {{$item->gender}}
+                                            {{ __('male') }}
                                         </div>
+                                        @else
+                                        <div class="text-gray-600 text-xs font-thin">
+                                            {{ __('female') }}
+                                        </div>
+                                        @endif
                                     </div>
                                     <div class="text-red-400 text-xs ml-4 mt-1">{{ \Carbon\Carbon::parse($item->last_seen)->diffForHumans() }}</div>
                                 </div>
@@ -184,7 +190,7 @@
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-bold">Contact No.</div>
-                                <div class="px-4 py-2">
+                                <div class="px-4 py-2 bg-indigo-50 rounded-md">
                                     <h6 class="font-bold">+216{{$user->tel}}</h6>
                                     <a href="tel:+216{{$user->tel}}">
                                         <svg  class="text-blue-500 h-6 w-6 -mt-6 ml-28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -195,18 +201,14 @@
                                 </div>
                             </div>
                             <div class="grid grid-cols-2">
-                                @if($item->role == 'E-health Care') 
-                                <div class="px-4 py-2 font-semibold">Cabinet Address</div>
-                                @else
+                                <div class="px-4 py-2 font-semibold">Governorate</div>
+                                <div class="px-4 py-2 capitalize">{{$user->Governorate}}</div>
+                            </div>
+                            <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Current Address</div>
-                                @endif
                                 <div class="px-4 py-2 capitalize">{{$user->adresse}}</div>
                             </div>
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Permanant Address</div>
-                                <div class="px-4 py-2 capitalize">{{$user->adresse2}}</div>
-                            </div>
-                            <div class="grid grid-cols-2">
+                            <div class="grid grid-cols-2 bg-indigo-50 rounded-md">
                                 <div class="px-4 py-2 font-bold">Email.</div>
                                 <div class="px-2 py-2">
                                     <a class="text-blue-800" href="mailto:{{$user->email}}">
@@ -220,9 +222,6 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <button class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">Show
-                        Full Information
-                    </button> --}}
                 </div>
                 <!-- End of about section -->
                 <div class="my-4"></div>

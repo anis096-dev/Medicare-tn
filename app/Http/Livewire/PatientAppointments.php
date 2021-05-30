@@ -14,7 +14,10 @@ class PatientAppointments extends Component
      * Put your custom public properties here!
      */
     public User $user;
-    public $related_name; 
+    public $related_name;
+    public $patient_name; 
+    public $patient_email;   
+    public $patient_tel;   
     public $treatment; 
     public $created_at; 
     public $sub_treatment;
@@ -25,17 +28,20 @@ class PatientAppointments extends Component
     public $start_date;
     public $duration;
     public $user_dispo;
+    public $user_dispo2;
     public $care_place;
     public $covid_symptom;
     public $modalShowVisible;
     public $modelId;
     public $perPage = 10;
     public $search = '';
+    public $selectedDate = null;
    
     public function render()
     {
         return view('livewire.patient-appointments', [
             'data' => Appointment::search($this->search)
+            ->Where('created_at', 'like', '%'.$this->selectedDate.'%')
             ->with('user')
             ->latest()
             ->paginate($this->perPage),
@@ -56,6 +62,9 @@ class PatientAppointments extends Component
         $data = Appointment::find($id);
         // Assign the variables here
         $this->related_name = $data->related_name;
+        $this->patient_name = $data->patient_name;
+        $this->patient_email = $data->patient_email;
+        $this->patient_tel = $data->patient_tel;
         $this->treatment  = $data->treatment;
         $this->sub_treatment  = $data->sub_treatment;
         $this->passage_number  = $data->passage_number;
@@ -65,6 +74,7 @@ class PatientAppointments extends Component
         $this->start_date  = $data->start_date;
         $this->duration  = $data->duration;
         $this->user_dispo  = $data->user_dispo;
+        $this->user_dispo2  = $data->user_dispo2;
         $this->care_place  = $data->care_place;
         $this->covid_symptom  = $data->covid_symptom;
         $this->created_at  = $data->created_at;
@@ -79,6 +89,7 @@ class PatientAppointments extends Component
     public function searchClear()
     {
         $this->search = '';
+        $this->selectedDate = null;
     }
     
     /**

@@ -1,22 +1,18 @@
 <div class="p-6">
     <div class="flex flex-col">
         <div class="mb-1">
-            <div class="flex items-center sm:justify-end justify-center px-4 py-3 text-right sm:px-8">
+            <div class="flex-col items-center md:justify-end lg:text-right justify-start px-4 py-3 space-y-2 text-left -ml-4">
                 &nbsp;
                 <select class="border border-gray-300 text-gray-600 h-14 pl-5 pr-10 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none" wire:model="perPage">
                     <option>10</option>
                     <option>15</option>
                     <option>25</option>
                 </select>
+                <x-jet-input wire:model="selectedDate" id="start_date" class="border border-gray-300 text-gray-600 h-14 pl-5 pr-10 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none" type="date" />
                 <input wire:model="search" wire:click="alertInfo" type="text" class="h-14 sm:w-96 md:pr-8 sm:pl-10 rounded focus:shadow focus:outline-none" placeholder="Search...">
-                <button class="-ml-8" wire:click="searchClear">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                <button class="border border-gray-300 text-center h-14 p-2 ml-3 border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none appearance-none" wire:click="searchClear">
+                    Reset All
                 </button>
-            </div>
-            <div class="flex items-center sm:justify-end justify-center text-left sm:px-20">
-                <span class=" text-gray-400 text-xs font-bold">Search for RDV by date(YYYY-MM-DD)!!</span>
             </div>
         </div>
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -45,7 +41,7 @@
                                     <td class="px-6 py-2 text-xs capitalize">{{ $item->passage_number }}</td>                                        
                                     <td class="px-6 py-2 text-xs">{{Carbon\Carbon::parse($this->start_date)->format('d M Y')}}</td>                                        
                                     <td class="px-6 py-2 text-xs">{{ $item->duration }}</td>                                        
-                                    <td class="px-6 py-2 text-xs">{{ $item->user_dispo }}</td>  
+                                    <td class="px-6 py-2 text-xs"><span class="text-white bg-blue-300 p-1 rounded-lg mr-1">{{ $item->user_dispo }}</span><span class="text-white bg-blue-300 p-1 rounded-lg">{{ $item->user_dispo2 }}</span></td>  
                                     @if($item->status=='accepted')
                                     <td class="px-6 py-2 text-xs mb-2"><span class="p-1 text-gray-50 font-bold bg-blue-500 rounded">{{$item->status}}</span></td>
                                     @elseif($item->status=='refused')
@@ -96,11 +92,13 @@
                     <li class="mb-2"><span class=" font-bold pr-2">E-health care name:</span> {{$this->related_name}}</li>
                     <li class="mb-2"><span class=" font-bold pr-2">Patient name:</span> {{$this->patient_name}}</li>
                     <li class="mb-2"><span class=" font-bold pr-2">Patient email:</span> {{$this->patient_email}}</li>
+                    <li class="mb-2"><span class=" font-bold pr-2">Patient phone:</span> {{$this->patient_tel}}</li>
                     <li class="mb-2"><span class=" font-bold pr-2">Treatment:</span> {{$this->treatment}}</li>
                     <li class="mb-2"><span class=" font-bold pr-2">Sub Treatment:</span> {{$this->sub_treatment}}</li>
                     <li class="mb-2"><span class=" font-bold pr-2">Passage Nbre:</span> {{$this->passage_number}}</li>
                     <li class="mb-2"><span class=" font-bold pr-2">Start Date:</span> {{Carbon\Carbon::parse($this->start_date)->format('d M Y')}}</li>
                     <li class="mb-2"><span class=" font-bold pr-2">Duration:</span> {{$this->duration}}</li>
+                    <li class="mb-2"><span class=" font-bold pr-2">Patient Dispo/Day:<span class="text-white bg-blue-300 p-1 rounded-lg mr-1">{{ $this->user_dispo }}</span><span class="text-white bg-blue-300 p-1 rounded-lg">{{ $this->user_dispo2 }}</span></li>
                     <li class="mb-2"><span class=" font-bold pr-2">Certificate:</span> {{$this->certificate}}</li>
                     <li class="mb-3"><span class=" font-bold pr-2">Home Mention:</span> {{$this->home_mention}}</li>
                     <li class="mb-2"><span class=" font-bold pr-2">Care place:</span> {{$this->care_place}}</li>

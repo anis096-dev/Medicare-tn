@@ -20,6 +20,7 @@ class CreateAppointmentsTable extends Migration
             $table->string('related_name');
             $table->string('patient_name');
             $table->string('patient_email');
+            $table->string('patient_tel')->nullable();
             $table->string('treatment');
             $table->string('sub_treatment');
             $table->enum('status', [ 'waiting', 'accepted', 'refused'])->default('waiting');
@@ -29,6 +30,7 @@ class CreateAppointmentsTable extends Migration
             $table->date('start_date')->nullable();
             $table->string('duration')->nullable();
             $table->string('user_dispo')->nullable();
+            $table->string('user_dispo2')->nullable();
             $table->enum('care_place', ['home', 'cabinet', 'both']);
             $table->enum('covid_symptom', ['yes', 'no'])->nullable();
             $table->timestamps();

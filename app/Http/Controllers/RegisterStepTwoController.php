@@ -14,13 +14,13 @@ class RegisterStepTwoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'Governorate' => 'required',
             'adresse' => 'required|string|max:255',
-            'adresse2' => 'required|string|max:255',
             'bio' => 'max:255',
         ]);
         auth()->user()->update([
+            'Governorate' => $request->Governorate,
             'adresse' => $request->adresse,
-            'adresse2' => $request->adresse2,
             'bio' => $request->bio,
         ]);
         return redirect()->route('dashboard');
