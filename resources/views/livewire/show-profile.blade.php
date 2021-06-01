@@ -188,6 +188,7 @@
                                 <div class="px-4 py-2 capitalize">female</div>
                                 @endif
                             </div>
+                            @if(auth()->user()->role != 'Patient')
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-bold">Contact No.</div>
                                 <div class="px-4 py-2 bg-indigo-50 rounded-md">
@@ -200,6 +201,7 @@
                                     </a>
                                 </div>
                             </div>
+                            @endif
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Governorate</div>
                                 <div class="px-4 py-2 capitalize">{{$user->Governorate}}</div>
@@ -208,6 +210,7 @@
                                 <div class="px-4 py-2 font-semibold">Current Address</div>
                                 <div class="px-4 py-2 capitalize">{{$user->adresse}}</div>
                             </div>
+                            @if(auth()->user()->role != 'Patient')
                             <div class="grid grid-cols-2 bg-indigo-50 rounded-md">
                                 <div class="px-4 py-2 font-bold">Email.</div>
                                 <div class="px-2 py-2">
@@ -216,6 +219,7 @@
                                     </a>
                                 </div>
                             </div>
+                            @endif
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Age</div>
                                 <div class="px-4 py-2">{{\Carbon\Carbon::parse($user->date_of_birth)->diffForHumans()}}</div>

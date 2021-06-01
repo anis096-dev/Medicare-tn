@@ -19,10 +19,10 @@
             <span class=" bg-blue-500 rounded-md box-border text-white text-xs font-bold p-1 ml-2">{{App\Models\User::where('role','Patient')->count()}}</span>
         </div>
     </div>
-    {{-- The data table --}}
+    {{-- The data ehealth table --}}
     <div class="flex flex-col">
         <div class="mb-1">
-            <div class="flex items-center sm:justify-end justify-center px-4 py-3 text-right sm:px-8">
+            <div class="flex-col items-center md:justify-end lg:text-right justify-start px-4 py-3 space-y-2 text-left -ml-4">
                 &nbsp;
                 <select class="border border-gray-300 text-gray-600 h-14 pl-5 pr-10 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none" wire:model="perPage">
                     <option>10</option>
@@ -30,10 +30,28 @@
                     <option>25</option>
                 </select>
                 <input wire:model="search" wire:click="alertInfo" type="text" class="h-14 sm:w-96 md:pr-8 sm:pl-10 rounded focus:shadow focus:outline-none" placeholder="Search...">
-                <button class="-ml-8" wire:click="searchClear">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+                <select wire:model="selectedRole" class="border border-gray-300 text-gray-600 h-14 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                    <option value="">--role--</option>
+                    @forelse($roles as $item)
+                    <option>{{$item->name}}</option>    
+                    @empty
+                    <option>empty..</option>
+                    @endforelse
+                </select>
+                <select wire:model="selectedGender" class="border border-gray-300 text-gray-600 h-14 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                    <option value="">--gender--</option>
+                    @forelse($genders as $item)
+                    @if($item == 'm')
+                    <option value="{{$item}}">male</option>
+                    @else
+                    <option value="{{$item}}">female</option>
+                    @endif   
+                    @empty
+                    <option>empty..</option>
+                    @endforelse
+                </select>
+                <button class="border border-gray-300 text-center ml-2 h-14 p-2 mr-1 border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none appearance-none" wire:click="searchClear">
+                    Reset All
                 </button>
                 <button @if($bulkDisabled) wire:click.prevent="NodeleteSelected" @endif  wire:click.prevent="deleteSelected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"
                 class="@if($bulkDisabled) opacity-50 @endif ml-2 p-1 text-red-500 hover:text-red-700">
@@ -48,7 +66,8 @@
                         <thead>
                             <tr>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    <input type="checkbox" wire:model="selectAll" wire:click="adminAlert">
+                                    {{-- <input type="checkbox" wire:model="selectAll" wire:click="adminAlert"> --}}
+                                    select
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Photo</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Name</th>

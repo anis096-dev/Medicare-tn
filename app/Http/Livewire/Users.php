@@ -2,9 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Rating;
 use App\Models\User;
+use App\Models\Rating;
 use Livewire\Component;
+use App\Models\Roles;
 use Livewire\WithPagination;
 
 class Users extends Component
@@ -17,6 +18,11 @@ class Users extends Component
     public $selectedUsers = [];
     public $selectAll = false;
     public $bulkDisabled = true;
+    public $selectedRole = null;
+    public $selectedGender = null;
+    public $roles;
+    public $genders;
+    
 
 
     /**
@@ -30,6 +36,14 @@ class Users extends Component
     public $specialty;
     public $name;
     public $email;
+
+
+
+    public function mount()
+    {
+        $this->roles = Roles::all();
+        $this->genders = ['m', 'f'];
+    }
 
     /**
      * The validation rules
@@ -242,6 +256,9 @@ class Users extends Component
     public function searchClear()
     {
         $this->search = '';
+        $this->selectedRole= null;
+        $this->selectedGender= null;
+        $this->resetPage();
     }
     
     /**
@@ -253,7 +270,7 @@ class Users extends Component
     {
         $this->dispatchBrowserEvent('alert', 
             ['type' => 'info',  
-            'message' => 'Search by Name, Email & phone or Specialty!'
+            'message' => 'Search by Email, Phone or specialty!'
             ]);
     }
 
@@ -275,6 +292,8 @@ class Users extends Component
         $this->bulkDisabled = count($this->selectedUsers) < 1;
         return view('livewire.users', [
             'data' => User::search($this->search)
+            ->Where('gender', 'like', '%'.$this->selectedGender.'%')
+            ->Where('Role', 'like', '%'.$this->selectedRole.'%')
             ->paginate($this->perPage),
         ]);
     }

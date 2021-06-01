@@ -78,7 +78,7 @@
                             Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
                             </p>
                             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                            <div class="rounded-md shadow">
+                            <div class=" animate-pulse rounded-md shadow">
                                 <a href="#RDV" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
                                 Get started
                                 </a>
@@ -105,48 +105,47 @@
                 <div class="text-gray-600 bg-white body-font">
                     <div class="container px-5 py-24 mx-auto">
                       <div class="flex flex-col text-center w-full mb-20">
-                        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Master Cleanse Reliac Heirloom</h1>
+                        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Statistics</h1>
                         <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them man bun deep jianbing selfies heirloom prism food truck ugh squid celiac humblebrag.</p>
                       </div>
                       <div class="flex flex-wrap -m-4 text-center">
                         <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
                           <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="text-indigo-500 w-12 h-12 mb-3 inline-block" viewBox="0 0 24 24">
-                              <path d="M8 17l4 4 4-4m-4-5v9"></path>
-                              <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>
+                            <svg xmlns="http://www.w3.org/2000/svg" class=" animate-bounce text-indigo-500 w-12 h-12 mb-3 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
-                            <h2 class="title-font font-medium text-3xl text-gray-900">2.7K</h2>
-                            <p class="leading-relaxed">Downloads</p>
+                            <h2 class="title-font font-medium text-3xl text-gray-900">{{App\Models\Appointment::count()}}</h2>
+                            <p class="leading-relaxed">Appointments</p>
                           </div>
                         </div>
                         <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
                           <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="text-indigo-500 w-12 h-12 mb-3 inline-block" viewBox="0 0 24 24">
-                              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
-                              <circle cx="9" cy="7" r="4"></circle>
-                              <path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"></path>
-                            </svg>
-                            <h2 class="title-font font-medium text-3xl text-gray-900">1.3K</h2>
-                            <p class="leading-relaxed">Users</p>
+                                <svg xmlns="http://www.w3.org/2000/svg" class=" animate-pulse text-indigo-500 w-12 h-12 mb-3 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" 
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                                </svg>
+                            <h2 class="title-font font-medium text-3xl text-gray-900">{{App\Models\User::where('role', 'E-Health Care')->count()}}</h2>
+                            <p class="leading-relaxed">Healthcare professionals</p>
                           </div>
                         </div>
                         <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
-                          <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="text-indigo-500 w-12 h-12 mb-3 inline-block" viewBox="0 0 24 24">
-                              <path d="M3 18v-6a9 9 0 0118 0v6"></path>
-                              <path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"></path>
-                            </svg>
-                            <h2 class="title-font font-medium text-3xl text-gray-900">74</h2>
-                            <p class="leading-relaxed">Files</p>
-                          </div>
+                            <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class=" animate-pulse text-indigo-500 w-12 h-12 mb-3 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                              <h2 class="title-font font-medium text-3xl text-gray-900">{{App\Models\User::where('role', 'Patient')->count()}}</h2>
+                              <p class="leading-relaxed">Patients</p>
+                            </div>
                         </div>
                         <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
                           <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
-                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="text-indigo-500 w-12 h-12 mb-3 inline-block" viewBox="0 0 24 24">
-                              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            <svg xmlns="http://www.w3.org/2000/svg" class=" animate-pulse text-indigo-500 w-12 h-12 mb-3 inline-block" viewBox="0 0 24 24"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
-                            <h2 class="title-font font-medium text-3xl text-gray-900">46</h2>
-                            <p class="leading-relaxed">Places</p>
+                            <h2 class="title-font font-medium text-3xl text-gray-900">{{App\Models\Specialty::count()}}</h2>
+                            <p class="leading-relaxed">Specialties</p>
                           </div>
                         </div>
                       </div>

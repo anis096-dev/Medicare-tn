@@ -17,7 +17,7 @@ class FindEhealthCare extends Component
      * Put your custom public properties here!
      */
     public User $user;
-    public $perPage = 10;
+    public $perPage = 12;
     public $selectedGovernorate = null;
     public $selectedAdresse = null;
     public $selectedSpecialty = null;

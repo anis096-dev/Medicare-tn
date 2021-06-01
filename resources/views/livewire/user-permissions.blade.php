@@ -15,12 +15,6 @@
     <div class="flex flex-col">
         <div class="mb-1">
             <div class="flex items-center sm:justify-end justify-center px-4 py-3 text-right sm:px-8">
-                &nbsp;
-                <select class="border border-gray-300 text-gray-600 h-14 pl-5 pr-10 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none" wire:model="perPage">
-                    <option>10</option>
-                    <option>15</option>
-                    <option>25</option>
-                </select>
                 <input wire:model="search" wire:click="alertInfo" type="text" class="h-14 sm:w-96 md:pr-8 sm:pl-10 rounded focus:shadow focus:outline-none" placeholder="Search...">
                 <button class="-ml-8" wire:click="searchClear">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -43,31 +37,36 @@
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"></th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">                           
-                                @forelse ($data as $item)
-                                    <tr>
-                                        <td class="px-6 py-2">
-                                            <input type="checkbox" wire:model="selectedPermissions" value="{{$item->id}}">
-                                        </td>
-                                        <td class="px-6 py-2">{{ $item->role }}</td>
-                                        <td class="px-6 py-2">{{ $item->route_name }}</td>                                        
-                                        <td class="px-6 py-2 flex justify-end">
-                                            <div class="flex space-x-1 justify-around">
-                                                <a  wire:click="updateShowModal({{ $item->id }})" target="_blank" class="p-1 text-blue-600 hover:bg-blue-600 hover:text-white rounded">
-                                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg>
-                                                 </a>
-                                             
-                                                 <button wire:click="deleteShowModal({{ $item->id }})" class="p-1 text-red-600 hover:bg-red-600 hover:text-white rounded">
-                                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-                                                 </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @empty
-                                <tr>
-                                    <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">No Results Found</td>
-                                </tr>
-                                @endforelse
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @forelse ($data->unique('role') as $item)
+                            <tr>
+                                <td class="px-6 py-2">
+                                    <input class="hidden" type="checkbox" wire:model="selectedTimes" value="{{$item->id}}">
+                                </td>
+                                <td class="px-6 py-2">{{ $item->role }}</td>
+                                <td class="px-6 py-2" x-data="{ show: false }">
+                                    @foreach ($data->where('role', $item->role) as $item)
+                                    <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'" :class="{ 'active': show }" 
+                                    class="bg-blue-500 px-2 py-2 ml-2 mb-2 rounded text-white text-xs font-bold items-center">
+                                        {{$item->route_name}}
+                                    </button>
+                                    <div class="ml-4 mb-2 px-2 py-2 items-center flex" x-show="show">
+                                        <a  wire:click="updateShowModal({{ $item->id }})" target="_blank" class="p-1 text-blue-600 hover:bg-blue-600 hover:text-white rounded">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg>
+                                        </a>
+
+                                        <button wire:click="deleteShowModal({{ $item->id }})" class="p-1 text-red-600 hover:bg-red-600 hover:text-white rounded">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                                        </button>
+                                    </div>
+                                    @endforeach
+                                </td>
+                            </tr>
+                        @empty
+                        <tr>
+                            <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">No Results Found</td>
+                        </tr>
+                        @endforelse                          
                         </tbody>
                     </table>
                 </div>
