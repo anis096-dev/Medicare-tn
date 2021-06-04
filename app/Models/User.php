@@ -36,6 +36,7 @@ class User extends Authenticatable
         'marital_status', 
         'date_of_birth', 
         'tel',
+        'isVerified',
         'Governorate',
         'adresse',
         'bio',

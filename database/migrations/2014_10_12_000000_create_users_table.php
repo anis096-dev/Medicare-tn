@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->enum('marital_status', ['single', 'married']);;
             $table->string('date_of_birth')->nullable();
             $table->string('tel')->nullable();
+            $table->boolean('isVerified')->default(false);
             $table->string('Governorate')->nullable();
             $table->string('adresse')->nullable();
             $table->string('bio')->nullable();

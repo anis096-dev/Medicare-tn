@@ -39,7 +39,7 @@
                 <x-jet-input id="date_of_birth" class="block mt-1 w-full" type="date" name="date_of_birth" required />
             </div>
 
-            <div class="mt-4">
+            {{-- <div class="mt-4">
                 <x-jet-label for="tel" value="{{ __('Tel') }}" />
                 <div class="mt-1 flex rounded-md shadow-sm">
                     <span class="inline-flex items-center px-3 py-2 rounded-l-lg border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
@@ -47,7 +47,7 @@
                     </span>
                         <x-jet-input id="tel" class="inline-flex items-center w-full pl-2 py-2 rounded-r-lg rounded-l-none border border-l-0" maxlength="8" type="tel" name="tel" placeholder="enter 8 numbers here! ..." required />
                 </div>
-            </div>
+            </div> --}}
 
             <div class="mt-4">
                 <x-jet-label for="role" value="{{ __('Register as:') }}" />

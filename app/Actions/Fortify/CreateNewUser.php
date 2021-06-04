@@ -31,12 +31,12 @@ class CreateNewUser implements CreatesNewUsers
             'gender' => ['required'],
             'marital_status' => ['required'],
             'date_of_birth' => ['required', 'string', 'max:255'],
-            'tel' => ['required', 'numeric'],
+            // 'tel' => ['required', 'numeric', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
-            
+        
         return DB::transaction(function () use ($input) {
             return tap(User::create([
                 'name' => $input['name'],
@@ -45,7 +45,7 @@ class CreateNewUser implements CreatesNewUsers
                 'gender' => $input['gender'],
                 'marital_status' => $input['marital_status'],
                 'date_of_birth' => $input['date_of_birth'],
-                'tel' => $input['tel'],
+                // 'tel' => $input['tel'],
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
             ]), function (User $user) {
