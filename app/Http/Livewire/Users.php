@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Rating;
 use Livewire\Component;
 use App\Models\Roles;
+use App\Models\Specialty;
 use Livewire\WithPagination;
 
 class Users extends Component
@@ -20,8 +21,6 @@ class Users extends Component
     public $bulkDisabled = true;
     public $selectedRole = null;
     public $selectedGender = null;
-    public $roles;
-    public $genders;
     
 
 
@@ -36,14 +35,6 @@ class Users extends Component
     public $specialty;
     public $name;
     public $email;
-
-
-
-    public function mount()
-    {
-        $this->roles = Roles::all();
-        $this->genders = ['m', 'f'];
-    }
 
     /**
      * The validation rules

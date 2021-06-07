@@ -32,7 +32,7 @@
                 <input wire:model="search" wire:click="alertInfo" type="text" class="h-14 sm:w-96 md:pr-8 sm:pl-10 rounded focus:shadow focus:outline-none" placeholder="Search...">
                 <select wire:model="selectedRole" class="border border-gray-300 text-gray-600 h-14 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none">
                     <option value="">--role--</option>
-                    @forelse($roles as $item)
+                    @forelse(App\Models\Roles::all() as $item)
                     <option>{{$item->name}}</option>    
                     @empty
                     <option>empty..</option>
@@ -40,15 +40,8 @@
                 </select>
                 <select wire:model="selectedGender" class="border border-gray-300 text-gray-600 h-14 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none">
                     <option value="">--gender--</option>
-                    @forelse($genders as $item)
-                    @if($item == 'm')
-                    <option value="{{$item}}">male</option>
-                    @else
-                    <option value="{{$item}}">female</option>
-                    @endif   
-                    @empty
-                    <option>empty..</option>
-                    @endforelse
+                    <option value="{{'m'}}">male</option>
+                    <option value="{{'f'}}">female</option>
                 </select>
                 <button class="border border-gray-300 text-center ml-2 h-14 p-2 mr-1 border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none appearance-none" wire:click="searchClear">
                     Reset All
@@ -179,17 +172,6 @@
                 <x-jet-label for="name" value="{{ __('Name') }}" />
                 <x-jet-input wire:model="name" id="name" class="block mt-1 w-full" type="text" />
                 @error('name') <span class="error">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="role" value="{{ __('Role') }}" />
-                <select wire:model="role" id="role" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                        <option value="">-- Select a Role --</option>    
-                    @foreach (App\Models\Roles::all()->whereNotIn('name', 'admin') as $item)
-                        <option value="{{ $item->name }}">{{ $item->name }}</option>
-                    @endforeach
-                </select>
-                @error('role') <span class="error">{{ $message }}</span> @enderror
             </div>
 
             @if($role=='E-health Care')

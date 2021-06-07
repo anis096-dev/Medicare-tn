@@ -94,7 +94,7 @@
                     </div>
                     </div>
                     <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                    <img class="h-65 w-full rounded-b-full rounded-bl-full rounded-l-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full shadow-2xl" src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=889&q=80" alt="">
+                    <img class="h-65 w-full rounded-b-full rounded-bl-full rounded-l-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full shadow-2xl" src="{{url('/img/infirmier.jpg')}}" alt="Image">
                     </div>
                 </div>
                 <!-- health Care --> 
