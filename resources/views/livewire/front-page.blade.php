@@ -13,15 +13,16 @@
                 {{ config('app.name', 'Laravel') }}
             </a>
         </div>
+        
         <div class="flex justify-end sm:w-8/12">
             {{-- Top Navigation --}}
             <ul class="hidden sm:flex sm:text-left text-blue-500 text-sm">
                 @foreach ($topNavLinks as $item)
                     <a href="{{ url('/'.$item->slug) }}">
                         @if($item->slug == 'contact')
-                        <li class="cursor-pointer px-4 py-2 hover:bg-blue-100 rounded font-bold"><a href="#contact">{{$item->label}}</a></li>
+                        <li class="cursor-pointer px-4 py-2 hover:bg-blue-100 rounded font-bold"><a href="#contact">{{__($item->label)}}</a></li>
                         @else
-                        <li class="cursor-pointer px-4 py-2 hover:bg-blue-100 rounded font-bold">{{ $item->label }}</li>
+                        <li class="cursor-pointer px-4 py-2 hover:bg-blue-100 rounded font-bold">{{__($item->label)}}</li>
                         @endif
                     </a>
                 @endforeach
@@ -29,13 +30,13 @@
             @if (Route::has('login'))
                 <div class="sm:flex sm:text-left text-blue-500 text-sm">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="cursor-pointer px-4 py-2 hover:bg-blue-100 rounded font-bold">Dashboard</a>
+                        <a href="{{ url('/dashboard') }}" class="cursor-pointer px-4 py-2 hover:bg-blue-100 rounded font-bold">{{__('Dashboard')}}</a>
                     @else
                     <div class="flex justify-end sm:w-auto items-center">
-                        <a href="{{ route('login') }}" class="cursor-pointer md:px-4 px-2 py-2 hover:bg-blue-100 rounded font-bold">Login</a>
+                        <a href="{{ route('login') }}" class="cursor-pointer md:px-4 px-2 py-2 hover:bg-blue-100 rounded font-bold">{{__('Log in')}}</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-0 cursor-pointer md:px-4 px-2 py-2 hover:bg-blue-100 rounded font-bold">Register</a>
+                            <a href="{{ route('register') }}" class="ml-0 cursor-pointer md:px-4 px-2 py-2 hover:bg-blue-100 rounded font-bold">{{__('Register')}}</a>
                         @endif
                     </div>
                     @endauth
@@ -52,9 +53,9 @@
                     @foreach ($topNavLinks as $item)
                         <a href="{{ url('/'.$item->slug) }}">
                             @if($item->slug == 'contact')
-                            <li class="cursor-pointer px-4 py-2 hover:bg-blue-100"><a href="#contact">{{$item->label}}</a></li>
+                            <li class="cursor-pointer px-4 py-2 hover:bg-blue-100"><a href="#contact">{{__($item->label)}}</a></li>
                             @else
-                            <li class="cursor-pointer px-4 py-2 hover:bg-blue-100">{{ $item->label }}</li>
+                            <li class="cursor-pointer px-4 py-2 hover:bg-blue-100">{{__($item->label)}}</li>
                             @endif
                         </a>
                     @endforeach 
@@ -69,23 +70,23 @@
                     <div class="max-w-full mx-auto">
                     <div class="relative z-10 pb-8 bg-transparent sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
                         <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-                        <div class="sm:text-center lg:text-left">
+                        <div class="text-center lg:text-left">
                             <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                            <span class="block xl:inline">Data to enrich your</span>
-                            <span class="block text-indigo-600 xl:inline">online business</span>
+                            <span class="block xl:inline text-4xl">{{__('Organize your home care')}}</span>
+                            <span class="block text-indigo-600 xl:inline text-4xl">{{__('thanks to our online care request')}}</span>
                             </h1>
-                            <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat aliqua.
+                            <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-lg lg:mx-0">
+                                {{__('How it works ? it is very simple ! All you need to do is create a care request with a home health professional by clicking on (Make an appointment). Once your care request has been created, it is sent to the healthcare professionals closest to you. As soon as a healthcare professional validates the care, you are put in contact.')}}
                             </p>
                             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                             <div class=" animate-pulse rounded-md shadow">
                                 <a href="#RDV" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
-                                Get started
+                                {{__('Get started')}}
                                 </a>
                             </div>
                             <div class="mt-3 sm:mt-0 sm:ml-3">
                                 <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
-                                Live demo
+                                {{__('Live demo')}}
                                 </a>
                             </div>
                             </div>
@@ -105,8 +106,8 @@
                 <div class="text-gray-600 bg-white body-font">
                     <div class="container px-5 py-24 mx-auto">
                       <div class="flex flex-col text-center w-full mb-20">
-                        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Statistics</h1>
-                        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them man bun deep jianbing selfies heirloom prism food truck ugh squid celiac humblebrag.</p>
+                        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">{{__('Statistics')}}</h1>
+                        <p class="lg:w-2/3 mx-auto leading-relaxed text-base"></p>
                       </div>
                       <div class="flex flex-wrap -m-4 text-center">
                         <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
@@ -115,7 +116,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                             <h2 class="title-font font-medium text-3xl text-gray-900">{{App\Models\Appointment::count()}}</h2>
-                            <p class="leading-relaxed">Appointments</p>
+                            <p class="leading-relaxed">{{__('Appointments')}}</p>
                           </div>
                         </div>
                         <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
@@ -125,7 +126,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
                                 </svg>
                             <h2 class="title-font font-medium text-3xl text-gray-900">{{App\Models\User::where('role', 'E-Health Care')->count()}}</h2>
-                            <p class="leading-relaxed">Healthcare professionals</p>
+                            <p class="leading-relaxed">{{__('Healthcare professionals')}}</p>
                           </div>
                         </div>
                         <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
@@ -135,7 +136,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
                               <h2 class="title-font font-medium text-3xl text-gray-900">{{App\Models\User::where('role', 'Patient')->count()}}</h2>
-                              <p class="leading-relaxed">Patients</p>
+                              <p class="leading-relaxed">{{__('Patients')}}</p>
                             </div>
                         </div>
                         <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
@@ -145,7 +146,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
                             <h2 class="title-font font-medium text-3xl text-gray-900">{{App\Models\Specialty::count()}}</h2>
-                            <p class="leading-relaxed">Specialties</p>
+                            <p class="leading-relaxed">{{__('Specialties')}}</p>
                           </div>
                         </div>
                       </div>

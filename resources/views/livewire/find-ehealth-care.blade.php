@@ -1,9 +1,20 @@
 <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto">
       <div class="flex flex-col text-center w-full mb-20">
-        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Find a Professionals</h1>
-        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them</p>
-      </div>
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">{{__('Find a Professionals')}}</h1>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">{{__('Find an available health professional near you!!')}}</p>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">{{__('Which professional are you looking for?')}}</p>
+        <div class="flex items-center justify-center mt-2 mb-2">
+            @forelse($specialties as $item)
+            <a class="bg-blue-500 px-2 py-2 ml-2 mb-2 rounded text-white text-xs font-bold items-center">
+                {{$item->name}}
+            </a>
+            @empty
+            <button>empty..</button>
+            @endforelse
+        </div>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base underline font-bold">{{__('SIMPLE, FAST AND FREE !')}}</p>
+        </div>
       <div class="mb-1">
         <!-- Filter -->
         <div class="flex-col items-center md:justify-end justify-start px-4 py-3 space-y-2 text-left -ml-4">

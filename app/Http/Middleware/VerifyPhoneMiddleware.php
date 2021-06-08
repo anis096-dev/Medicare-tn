@@ -15,7 +15,7 @@ class VerifyPhoneMiddleware
      */
     public function handle(Request $request, Closure $next)
     {   
-        if(is_null(auth()->user()->tel)) {
+        if(auth()->user()->isVerified == false) {
             return redirect()->route('add-phone');
         }
         return $next($request);

@@ -30,7 +30,7 @@
                     <div class="mt-4">
                         <x-jet-label for="Governorate" value="{{ __('Governorate') }}" />
                             <select id="Governorate" name="Governorate" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md">
-                                <option value="">-- Select a Governorate --</option>    
+                                <option value="">{{__('-- Select a Governorate --')}}</option>    
                             @foreach (App\Models\User::governorates() as $item)
                                 <option value="{{ $item }}">{{ $item }}</option>
                             @endforeach
@@ -45,7 +45,7 @@
                             @else
                             <x-jet-label for="adresse" value="{{ __('Adresse') }}" />
                             @endif
-                            <span class="font-bold text-yellow-600">If you do not find your address, try in <span class=" font-extrabold text-yellow-700">Arabic</span> or please enter your own adress!!</span>
+                            <span class="font-bold text-yellow-600">{{__('If you do not find your address, try in Arabic or please enter your own adress!!')}}</span>
                             <input type="search" id="adresse" name="adresse" class="block mt-2 mb-4 w-full" placeholder="Try &quot;Rue el mar&quot;" /></div>
                             @error('adresse') <span class="error">{{ $message }}</span> @enderror            
                         </div>

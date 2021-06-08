@@ -66,6 +66,10 @@
                     {{ __('Log in') }}
                 </x-jet-button>
             </div>
+            <div class="mt-4 text-center">
+                <a href="/en" class="m-2 underline">English</a>
+                <a href="/ar" class="m-2 underline">العربي</a>
+            </div>
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>

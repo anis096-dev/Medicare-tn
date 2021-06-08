@@ -2,8 +2,6 @@
 
 use App\Http\Livewire\Frontpage;
 use Illuminate\Support\Facades\Route;
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,10 +14,10 @@ use Illuminate\Support\Facades\Route;
  */
 Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], function ()
 {
-    Route::get('/add-phone', [App\Http\Controllers\VerifyPhoneController::class, 'create'])->name('add-phone')->withoutMiddleware('accessrole');
-    Route::post('/store-phone', [App\Http\Controllers\VerifyPhoneController::class, 'store'])->name('store-phone')->withoutMiddleware('accessrole');
-    Route::get('/verify-show', [App\Http\Controllers\VerifyPhoneController::class, 'verifyShow'])->name('verify-show')->withoutMiddleware('accessrole');
-    Route::post('/verify', [App\Http\Controllers\VerifyPhoneController::class, 'verify'])->name('verify')->withoutMiddleware('accessrole');
+    Route::get('/add-phone',  'App\Http\Controllers\VerifyPhoneController@create')->name('add-phone')->withoutMiddleware('accessrole');
+    Route::post('/store-phone', 'App\Http\Controllers\VerifyPhoneController@store')->name('store-phone')->withoutMiddleware('accessrole');
+    Route::get('/verify-show', 'App\Http\Controllers\VerifyPhoneController@verifyShow')->name('verify-show')->withoutMiddleware('accessrole');
+    Route::post('/verify', 'App\Http\Controllers\VerifyPhoneController@verify')->name('verify')->withoutMiddleware('accessrole');
     
     Route::group(['middleware' => ['verify_phone']], function() {
         Route::get('register-step2', [App\Http\Controllers\RegisterStepTwoController::class, 'create'])->name('register-step2.create')->withoutMiddleware('accessrole');

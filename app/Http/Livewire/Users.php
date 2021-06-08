@@ -5,8 +5,6 @@ namespace App\Http\Livewire;
 use App\Models\User;
 use App\Models\Rating;
 use Livewire\Component;
-use App\Models\Roles;
-use App\Models\Specialty;
 use Livewire\WithPagination;
 
 class Users extends Component
