@@ -14,14 +14,14 @@
             
             <div class="mt-4">
                 <x-jet-label for="gender" class="mb-2" value="{{ __('Gender') }}"/>
-                <x-jet-input id="gender" class=" mr-0.5" type="radio" name="gender" value="m" required checked/><span class="font-bold">{{__('Male')}}</span>
-                <x-jet-input id="gender" class=" ml-2 mr-0.5" type="radio" name="gender" value="f" required/><span class="font-bold">{{__('Female')}}</span>
+                <x-jet-input id="gender" class=" mr-0.5" type="radio" name="gender" value="{{__('m')}}" required checked/><span class="font-bold">{{__('Male')}}</span>
+                <x-jet-input id="gender" class=" ml-2 mr-0.5" type="radio" name="gender" value="{{__('f')}}" required/><span class="font-bold">{{__('Female')}}</span>
             </div>
             
             <div class="mt-4">
                 <x-jet-label for="marital_status" class="mb-2" value="{{ __('Marital status') }}"/>
-                <x-jet-input id="marital_status" class=" mr-0.5" type="radio" name="marital_status" value="single" required checked/><span class="font-bold">{{__('Single')}}</span>
-                <x-jet-input id="marital_status" class=" ml-2 mr-0.5" type="radio" name="marital_status" value="married" required/><span class="font-bold">{{__('Married')}}</span>
+                <x-jet-input id="marital_status" class=" mr-0.5" type="radio" name="marital_status" value="{{__('single')}}" required checked/><span class="font-bold">{{__('Single')}}</span>
+                <x-jet-input id="marital_status" class=" ml-2 mr-0.5" type="radio" name="marital_status" value="{{__('married')}}" required/><span class="font-bold">{{__('Married')}}</span>
             </div>
 
             <div class="mt-4">
@@ -54,7 +54,7 @@
                     @foreach (App\Models\Specialty::all() as $item)
                     <ul class="sm:flex sm:text-left text-gray">
                         <li class="px-4 py-2 font-bold">
-                            <x-jet-input id="specialty" type="radio" name="specialty" value="{{ $item->name }}"/>{{ $item->name}}
+                            <x-jet-input id="specialty" type="radio" name="specialty" value="{{$item->name}}"/>{{__($item->name)}}
                         </li>
                     </ul>
                     @endforeach

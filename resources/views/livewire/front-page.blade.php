@@ -95,7 +95,7 @@
                     </div>
                     </div>
                     <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                    <img class="h-65 w-full rounded-b-full rounded-bl-full rounded-l-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full shadow-2xl" src="{{url('/img/infirmier.jpg')}}" alt="Image">
+                    <img class="h-65 w-full rounded-b-full rounded-bl-full rounded-l-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full shadow-2xl" src="{{url('/img/i88936-.jpeg')}}" alt="Image">
                     </div>
                 </div>
                 <!-- health Care --> 

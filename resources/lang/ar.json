@@ -186,6 +186,10 @@
     "Sub Treatments":"العلاجات الفرعية",
     
     "Gender":"الحنس",
+    "m":"m",
+    "f":"f",
+    "single":"single",
+    "married":"married",
     "Male":"ذكر",
     "Female":"أنثى",
     "Marital status":"الحالة الاجتماعية",
