@@ -1,8 +1,8 @@
 <div>
     @if(auth()->user()->id != $user->id)
-        <a wire:click="createShowModal" class="text-center items-center justify-end bg-blue-700 text-white px-14 py-3 sm:px-20 rounded-md text-sm uppercase 
-        hover:shadow hover:bg-blue-500">
-            Appoint
+        <a wire:click="createShowModal" class="text-center items-center justify-end bg-blue-700 text-white px-14 py-3 sm:px-20
+        rounded-md text-sm uppercase hover:shadow hover:bg-blue-500">
+            {{__('Appoint')}}
         </a> 
     @endif
 

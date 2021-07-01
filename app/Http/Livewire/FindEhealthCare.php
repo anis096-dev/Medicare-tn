@@ -38,13 +38,13 @@ class FindEhealthCare extends Component
     {
         $this->ratings = Rating::all();
         $this->specialties = Specialty::all();
-        $this->adresses = User::all()->where('role', 'E-health Care')->unique('adresse');
+        $this->adresses = User::all()->where('role', 'Health specialist')->unique('adresse');
         $this->genders = ['m', 'f'];
     }
 
     public function show ($user)
     {   
-        if ($user->role == 'E-health Care') {
+        if ($user->role == 'Health specialist') {
             # code...
             $avgrating = Rating::all()->where('related_id', $user->id );
             return view('livewire.show-profile',compact('user', 'avgrating'));

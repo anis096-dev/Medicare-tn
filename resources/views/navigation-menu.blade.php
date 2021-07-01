@@ -161,7 +161,7 @@
                         @endif
                     </x-jet-nav-link>
 
-                    @elseif(auth()->user()->role == 'E-health Care')
+                    @elseif(auth()->user()->role == 'Health specialist')
                     
                     <x-jet-nav-link class="mt-4 pb-4" href="{{ route('e-health-appointments') }}" :active="request()->routeIs('e-health-appointments')">
                         <svg class="h-7 w-7" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

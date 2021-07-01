@@ -102,58 +102,66 @@ class UserPermissionsTableSeeder extends Seeder
             10 => 
             array (
                 'id' => 11,
+                'role' => 'admin',
+                'route_name' => 'contacts-from-website',
+                'created_at' => '2021-03-24 23:24:29',
+                'updated_at' => '2021-03-24 23:24:29',
+            ),
+            11 => 
+            array (
+                'id' => 12,
                 'role' => 'Patient',
                 'route_name' => 'dashboard',
                 'created_at' => '2021-03-24 23:24:38',
                 'updated_at' => '2021-03-24 23:24:38',
             ),
-            11 => 
-            array (
-                'id' => 12,
-                'role' => 'E-health Care',
-                'route_name' => 'dashboard',
-                'created_at' => '2021-03-24 23:24:47',
-                'updated_at' => '2021-03-24 23:24:47',
-            ),
             12 => 
             array (
                 'id' => 13,
-                'role' => 'E-health Care',
-                'route_name' => 'user-experience',
-                'created_at' => '2021-03-24 23:24:47',
-                'updated_at' => '2021-03-24 23:24:47',
+                'role' => 'Patient',
+                'route_name' => 'patient-appointments',
+                'created_at' => '2021-05-25 01:22:54',
+                'updated_at' => '2021-05-25 01:22:54',
             ),
             13 => 
             array (
                 'id' => 14,
-                'role' => 'E-health Care',
-                'route_name' => 'user-education',
+                'role' => 'Health specialist',
+                'route_name' => 'dashboard',
                 'created_at' => '2021-03-24 23:24:47',
                 'updated_at' => '2021-03-24 23:24:47',
             ),
             14 => 
             array (
                 'id' => 15,
-                'role' => 'E-health Care',
-                'route_name' => 'user-time-settings',
+                'role' => 'Health specialist',
+                'route_name' => 'user-experience',
                 'created_at' => '2021-03-24 23:24:47',
                 'updated_at' => '2021-03-24 23:24:47',
             ),
             15 => 
             array (
-                'id' => 16,
-                'role' => 'E-health Care',
-                'route_name' => 'e-health-appointments',
-                'created_at' => '2021-05-25 01:22:44',
-                'updated_at' => '2021-05-25 01:22:44',
+                'id' => 17,
+                'role' => 'Health specialist',
+                'route_name' => 'user-education',
+                'created_at' => '2021-03-24 23:24:47',
+                'updated_at' => '2021-03-24 23:24:47',
             ),
             16 => 
             array (
-                'id' => 17,
-                'role' => 'Patient',
-                'route_name' => 'patient-appointments',
-                'created_at' => '2021-05-25 01:22:54',
-                'updated_at' => '2021-05-25 01:22:54',
+                'id' => 18,
+                'role' => 'Health specialist',
+                'route_name' => 'user-time-settings',
+                'created_at' => '2021-03-24 23:24:47',
+                'updated_at' => '2021-03-24 23:24:47',
+            ),
+            17 => 
+            array (
+                'id' => 19,
+                'role' => 'Health specialist',
+                'route_name' => 'e-health-appointments',
+                'created_at' => '2021-05-25 01:22:44',
+                'updated_at' => '2021-05-25 01:22:44',
             ),
         ));
         

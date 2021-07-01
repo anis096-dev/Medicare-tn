@@ -13,8 +13,7 @@ class Education extends Model
         'user_id',
         'formation',
         'institute',
-        'start_date',
-        'end_date',
+        'Date_of_obtaining',
     ];
 
     public function user()

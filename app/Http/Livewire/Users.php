@@ -43,7 +43,7 @@ class Users extends Component
     {
         return [
             'role' => 'required',
-            'specialty' => 'required_if:role,E-health Care|string',
+            'specialty' => 'required_if:role,Health specialist|string',
             'name' => 'required',
             'email' => 'required',
         ];
@@ -57,7 +57,7 @@ class Users extends Component
      */
     public function show (User $user)
     {   
-        if ($user->role == 'E-health Care') {
+        if ($user->role == 'Health specialist') {
             # code...
             $avgrating = Rating::all()->where('related_id', $user->id );
             return view('livewire.show-profile',compact('user', 'avgrating'));
@@ -125,7 +125,7 @@ class Users extends Component
             $this->modalFormVisible = false;
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',
-                'message'=>"Your E-health Care updated Successfully!!"
+                'message'=>"Your Health specialist updated Successfully!!"
             ]);
     
             }
@@ -149,7 +149,7 @@ class Users extends Component
         $this->modalConfirmDeleteVisible = false;
         $this->dispatchBrowserEvent('alert',[
             'type'=>'error',
-            'message'=>"Your E-health Care deleted Successfully!!"
+            'message'=>"Your Health specialist deleted Successfully!!"
         ]);
         $this->resetPage();
     }

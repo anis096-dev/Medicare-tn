@@ -36,7 +36,7 @@ class RolesTableSeeder extends Seeder
             2 => 
             array (
                 'id' => 3,
-                'name' => 'E-health Care',
+                'name' => 'Health specialist',
                 'created_at' => '2021-03-24 23:24:15',
                 'updated_at' => '2021-03-24 23:24:15',
             ),

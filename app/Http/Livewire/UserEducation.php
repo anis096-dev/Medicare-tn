@@ -16,8 +16,7 @@ class UserEducation extends Component
     public $user_id;
     public $formation;
     public $institute;
-    public $start_date;
-    public $end_date;
+    public $Date_of_obtaining;
     public $modalFormVisible;
     public $modalConfirmDeleteVisible;
     public $modelId;
@@ -37,8 +36,7 @@ class UserEducation extends Component
         return [ 
             'formation' => 'required',
             'institute'    => 'required',
-            'start_date' => 'required',
-            'end_date'   => 'required',           
+            'Date_of_obtaining' => 'required',          
         ];
     }
 
@@ -55,8 +53,7 @@ class UserEducation extends Component
         $this->user_id = auth()->user()->id;
         $this->formation = $data->formation;
         $this->institute = $data->institute;
-        $this->start_date = $data->start_date;
-        $this->end_date = $data->end_date;
+        $this->Date_of_obtaining = $data->Date_of_obtaining;
     }
 
     /**
@@ -71,8 +68,7 @@ class UserEducation extends Component
             'user_id' => auth()->user()->id,
             'formation' => $this->formation,
             'institute' => $this->institute,
-            'start_date' => $this->start_date,
-            'end_date'=> $this->end_date,       
+            'Date_of_obtaining' => $this->Date_of_obtaining,
         ];
     }
 
@@ -89,7 +85,7 @@ class UserEducation extends Component
             $this->modalFormVisible = false;
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',
-                'message'=>"Your Education level created Successfully!!"
+                'message'=>"Your Formation added Successfully!!"
             ]);
     
             // Reset Form Fields After Creating Category
@@ -118,7 +114,7 @@ class UserEducation extends Component
             $this->modalFormVisible = false;
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',
-                'message'=>"Your Education level updated Successfully!!"
+                'message'=>"Your Formation updated Successfully!!"
             ]);
     
             }
@@ -142,7 +138,7 @@ class UserEducation extends Component
         $this->modalConfirmDeleteVisible = false;
         $this->dispatchBrowserEvent('alert',[
             'type'=>'error',
-            'message'=>"Your Education level deleted Successfully!!"
+            'message'=>"Your Formation deleted Successfully!!"
         ]);
         $this->resetPage();
     }

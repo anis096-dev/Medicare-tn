@@ -76,7 +76,7 @@
                             <span class="block text-indigo-600 xl:inline text-4xl">{{__('thanks to our online care request')}}</span>
                             </h1>
                             <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-lg lg:mx-0">
-                                {{__('How it works ? it is very simple ! All you need to do is create a care request with a home health professional by clicking on (Make an appointment). Once your care request has been created, it is sent to the healthcare professionals closest to you. As soon as a healthcare professional validates the care, you are put in contact.')}}
+                                {{__('How it works ? it is very simple ! All you need to do is create a care request with a Health specialist by clicking on (Make an appointment). Once your care request has been created, it is sent to the Health specialists closest to you. As soon as a Health specialist validates the care, you are put in contact.')}}
                             </p>
                             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                             <div class=" animate-pulse rounded-md shadow">
@@ -125,8 +125,8 @@
                                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
                                 </svg>
-                            <h2 class="title-font font-medium text-3xl text-gray-900">{{App\Models\User::where('role', 'E-Health Care')->count()}}</h2>
-                            <p class="leading-relaxed">{{__('Healthcare professionals')}}</p>
+                            <h2 class="title-font font-medium text-3xl text-gray-900">{{App\Models\User::where('role', 'Health specialist')->count()}}</h2>
+                            <p class="leading-relaxed">{{__('Health specialist')}}</p>
                           </div>
                         </div>
                         <div class="p-4 md:w-1/4 sm:w-1/2 w-full">

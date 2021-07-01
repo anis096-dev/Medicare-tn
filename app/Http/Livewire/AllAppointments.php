@@ -338,6 +338,6 @@ class AllAppointments extends Component
     public function alertInfo()
     {
         $this->dispatchBrowserEvent('alert', 
-                ['type' => 'info',  'message' => 'Search by e-health care name, date, care place or status!']);
+                ['type' => 'info',  'message' => 'Search by Health specialist name, date, care place or status!']);
     }
 }

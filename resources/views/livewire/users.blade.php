@@ -6,8 +6,8 @@
                     <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
                 </svg>
             </span>
-            <span class="font-bold">E-Health Care:</span>
-            <span class=" bg-red-500 rounded-md box-border text-white text-xs font-bold p-1 ml-2">{{App\Models\User::where('role','E-health Care')->count()}}</span>
+            <span class="font-bold">Health specialist:</span>
+            <span class=" bg-red-500 rounded-md box-border text-white text-xs font-bold p-1 ml-2">{{App\Models\User::where('role','Health specialist')->count()}}</span>
         </div>
         <div class="flex mt-2">
             <span class=" text-blue-600 pr-1">
@@ -122,7 +122,7 @@
                                         <td class="px-6 py-2">{{ $item->specialty }}</td> 
                                         <td class="px-6 py-2 flex justify-end">
                                             <div class="flex space-x-1 justify-around">
-                                                @if($item->role == 'E-health Care')
+                                                @if($item->role == 'Health specialist')
                                                 <a href="{{ route('user.show', [$item->id]) }}" target="_blank" class="p-1 text-yellow-600 hover:bg-yellow-600 hover:text-white rounded">
                                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path></svg>
                                                 </a>
@@ -174,7 +174,7 @@
                 @error('name') <span class="error">{{ $message }}</span> @enderror
             </div>
 
-            @if($role=='E-health Care')
+            @if($role=='Health specialist')
             <div class="mt-4">
                 <x-jet-label for="specialty" value="{{ __('Specialty') }}"/>
                 <select wire:model="specialty" id="specialty" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
@@ -187,7 +187,7 @@
             </div>
             @else 
             <div class="mt-4">
-                <x-jet-label for="specialty" value="{{ __('Specialty') }}"/><span class=" text-red-600 font-bold"> Just For E-health Care!!</span>
+                <x-jet-label for="specialty" value="{{ __('Specialty') }}"/><span class=" text-red-600 font-bold"> Just For Health specialist!!</span>
                 <select wire:model="specialty" id="specialty" class="block appearance-none w-full bg-gray-100 border border-gray-200 text-gray-700 py-3 px-4 pr-8 round leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
                         <option value="{{$this->specialty = ''}}">-- Select a Sepecialty --</option>    
                 </select>

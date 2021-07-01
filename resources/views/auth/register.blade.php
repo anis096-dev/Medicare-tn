@@ -49,7 +49,7 @@
                 @error('role') <span class="error">{{ $message }}</span> @enderror
             </div>
             
-            <div class="mt-4" x-show=" role == 'E-health Care'">
+            <div class="mt-4" x-show=" role == 'Health specialist'">
                 <x-jet-label class="mb-2" for="specialty" value="{{ __('Your Specialty') }}" />
                     @foreach (App\Models\Specialty::all() as $item)
                     <ul class="sm:flex sm:text-left text-gray">

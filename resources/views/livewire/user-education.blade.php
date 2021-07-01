@@ -40,8 +40,7 @@
                                 </th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Formation</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Institute/University</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Stat Date</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">End Date</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Date of obtaining</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"></th>
                             </tr>
                         </thead>
@@ -53,8 +52,7 @@
                                         </td>
                                         <td class="px-6 py-2">{{ $item->formation }}</td>
                                         <td class="px-6 py-2">{{ $item->institute }}</td>
-                                        <td class="px-6 py-2">{{ $item->start_date }}</td>                                         
-                                        <td class="px-6 py-2">{{ $item->end_date }}</td>                                         
+                                        <td class="px-6 py-2">{{ $item->Date_of_obtaining }}</td>                                         
                                         <td class="px-6 py-2 flex justify-end">
                                             <div class="flex space-x-1 justify-around">
                                                     <a  wire:click="updateShowModal({{ $item->id }})" target="_blank" class="p-1 text-blue-600 hover:bg-blue-600 hover:text-white rounded">
@@ -87,11 +85,11 @@
     <x-jet-dialog-modal wire:model="modalFormVisible">
         @if ($modelId)
         <x-slot name="title">
-            {{ __('Update Education') }}
+            {{ __('Update Formation') }}
         </x-slot>
         @else
         <x-slot name="title">
-            {{ __('Add Education') }}
+            {{ __('Add Formation') }}
         </x-slot>
         @endif
 
@@ -103,21 +101,15 @@
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="institute" value="{{ __('Institute') }}" />
+                <x-jet-label for="institute" value="{{ __('Institute/University') }}" />
                 <x-jet-input wire:model="institute" id="institute" class="block mt-1 w-full" type="text" />
                 @error('institute') <span class="error">{{ $message }}</span> @enderror
             </div>
 
             <div class="mt-4">
-                <x-jet-label for="start_date" value="{{ __('Start Date') }}" />
-                <x-jet-input wire:model="start_date" id="start_date" class="block mt-1 w-full" type="date" />
-                @error('start_date') <span class="error">{{ $message }}</span> @enderror
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label for="end_date" value="{{ __('End Date') }}" />
-                <x-jet-input wire:model="end_date" id="end_date" class="block mt-1 w-full" type="date"/>
-                @error('end_date') <span class="error">{{ $message }}</span> @enderror
+                <x-jet-label for="Date_of_obtaining" value="{{ __('Date of obtaining') }}" />
+                <x-jet-input wire:model="Date_of_obtaining" id="Date_of_obtaining" class="block mt-1 w-full" type="date"/>
+                @error('Date_of_obtaining') <span class="error">{{ $message }}</span> @enderror
             </div>        
         </x-slot>
 

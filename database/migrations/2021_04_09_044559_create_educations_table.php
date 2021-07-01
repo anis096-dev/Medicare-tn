@@ -18,8 +18,7 @@ class CreateEducationsTable extends Migration
             $table->integer('user_id');
             $table->string('formation')->nullable();
             $table->string('institute')->nullable();
-            $table->string('start_date')->nullable();
-            $table->string('end_date')->nullable();
+            $table->string('Date_of_obtaining')->nullable();
             $table->timestamps();
         });
     }

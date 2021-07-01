@@ -25,7 +25,7 @@ class CreateNewUser implements CreatesNewUsers
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'role' => ['required', 'string', 'max:255'],
-            'specialty' => ['required_if:role,E-health Care|string'],
+            'specialty' => ['required_if:role,Health specialist|string'],
             'gender' => ['required'],
             'marital_status' => ['required'],
             'date_of_birth' => ['required', 'string', 'max:255'],
