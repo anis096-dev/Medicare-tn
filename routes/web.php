@@ -88,6 +88,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], funct
             Route::get('/contacts-from-website', function () {
                 return view('admin.contacts-from-website');
             })->name('contacts-from-website');
+
+            Route::get('/treatments-prices', function () {
+                return view('admin.treatmentsPrices');
+            })->name('treatments-prices');
         });
     });
 });

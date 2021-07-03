@@ -34,6 +34,7 @@ class UserPermission extends Model
             'e-health-appointments',
             'patient-appointments',
             'contacts-from-website',
+            'treatments-prices',
         ];
     }
 

@@ -75,7 +75,7 @@
                                 </tr>
                             @empty
                             <tr>
-                                <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">No Results Found</td>
+                                <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">{{__('No Results Found')}}</td>
                             </tr>
                             @endforelse
                         </tbody>                        

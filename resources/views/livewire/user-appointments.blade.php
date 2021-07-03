@@ -23,6 +23,17 @@
                 </select>
                 @error('treatment') <span class="error">{{ $message }}</span> @enderror
             </div>
+            @foreach ($allTreatments->where('name', $treatment) as $item)
+               <span class="mr-1 text-sm font-bold text-red-500">
+                Price/Day: {{ $item->price_day }} TND
+               </span>
+               <span class="mr-1 text-sm font-bold text-blue-500">
+                Price/Night: {{ $item->price_night }} TND
+               </span>
+               <span class="text-sm font-bold text-green-500">
+                Price/Weekend: {{ $item->price_weekend }} TND
+               </span>
+            @endforeach
            
             <div class="mt-4 space-y-2">
                 <x-jet-label for="sub_treatment" value="{{ __('Sub Treatment') }}" />

@@ -41,6 +41,9 @@
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Specialty</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Name</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Price/day</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Price/night</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Price/weekend</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"></th>
                             </tr>
                         </thead>
@@ -53,6 +56,9 @@
                                         <td class="px-6 py-2">{{ $item->specialty }}</td>
                                         <td class="px-6 py-2">{{ $item->name }}</td>
                                         <td class="px-6 py-2">{{ \Illuminate\Support\Str::limit($item->description, 50, '...') }}</td>
+                                        <td class="px-6 py-2 pr-2"><span class="bg-red-500 font-bold text-white rounded-md p-1">{{ $item->price_day }} TND</span></td>
+                                        <td class="px-6 py-2"><span class="bg-blue-500 font-bold text-white rounded-md p-1">{{ $item->price_night }} TND</span></td>
+                                        <td class="px-6 py-2"><span class="bg-green-500 font-bold text-white rounded-md p-1">{{ $item->price_weekend }} TND</span></td>
                                         <td class="px-6 py-2 flex justify-end">
                                             <div class="flex space-x-1 justify-around">
                                                 <a  wire:click="updateShowModal({{ $item->id }})" target="_blank" class="p-1 text-blue-600 hover:bg-blue-600 hover:text-white rounded">
@@ -116,7 +122,31 @@
                 <x-jet-label for="description" value="{{ __('Description') }}" />
                 <textarea wire:model="description" id="description" class="block mt-1 w-full" type="text" wire:model.debounce.100000ms="description"></textarea>
                 @error('description') <span class="error">{{ $message }}</span> @enderror
-            </div>  
+            </div>
+            
+            <div class="mt-4">
+                <x-jet-label for="price_day" value="{{ __('Price/day') }}" />
+                <div class="mt-3 flex rounded-md shadow-sm">
+                    <x-jet-input wire:model="price_day" id="price_day" class="w-full border border-gray-300 text-gray-600 h-14 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none text-center font-bold text-lg" type="number" placeholder="10.5"/>
+                </div>
+                @error('price_day') <span class="error">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="price_night" value="{{ __('Price/night') }}" />
+                <div class="mt-3 flex rounded-md shadow-sm">
+                    <x-jet-input wire:model="price_night" id="price_night" class="w-full border border-gray-300 text-gray-600 h-14 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none text-center font-bold text-lg" type="number" placeholder="10.5"/>
+                </div>
+                @error('price_night') <span class="error">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="price_weekend" value="{{ __('Price/weekend') }}" />
+                <div class="mt-3 flex rounded-md shadow-sm">
+                    <x-jet-input wire:model="price_weekend" id="price_weekend" class="w-full border border-gray-300 text-gray-600 h-14 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none text-center font-bold text-lg" type="number" placeholder="10.5"/>
+                </div>
+                @error('price_weekend') <span class="error">{{ $message }}</span> @enderror
+            </div>
            
         </x-slot>
 

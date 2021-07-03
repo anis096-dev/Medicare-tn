@@ -25,7 +25,9 @@ class Treatments extends Component
     public $name;
     public $description;
     public $specialty;
-
+    public $price_day;
+    public $price_night;
+    public $price_weekend;
     /**
      * The validation rules
      *
@@ -37,6 +39,9 @@ class Treatments extends Component
             'name' => ['required', 'max:255'],          
             'description' => ['required', 'max:255'],  
             'specialty' => 'required',          
+            'price_day' => 'required',          
+            'price_night' => 'required',          
+            'price_weekend' => 'required',          
         ];
     }
 
@@ -53,6 +58,9 @@ class Treatments extends Component
         $this->name = $data->name;
         $this->description = $data->description;
         $this->specialty = $data->specialty;
+        $this->price_day = $data->price_day;
+        $this->price_night = $data->price_night;
+        $this->price_weekend = $data->price_weekend;
     }
 
     /**
@@ -67,6 +75,9 @@ class Treatments extends Component
             'name' => $this->name,         
             'description' => $this->description, 
             'specialty' => $this->specialty,          
+            'price_day' => $this->price_day,          
+            'price_night' => $this->price_night,          
+            'price_weekend' => $this->price_weekend,          
         ];
     }
 

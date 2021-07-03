@@ -6,7 +6,7 @@
                     <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
                 </svg>
             </span>
-            <span class="font-bold">Health specialist:</span>
+            <span class="font-bold">{{__('Health specialist')}}:</span>
             <span class=" bg-red-500 rounded-md box-border text-white text-xs font-bold p-1 ml-2">{{App\Models\User::where('role','Health specialist')->count()}}</span>
         </div>
         <div class="flex mt-2">
@@ -15,7 +15,7 @@
                     <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
                 </svg>
             </span>
-            <span class="font-bold">Patients:</span>
+            <span class="font-bold">{{__('Patients')}}:</span>
             <span class=" bg-blue-500 rounded-md box-border text-white text-xs font-bold p-1 ml-2">{{App\Models\User::where('role','Patient')->count()}}</span>
         </div>
     </div>

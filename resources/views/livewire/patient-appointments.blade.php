@@ -22,7 +22,7 @@
                         <thead>
                             <tr>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">RDV Date</th> 
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">E-healthCare name</th> 
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Health specialist</th> 
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Treatment</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Passage Nbr</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Start Date</th>
@@ -59,7 +59,7 @@
                                 </tr>
                             @empty
                             <tr>
-                                <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">No Results Found</td>
+                                <td class="px-6 py-4 text-sm whitespace-no-wrap" colspan="4">{{__('No Results Found')}}</td>
                             </tr>
                             @endforelse
                         </tbody>                        
@@ -89,7 +89,7 @@
         <x-slot name="content">
             <div class="flex items-center justify-center sm:items-start sm:justify-start px-4 py-3 sm:px-8">
                 <ul>
-                    <li class="mb-2"><span class=" font-bold pr-2">E-health care name:</span> {{$this->related_name}}</li>
+                    <li class="mb-2"><span class=" font-bold pr-2">Health specialist name:</span> {{$this->related_name}}</li>
                     <li class="mb-2"><span class=" font-bold pr-2">Patient name:</span> {{$this->patient_name}}</li>
                     <li class="mb-2"><span class=" font-bold pr-2">Patient email:</span> {{$this->patient_email}}</li>
                     <li class="mb-2"><span class=" font-bold pr-2">Patient phone:</span> {{$this->patient_tel}}</li>
