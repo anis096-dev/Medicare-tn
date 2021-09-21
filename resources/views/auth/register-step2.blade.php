@@ -19,7 +19,7 @@
                         </x-jet-button>
                     </div>
 
-                    @if(auth()->user()->role == 'E-health Care')
+                    @if(auth()->user()->role == 'Health specialist')
                     <div class="mt-4">
                         <x-jet-label for="bio" value="{{ __('Bio') }}" />
                         <textarea id="bio" class="lg:h-40 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md" type="text" name="bio" value="{{ old('bio') }}"></textarea>
@@ -50,6 +50,9 @@
                             @error('adresse') <span class="error">{{ $message }}</span> @enderror            
                         </div>
                     </div>
+                    {{-- <div class="mt-4">
+                        @livewire('file_upload')
+                    </div> --}}
                 </form>
             </div>
         </div> 

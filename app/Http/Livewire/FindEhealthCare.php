@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Rating;
-use App\Models\Specialty;
 use App\Models\User;
+use App\Models\Rating;
 use Livewire\Component;
+use App\Models\Specialty;
+use Illuminate\Http\Request;
 use Livewire\WithPagination;
 
 class FindEhealthCare extends Component
@@ -16,6 +17,7 @@ class FindEhealthCare extends Component
     /**
      * Put your custom public properties here!
      */
+
     public User $user;
     public $perPage = 12;
     public $selectedGovernorate = null;
@@ -26,7 +28,7 @@ class FindEhealthCare extends Component
     public $specialties;
     public $adresses;
     public $genders;
-    
+    public $name;
     
     /**
      * mount
