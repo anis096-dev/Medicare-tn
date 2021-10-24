@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
  */
 Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], function ()
 {
+    Route::view('multiple-image-upload','master')->withoutMiddleware('accessrole');
     Route::get('/add-phone',  'App\Http\Controllers\VerifyPhoneController@create')->name('add-phone')->withoutMiddleware('accessrole');
     Route::post('/store-phone', 'App\Http\Controllers\VerifyPhoneController@store')->name('store-phone')->withoutMiddleware('accessrole');
     Route::get('/verify-show', 'App\Http\Controllers\VerifyPhoneController@verifyShow')->name('verify-show')->withoutMiddleware('accessrole');

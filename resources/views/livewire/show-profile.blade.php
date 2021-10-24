@@ -32,6 +32,18 @@
                     </div>
                     <h1 class="text-gray-900 font-bold text-xl leading-8 my-1 capitalize">{{$user->name}}</h1>
                     <h3 class="text-gray-600 font-bold font-lg text-semibold leading-6 capitalize">{{$user->specialty}}</h3>
+                    @if($user->account_Verified == true)
+                    <h3 class=" inline-flex text-green-600 font-bold font-lg text-semibold leading-6 capitalize">
+                    Identity Verified  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-5 w-5 text-green-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    </h3>
+                    @else
+                    <h3 class="text-red-600 font-bold font-lg text-semibold leading-6 capitalize">
+                    Identity Not Verified
+                    </h3> 
+                    @endif
                     <p class="text-sm text-gray-500 hover:text-gray-600 leading-6 capitalize">{{$user->bio}}</p>
                     <ul class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                         <li class="flex items-center py-3">
@@ -311,7 +323,7 @@
                 <!-- Rating -->
                 @if(($user->role == 'Health specialist'))
                 @livewire('user-ratings', ['user' => $user], key($user->id))
-                @endif
+                @endif		
                 <!-- End of profile tab -->
             </div>
         </div>

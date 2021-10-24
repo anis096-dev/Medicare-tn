@@ -50,9 +50,6 @@
                             @error('adresse') <span class="error">{{ $message }}</span> @enderror            
                         </div>
                     </div>
-                    {{-- <div class="mt-4">
-                        @livewire('file_upload')
-                    </div> --}}
                 </form>
             </div>
         </div> 

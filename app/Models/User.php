@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Image;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -150,5 +151,9 @@ class User extends Authenticatable implements MustVerifyEmail
             : static::Where('email', 'like', '%'.$query.'%')
                 ->orWhere('tel', 'like', '%'.$query.'%')
                 ->orWhere('specialty', 'like', '%'.$query.'%');
+    }
+    
+    public function images(){
+        return $this->hasMany(Image::class);
     }
 }

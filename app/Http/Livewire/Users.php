@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use App\Models\Rating;
+use Illuminate\Http\Client\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -34,6 +35,9 @@ class Users extends Component
     public $name;
     public $email;
 
+    public $images;
+    public $selectedItem;
+    
     /**
      * The validation rules
      *
@@ -48,7 +52,7 @@ class Users extends Component
             'email' => 'required',
         ];
     }
-    
+
     /**
      * mount
      *
@@ -66,6 +70,16 @@ class Users extends Component
         {
             return \redirect('dashboard');
         }
+    }
+
+    public function showPhotos($itemId)
+    {
+        $this->selectedItem = $itemId;
+        // Pass the currently selected item
+        $this->emit('getUserId', $this->selectedItem);
+
+        // Show the modal that shows the additional photos
+        $this->dispatchBrowserEvent('openModalShowPhotos');
     }
 
     /**

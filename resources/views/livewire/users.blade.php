@@ -89,7 +89,7 @@
                                         </td>
                                         @endif
                                         <td class="px-6 py-2">
-                                        <img class="h-8 w-8 rounded-full object-cover" src="{{ $item->profile_photo_url }}" alt="{{ $item->name }}" />
+                                            <img class="h-8 w-8 rounded-full object-cover" src="{{ $item->profile_photo_url }}" alt="{{ $item->name }}" />
                                         </td>
                                         <td class="px-6 py-2">{{ $item->name }}</td>
                                         <td class="px-6 py-2">
@@ -135,6 +135,19 @@
                                                 <button wire:click="deleteShowModal({{ $item->id }})" class="p-1 text-red-600 hover:bg-red-600 hover:text-white rounded">
                                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
                                                 </button>
+
+                                                <button wire:click="showPhotos({{ $item->id }})" class="p-1 text-blue-600 hover:bg-blue-600 hover:text-white rounded">
+                                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                                                    </svg>
+                                                </button>
+                                                
+                                               <div>
+                                                    <livewire:toggle-button
+                                                    :model="$item"
+                                                    field="account_Verified"
+                                                    key="{{ $item->id }}" />
+                                               </div>
                                                 @endif
                                             </div>
                                         </td>
@@ -218,6 +231,19 @@
             @endif            
         </x-slot>
     </x-jet-dialog-modal>
+
+
+    <!-- Modal  Images-->
+    <div class="modal fade" id="modalShowPhotos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @livewire('user-images')
+                </div>            
+            </div>
+        </div>
+    </div>
+
 
     {{-- The Delete Modal --}}
     <x-jet-dialog-modal wire:model="modalConfirmDeleteVisible">
