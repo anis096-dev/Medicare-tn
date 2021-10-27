@@ -15,6 +15,7 @@ class Appointment extends Model
         'user_id',
         'related_id',
         'related_name',
+        'related_email',
         'patient_name',
         'patient_email',
         'patient_tel',

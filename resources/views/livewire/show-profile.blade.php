@@ -32,6 +32,14 @@
                     </div>
                     <h1 class="text-gray-900 font-bold text-xl leading-8 my-1 capitalize">{{$user->name}}</h1>
                     <h3 class="text-gray-600 font-bold font-lg text-semibold leading-6 capitalize">{{$user->specialty}}</h3>
+                    @if(auth()->user()->role == 'admin' )
+                    <div>
+                        <livewire:toggle-button
+                            :model="$user"
+                            field="account_Verified"
+                            key="{{ $user->id }}" />
+                    </div>
+                    @endif
                     @if($user->account_Verified == true)
                     <h3 class=" inline-flex text-green-600 font-bold font-lg text-semibold leading-6 capitalize">
                     Identity Verified  
@@ -77,13 +85,13 @@
                 <div class="my-4"></div>
                 <!-- Calender -->
                 <div class="bg-white p-3">
-                    <div class="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
+                    <div class="flex items-center space-x-3 text-gray-900 text-l font-bold leading-8">
                         <span class="text-blue-500">
                             <svg class="h-5 fill-current" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
                             </svg>
                         </span>
-                        <span>{{__('Calender')}}</span>
+                        <span>{{__('Disponibility')}}</span>
                         <span class="w-auto">
                             @livewire('user-appointments', ['user' => $user], key($user->id))
                         </span>

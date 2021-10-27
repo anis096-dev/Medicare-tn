@@ -2,10 +2,10 @@
 
 namespace App\Http;
 
-use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use App\Http\Middleware\CheckRegistrationCompletedMiddleware;
 use App\Http\Middleware\VerifyPhoneMiddleware;
-
+use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use App\Http\Middleware\EnsureIdentity;
+use App\Http\Middleware\CheckRegistrationCompletedMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'accessrole' => \App\Http\Middleware\EnsureUserRoleIsAllowedToAccess::class,
         'registration_completed' => CheckRegistrationCompletedMiddleware::class,
         'verify_phone' => VerifyPhoneMiddleware::class,
+        'ensure_identity' => EnsureIdentity::class,
     ];
 }

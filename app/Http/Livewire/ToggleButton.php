@@ -9,11 +9,11 @@
   {
       public Model $model;
       public string $field;
-      public bool $hasStock;
+      public bool $isActive;
 
       public function mount()
       {
-          $this->hasStock = (bool) $this->model->getAttribute($this->field);
+          $this->isActive = (bool) $this->model->getAttribute($this->field);
       }
       public function render()
       {

@@ -32,7 +32,7 @@
                 <input wire:model="search" wire:click="alertInfo" type="text" class="h-14 sm:w-96 md:pr-8 sm:pl-10 rounded focus:shadow focus:outline-none" placeholder="Search...">
                 <select wire:model="selectedRole" class="border border-gray-300 text-gray-600 h-14 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none">
                     <option value="">--role--</option>
-                    @forelse(App\Models\Roles::all() as $item)
+                    @forelse(App\Models\Roles::all()->whereNotIn('name','admin') as $item)
                     <option>{{$item->name}}</option>    
                     @empty
                     <option>empty..</option>
@@ -43,7 +43,7 @@
                     <option value="{{'m'}}">male</option>
                     <option value="{{'f'}}">female</option>
                 </select>
-                <button class="border border-gray-300 text-center ml-2 h-14 p-2 mr-1 border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none appearance-none" wire:click="searchClear">
+                <button wire:click="searchClear" class="border border-gray-300 text-center ml-2 h-14 p-2 mr-1 border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none appearance-none">
                     Reset All
                 </button>
                 <button @if($bulkDisabled) wire:click.prevent="NodeleteSelected" @endif  wire:click.prevent="deleteSelected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"
@@ -74,7 +74,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">                           
-                                @forelse ($data as $item)
+                                @forelse ($data->whereNotIn('role', 'admin') as $item)
                                     <tr>
                                         @if($item->role != 'admin')
                                         <td class="px-6 py-2">
@@ -141,13 +141,6 @@
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
                                                     </svg>
                                                 </button>
-                                                
-                                               <div>
-                                                    <livewire:toggle-button
-                                                    :model="$item"
-                                                    field="account_Verified"
-                                                    key="{{ $item->id }}" />
-                                               </div>
                                                 @endif
                                             </div>
                                         </td>

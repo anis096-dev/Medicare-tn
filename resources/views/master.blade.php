@@ -26,7 +26,7 @@
     <body>
         <div class="container mt-5">
             <div class="row">
-                <h1 class="text-center my-2 mb-4">Great, just one last step to fully activate your account, you must upload a photo of your professional card to ensure credibility with patients.</h1>
+                <h1 class="text-center my-2 mb-4">Great, just one last step to fully activate your account, you must upload a photo of your identity card to ensure credibility with patients.</h1>
                 @livewire('multiple-image-upload')
             </div>
         </div>

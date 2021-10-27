@@ -18,6 +18,7 @@ class CreateAppointmentsTable extends Migration
             $table->integer('user_id');
             $table->integer('related_id');
             $table->string('related_name');
+            $table->string('related_email');
             $table->string('patient_name');
             $table->string('patient_email');
             $table->string('patient_tel')->nullable();

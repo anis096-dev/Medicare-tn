@@ -147,10 +147,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public static function search($query)
     {
+        // return empty($query) ? static::query()
+        //     : static::Where('email', 'like', '%'.$query.'%')
+        //         ->orWhere('tel', 'like', '%'.$query.'%')
+        //         ->orWhere('specialty', 'like', '%'.$query.'%'); 
         return empty($query) ? static::query()
-            : static::Where('email', 'like', '%'.$query.'%')
-                ->orWhere('tel', 'like', '%'.$query.'%')
-                ->orWhere('specialty', 'like', '%'.$query.'%');
+            : static::Where('tel', 'like', '%'.$query.'%');
     }
     
     public function images(){

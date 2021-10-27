@@ -273,22 +273,22 @@ class Users extends Component
     {
         $this->dispatchBrowserEvent('alert', 
             ['type' => 'info',  
-            'message' => 'Search by Email, Phone or specialty!'
+            'message' => 'Search by phone number!'
             ]);
     }
 
-    /**
-     * Write code on Method
-     *
-     * @return response()
-     */
-    public function adminAlert()
-    {
-        $this->dispatchBrowserEvent('alert', 
-            ['type' => 'info',  
-            'message' => 'Be careful!! Deleting Admin may cause a problem!!'
-            ]);
-    }
+    // /**
+    //  * Write code on Method
+    //  *
+    //  * @return response()
+    //  */
+    // public function adminAlert()
+    // {
+    //     $this->dispatchBrowserEvent('alert', 
+    //         ['type' => 'info',  
+    //         'message' => 'Be careful!! Deleting Admin may cause a problem!!'
+    //         ]);
+    // }
 
     public function render()
     {  

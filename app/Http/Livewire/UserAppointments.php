@@ -21,6 +21,7 @@ class UserAppointments extends Component
     public $allTreatments;
     public $allSubTreatments;
     public $related_name; 
+    public $related_email; 
     public $patient_name; 
     public $patient_email; 
     public $patient_tel; 
@@ -99,6 +100,7 @@ class UserAppointments extends Component
             'user_id' => auth()->user()->id,
             'related_id' => $this->user->id,
             'related_name' => $this->user->name,
+            'related_email' => $this->user->email,
             'patient_name' => auth()->user()->name,
             'patient_email' => auth()->user()->email,
             'patient_tel' => auth()->user()->tel,
@@ -159,6 +161,7 @@ class UserAppointments extends Component
         $this->user_id = '';
         $this->related_id ='';
         $this->related_name ='';
+        $this->related_email ='';
         $this->patient_name ='';
         $this->patient_email ='';
         $this->patient_tel ='';
