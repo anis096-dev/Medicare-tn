@@ -2,21 +2,20 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Image;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Models\Image;
 
 class MultipleImageUpload extends Component
 {
-    use WithFileUploads;
- 
+    use WithFileUploads;     
     public $images = [];
 
     public function save()
     {
         $this->validate([
-            'images' => 'required|array|max:3',
-            'images.*' => 'image|mimes:jpeg,jpg,png|max:2048', // 1MB Max
+            'images' => 'required|array|max:2',
+            'images.*' => 'image|mimes:jpeg,jpg,png|max:2048', // 2MB Max
         ]);
 
          // Uploads the images
@@ -29,11 +28,13 @@ class MultipleImageUpload extends Component
                     'user_id' => auth()->id(),
                     'image' => $photo->hashName()
                 ]);
+                $this->dispatchBrowserEvent('alert',[
+                    'message'=>"Images has been successfully Uploaded.
+                    We will make sure that the information is correct. Then you will be notified"
+                ]);
             }
         }
- 
-        session()->flash('success', 'Images has been successfully Uploaded.');
- 
+        session()->flash('success');
         return redirect()->back();
     }
 

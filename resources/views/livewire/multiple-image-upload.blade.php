@@ -2,10 +2,12 @@
     <div class="card-body">
         <form wire:submit.prevent="save">   
             @if (session()->has('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif 
+                <script>
+                    setTimeout(function() {
+                    window.location.href = "/"
+                    }, 6000); // 6 second
+                </script>
+            @endif
             <div class="mb-3">
                 {{-- <label class="form-label"></label> --}}
                 <div>

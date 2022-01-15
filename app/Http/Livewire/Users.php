@@ -77,9 +77,6 @@ class Users extends Component
         $this->selectedItem = $itemId;
         // Pass the currently selected item
         $this->emit('getUserId', $this->selectedItem);
-
-        // Show the modal that shows the additional photos
-        $this->dispatchBrowserEvent('openModalShowPhotos');
     }
 
     /**

@@ -13,7 +13,6 @@
                 {{ config('app.name', 'Laravel') }}
             </a>
         </div>
-        
         <div class="flex justify-end sm:w-8/12">
             {{-- Top Navigation --}}
             <ul class="hidden sm:flex sm:text-left text-blue-500 text-sm">
@@ -65,7 +64,7 @@
         <div class="border-t border-blue-600"></div>
         <main class="bg-blue-50">
             <section class="divide-y text-gray-900">
-                <!-- header -->
+                <!-- header --> 
                 <div id="header" class="relative bg-white overflow-hidden pb-2">
                     <div class="max-w-full mx-auto">
                     <div class="relative z-10 pb-8 bg-transparent sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
@@ -158,5 +157,5 @@
                 </div>
             </section>
         </main>
-    </div>   
+    </div> 
 </div>

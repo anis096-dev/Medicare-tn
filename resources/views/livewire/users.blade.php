@@ -232,7 +232,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     @livewire('user-images')
-                </div>            
+                </div>     
             </div>
         </div>
     </div>
