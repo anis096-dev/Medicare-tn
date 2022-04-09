@@ -31,7 +31,7 @@
                             src="{{$user->profile_photo_url }}" alt="{{ $user->name }}" >
                     </div>
                     <h1 class="text-gray-900 font-bold text-xl leading-8 my-1 capitalize">{{$user->name}}</h1>
-                    <h3 class="text-gray-600 font-bold font-lg text-semibold leading-6 capitalize">{{$user->specialty}}</h3>
+                    <h3 class="text-gray-600 font-bold font-lg text-semibold leading-6 capitalize">{{__($user->specialty)}}</h3>
                     @if(auth()->user()->role == 'admin' )
                     <div>
                         <livewire:toggle-button
@@ -42,14 +42,14 @@
                     @endif
                     @if($user->account_Verified == true)
                     <h3 class=" inline-flex text-green-600 font-bold font-lg text-semibold leading-6 capitalize">
-                    Identity Verified  
+                    {{__('Identity Verified')}}  
                     <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 h-5 w-5 text-green-600" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                     </svg>
                     </h3>
                     @else
                     <h3 class="text-red-600 font-bold font-lg text-semibold leading-6 capitalize">
-                    Identity Not Verified
+                    {{__('Identity Not Verified')}}
                     </h3> 
                     @endif
                     <p class="text-sm text-gray-500 hover:text-gray-600 leading-6 capitalize">{{$user->bio}}</p>
@@ -125,7 +125,7 @@
                                     d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
                         </span>
-                        <span>Similar Profiles</span>
+                        <span>{{__('Similar Profiles')}}</span>
                     </div>
                     <div class="grid grid-cols-3">
                         <div class="text-center my-2">
@@ -190,41 +190,41 @@
                                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                         </span>
-                        <span class="tracking-wide">About</span>
+                        <span class="tracking-wide">{{__('Personal Informations')}}</span>
                     </div>
                     <div class="text-gray-700">
                         <div class="grid md:grid-cols-2 text-sm">
                             <div class="grid grid-cols-1">
-                                <div class="px-4 py-2 font-semibold bg-blue-50 rounded-md">Full Name</div>
+                                <div class="px-4 py-2 font-semibold bg-blue-50 rounded-md">{{__('Full Name')}}</div>
                                 <div class="px-4 py-2 capitalize">{{$user->name}}</div>
                             </div>
                             <div class="grid grid-cols-1">
-                                <div class="px-4 py-2 md:ml-1 font-semibold bg-blue-50 rounded-md">Marital Status</div>
+                                <div class="px-4 py-2 md:ml-1 font-semibold bg-blue-50 rounded-md">{{__('Marital Status')}}</div>
                                 <div class="px-4 py-2 capitalize">{{$user->marital_status}}</div>
                             </div>
                             <div class="grid grid-cols-1">
-                                <div class="px-4 py-2 font-semibold bg-blue-50 rounded-md">Gender</div>
+                                <div class="px-4 py-2 font-semibold bg-blue-50 rounded-md">{{__('Gender')}}</div>
                                 @if($user->gender=='m')
-                                <div class="px-4 py-2 capitalize">male</div>
+                                <div class="px-4 py-2 capitalize">{{__('Male')}}</div>
                                 @else
-                                <div class="px-4 py-2 capitalize">female</div>
+                                <div class="px-4 py-2 capitalize">{{__('Female')}}</div>
                                 @endif
                             </div>
                             <div class="grid grid-cols-1">
-                                <div class="px-4 py-2 md:ml-1 font-semibold bg-blue-50 rounded-md">Age</div>
+                                <div class="px-4 py-2 md:ml-1 font-semibold bg-blue-50 rounded-md">{{__('Age')}}</div>
                                 <div class="px-4 py-2">{{\Carbon\Carbon::parse($user->date_of_birth)->diffForHumans()}}</div>
                             </div>
                             <div class="grid grid-cols-1">
-                                <div class="px-4 py-2 font-semibold bg-blue-50 rounded-md">Governorate</div>
+                                <div class="px-4 py-2 font-semibold bg-blue-50 rounded-md">{{__('Governorate')}}</div>
                                 <div class="px-4 py-2 capitalize">{{$user->Governorate}}</div>
                             </div>
                             <div class="grid grid-cols-1">
-                                <div class="px-4 py-2 md:ml-1 font-semibold bg-blue-50 rounded-md">Current Address</div>
+                                <div class="px-4 py-2 md:ml-1 font-semibold bg-blue-50 rounded-md">{{__('Current Address')}}</div>
                                 <div class="px-4 py-2 capitalize">{{$user->adresse}}</div>
                             </div>
                             @if(auth()->user()->role != 'Patient')
                             <div class="grid grid-cols-1 bg-indigo-50 rounded-md">
-                                <div class="px-4 py-2 font-bold">Email.</div>
+                                <div class="px-4 py-2 font-bold">{{__('Email')}}</div>
                                 <div class="px-2 py-2">
                                     <span class="flex">
                                         @if(!is_null($user->email_verified_at))
@@ -241,7 +241,7 @@
                             @endif
                             @if(auth()->user()->role != 'Patient')
                             <div class="mt-1 md:mt-0 md:ml-1 grid grid-cols-1 bg-indigo-50 rounded-md">
-                                <div class="px-4 py-2 font-bold">Contact No.</div>
+                                <div class="px-4 py-2 font-bold">{{__('Contact No')}}</div>
                                 <div class="px-4 py-2">
                                     <span class="flex">
                                         @if($user->isVerified == 1)
@@ -279,7 +279,7 @@
                                             d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                     </svg>
                                 </span>
-                                <span class="tracking-wide">Experience</span>
+                                <span class="tracking-wide">{{__('Experience')}}</span>
                             </div>
                             <ul class="list-inside space-y-2">
                                 @forelse (App\Models\Experience::all()->where('user_id', $user->id) as $item)
@@ -289,7 +289,7 @@
                                 </li>
                                 @empty
                                 <li>
-                                    <div class="text-teal-600">No experiences added!</div>
+                                    <div class="text-teal-600">{{__('No experiences added!')}}</div>
                                     <div class="text-gray-500 text-xs">start date - end date</div>
                                 </li>
                                 @endforelse
@@ -307,7 +307,7 @@
                                             d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
                                     </svg>
                                 </span>
-                                <span class="tracking-wide">Formation</span>
+                                <span class="tracking-wide">{{__('Formation')}}</span>
                             </div>
                             <ul class="list-inside space-y-2">
                                 @forelse (App\Models\Education::all()->where('user_id', $user->id) as $item)
@@ -317,8 +317,7 @@
                                 </li>
                                 @empty
                                 <li>
-                                    <div class="text-teal-600">No Formation added!</div>
-                                    <div class="text-gray-500 text-xs">date of obtaining</div>
+                                    <div class="text-teal-600">{{__('No Formation added!')}}</div>
                                 </li>
                                 @endforelse
                             </ul>

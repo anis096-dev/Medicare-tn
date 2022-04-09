@@ -1,8 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
+        <div class="flex">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Profile') }}
+            </h2>
+            <a href="{{ route('register-step2.create') }}">
+                <x-jet-secondary-button class="ml-3 relative" type="button">
+                    {{ __('Update location') }}
+                </x-jet-secondary-button>
+            </a>
+        </div>
     </x-slot>
 
     <div>

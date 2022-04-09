@@ -170,4 +170,5 @@ class Appointment extends Model
                         ->Orwhere('status', 'like', '%'.$query.'%')
                         ->Orwhere('created_at', 'like', '%'.$query.'%');
     }
+    
 }

@@ -28,14 +28,14 @@
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
                                     <input type="checkbox" wire:model="selectAll">
                                 </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">RDV Date</th> 
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Patient</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Treatment</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Passage Nbr</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Start Date</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Duration</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Disponibility/Day</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('RDV Date')}}</th> 
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('Patient')}}</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('Treatment')}}</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('Passage Nbr')}}</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('Start Date')}}</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('Duration')}}</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('Disponibility in Day')}}</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('Status')}}</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"></th>
                             </tr>
                         </thead>
@@ -53,11 +53,11 @@
                                     <td class="px-6 py-2 text-xs">{{ $item->duration }}</td>                                        
                                     <td class="px-6 py-2 text-xs"><span class="text-white bg-blue-300 p-1 rounded-lg mr-1">{{ $item->user_dispo }}</span><span class="text-white bg-blue-300 p-1 rounded-lg">{{ $item->user_dispo2 }}</span></td>  
                                     @if($item->status=='accepted')
-                                    <td class="px-6 py-2 text-xs mb-2"><span class="p-1 text-gray-50 font-bold bg-blue-500 rounded">{{$item->status}}</span></td>
+                                    <td class="px-6 py-2 text-xs mb-2"><span class="p-1 text-gray-50 font-bold bg-blue-500 rounded">{{__($item->status)}}</span></td>
                                     @elseif($item->status=='refused')
-                                    <td class="px-6 py-2 text-xs mb-2"><span class="p-1 text-gray-50 font-bold bg-red-500 rounded">{{$item->status}}</span></td>
+                                    <td class="px-6 py-2 text-xs mb-2"><span class="p-1 text-gray-50 font-bold bg-red-500 rounded">{{__($item->status)}}</span></td>
                                     @else
-                                    <td class="px-6 py-2 text-xs mb-2"><span class="p-1 text-gray-50 font-bold bg-yellow-500 rounded">{{$item->status}}</span></td>
+                                    <td class="px-6 py-2 text-xs mb-2"><span class="p-1 text-gray-50 font-bold bg-yellow-500 rounded">{{__($item->status)}}</span></td>
                                     @endif                                                                                 
                                     <td class="px-6 py-2 flex justify-end">
                                         <div class="flex space-x-1 justify-around mt-1">
@@ -109,8 +109,8 @@
 
             <div class="mt-4 space-y-2">
                 <x-jet-label for="patient_email" value="{{ __('Re-write patient email') }}" />
-                <span class=" font-bold text-xs text-red-700">Please confirm your patient email to notify him by using it!!</span><br>
-                <span class=" font-bold text-xs text-blue-700">If your patient has another email so enter the newest email!!</span>
+                <span class=" font-bold text-xs text-red-700">{{__('Please confirm your patient email to notify him by using it!!')}}</span><br>
+                <span class=" font-bold text-xs text-blue-700">{{__('If your patient has another email so enter the newest email!!')}}</span>
                 <x-jet-input id="user_email" class="w-full border border-gray-300 text-gray-600 h-14 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none" type="email" wire:model.debounce.800ms="patient_email" />
                 @error('patient_email') <span class="error">{{ $message }}</span> @enderror
             </div>
@@ -144,27 +144,27 @@
         <x-slot name="content">
             <div class="flex items-center justify-center sm:items-start sm:justify-start px-4 py-3 sm:px-8">
                 <ul>
-                    <li class="mb-2"><span class=" font-bold pr-2">Patient name:</span> {{$this->patient_name}}</li>
+                    <li class="mb-2"><span class=" font-bold pr-2">{{__('Patient name')}}:</span> {{$this->patient_name}}</li>
                     @if($this->status == 'accepted')
-                    <li class="mb-2"><span class=" font-bold pr-2">Patient email:</span> {{$this->patient_email}}</li>
-                    <li class="mb-2"><span class=" font-bold pr-2">Patient phone:</span> {{$this->patient_tel}}</li>
+                    <li class="mb-2"><span class=" font-bold pr-2">{{__('Patient email')}}:</span> {{$this->patient_email}}</li>
+                    <li class="mb-2"><span class=" font-bold pr-2">{{__('Patient phone')}}:</span> {{$this->patient_tel}}</li>
                     @endif
-                    <li class="mb-2"><span class=" font-bold pr-2">Treatment:</span> {{$this->treatment}}</li>
-                    <li class="mb-2"><span class=" font-bold pr-2">Sub Treatment:</span> {{$this->sub_treatment}}</li>
-                    <li class="mb-2"><span class=" font-bold pr-2">Passage Nbre:</span> {{$this->passage_number}}</li>
-                    <li class="mb-2"><span class=" font-bold pr-2">Start Date:</span> {{Carbon\Carbon::parse($this->start_date)->format('d M Y')}}</li>
-                    <li class="mb-2"><span class=" font-bold pr-2">Duration:</span> {{$this->duration}}</li>
-                    <li class="mb-2"><span class=" font-bold pr-2">Patient Dispo/Day:<span class="text-white bg-blue-300 p-1 rounded-lg mr-1">{{ $this->user_dispo }}</span><span class="text-white bg-blue-300 p-1 rounded-lg">{{ $this->user_dispo2 }}</span></li>
-                    <li class="mb-2"><span class=" font-bold pr-2">Certificate:</span> {{$this->certificate}}</li>
-                    <li class="mb-3"><span class=" font-bold pr-2">Home Mention:</span> {{$this->home_mention}}</li>
-                    <li class="mb-2"><span class=" font-bold pr-2">Care place:</span> {{$this->care_place}}</li>
-                    <li class="mb-4"><span class=" font-bold pr-2">Covid symptom:</span> {{$this->covid_symptom}}</li>
+                    <li class="mb-2"><span class=" font-bold pr-2">{{__('Treatment')}}:</span> {{$this->treatment}}</li>
+                    <li class="mb-2"><span class=" font-bold pr-2">{{__('Sub Treatment')}}:</span> {{$this->sub_treatment}}</li>
+                    <li class="mb-2"><span class=" font-bold pr-2">{{__('Passage Nbr')}}:</span> {{$this->passage_number}}</li>
+                    <li class="mb-2"><span class=" font-bold pr-2">{{__('Start Date')}}:</span> {{Carbon\Carbon::parse($this->start_date)->format('d M Y')}}</li>
+                    <li class="mb-2"><span class=" font-bold pr-2">{{__('Duration')}}:</span> {{$this->duration}}</li>
+                    <li class="mb-2"><span class=" font-bold pr-2">{{__('Disponibility in Day')}}:<span class="text-white bg-blue-300 p-1 rounded-lg mr-1">{{ $this->user_dispo }}</span><span class="text-white bg-blue-300 p-1 rounded-lg">{{ $this->user_dispo2 }}</span></li>
+                    <li class="mb-2"><span class=" font-bold pr-2">{{__('Certificate')}}:</span> {{$this->certificate}}</li>
+                    <li class="mb-3"><span class=" font-bold pr-2">{{__('Home mention')}}:</span> {{$this->home_mention}}</li>
+                    <li class="mb-2"><span class=" font-bold pr-2">{{__('Care Place')}}:</span> {{$this->care_place}}</li>
+                    <li class="mb-4"><span class=" font-bold pr-2">{{__('Covid Symptom')}}:</span> {{$this->covid_symptom}}</li>
                     @if($this->status=='accepted')
-                    <li class="mb-2"><span class=" font-bold pr-2">Status:</span> <span class="p-1 text-gray-50 font-bold bg-blue-500 rounded">{{$this->status}}</span></li>
+                    <li class="mb-2"><span class=" font-bold pr-2">{{__('Status')}}:</span> <span class="p-1 text-gray-50 font-bold bg-blue-500 rounded">{{__($this->status)}}</span></li>
                     @elseif($this->status=='refused')
-                    <li class="mb-2"><span class=" font-bold pr-2">Status:</span> <span class="p-1 text-gray-50 font-bold bg-red-500 rounded">{{$this->status}}</span></li>
+                    <li class="mb-2"><span class=" font-bold pr-2">{{__('Status')}}:</span> <span class="p-1 text-gray-50 font-bold bg-red-500 rounded">{{__($this->status)}}</span></li>
                     @else
-                    <li class="mb-2"><span class=" font-bold pr-2">Status:</span> <span class="p-1 text-gray-50 font-bold bg-yellow-500 rounded">{{$this->status}}</span></li>
+                    <li class="mb-2"><span class=" font-bold pr-2">{{__('Status')}}:</span> <span class="p-1 text-gray-50 font-bold bg-yellow-500 rounded">{{__($this->status)}}</span></li>
                     @endif
                 </ul> 
             </div>

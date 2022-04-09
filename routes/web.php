@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
-Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], function ()
+Route::group(['prefix' => '(locale)', 'where' => ['locale' => '[a-zA-Z]{2}']], function () {
+    Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], function ()
 {
     Route::view('/multiple-image-upload','master')->name('ensure_identity')->withoutMiddleware('accessrole');
     Route::get('/add-phone',  'App\Http\Controllers\VerifyPhoneController@create')->name('add-phone')->withoutMiddleware('accessrole');
@@ -101,3 +102,4 @@ Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], funct
 
 Route::get('/', Frontpage::class);
 Route::get('/{urlslug}', Frontpage::class);
+});

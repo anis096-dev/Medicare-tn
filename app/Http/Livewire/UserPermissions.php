@@ -16,7 +16,7 @@ class UserPermissions extends Component
     public $selectedPermissions = [];
     public $selectAll = false;
     public $bulkDisabled = true;
-    public $perPage = 10;
+    public $perPage = 100;
     public $search = '';
 
     /**

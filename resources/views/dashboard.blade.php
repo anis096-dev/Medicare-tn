@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white p-6 mb-2 overflow-hidden shadow-xl sm:rounded-lg">
-                <H1 class="text-center px-3">{{__('Welcome in your personal area! as')}}{{__(Auth::user()->role)}}</H1>
+                <H1 class="text-center px-3"><span class=" font-bold">{{__(Auth::user()->name)}}</span> {{__('Welcome in your personal area!')}}</H1>
             </div>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
               @livewire('find-ehealth-care')             

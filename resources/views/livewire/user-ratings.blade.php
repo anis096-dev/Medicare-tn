@@ -76,7 +76,7 @@
             <div class="box-border flex flex-col flex-wrap justify-center -mx-4 text-indigo-900">
                 <div class="relative w-full mb-12 leading-6 text-left xl:flex-grow-0 xl:flex-shrink-0">
                     <h2 class="box-border mx-0 mt-0 font-sans text-4xl font-bold text-center text-indigo-900">
-                        Ratings
+                        {{__('Ratings')}}
                     </h2>
                 </div>
             </div>

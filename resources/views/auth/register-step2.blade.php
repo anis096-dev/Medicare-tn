@@ -28,7 +28,7 @@
                     @endif
 
                     <div class="mt-4">
-                        <x-jet-label for="Governorate" value="{{ __('Governorate') }}" />
+                        <x-jet-label for="Governorate" value="{{ __('Governorate') }}"/>
                             <select id="Governorate" name="Governorate" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md">
                                 <option value="">{{__('-- Select a Governorate --')}}</option>    
                             @foreach (App\Models\User::governorates() as $item)

@@ -25,13 +25,13 @@
             </div>
             @foreach ($allTreatments->where('name', $treatment) as $item)
                <span class="mr-1 text-sm font-bold text-red-500">
-                Price/Day: {{ $item->price_day }} TND
+                {{__('Price/Day')}} {{ $item->price_day }} {{__('TND')}}
                </span>
                <span class="mr-1 text-sm font-bold text-blue-500">
-                Price/Night: {{ $item->price_night }} TND
+                {{__('Price/Night')}} {{ $item->price_night }} {{__('TND')}}
                </span>
                <span class="text-sm font-bold text-green-500">
-                Price/Weekend: {{ $item->price_weekend }} TND
+                {{__('Price/Weekend')}} {{ $item->price_weekend }} {{__('TND')}}
                </span>
             @endforeach
            
@@ -99,7 +99,7 @@
             </div>
 
             <div class="mt-4 space-y-2">
-                <x-jet-label  for="start_date" value="{{ __('Start Date // Duration') }}" />
+                <x-jet-label  for="start_date" value="{{ __('Start Date & Duration') }}" />
                 <div class="flex">
                     <x-jet-input wire:model="start_date" id="start_date" class=" w-1/2 border border-gray-300 text-gray-600 h-14 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none" type="date" />
                     @error('start_date') <span class="error">{{ $message }}</span> @enderror
@@ -115,7 +115,7 @@
             </div>
             
             <div class="mt-4 space-y-2">
-                <x-jet-label for="user_dispo" value="{{ __('Disponibility/Day') }}" />
+                <x-jet-label for="user_dispo" value="{{ __('Disponibility in Day') }}" />
                 <div class="flex">
                     <x-jet-input wire:model="user_dispo" id="user_dispo" class=" w-1/2 border border-gray-300 text-gray-600 h-14 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none" type="time"/>
                     @error('user_dispo') <span class="error">{{ $message }}</span> @enderror

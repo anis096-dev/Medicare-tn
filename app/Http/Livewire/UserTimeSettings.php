@@ -20,7 +20,7 @@ class UserTimeSettings extends Component
     public $selectedTimes = [];
     public $selectAll = false;
     public $bulkDisabled = true;
-    public $perPage = 10;
+    public $perPage = 100;
     public $search = '';
 
     /**

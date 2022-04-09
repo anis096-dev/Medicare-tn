@@ -15,6 +15,23 @@
         </div>
         <div class="flex justify-end sm:w-8/12">
             {{-- Top Navigation --}}
+            <ul class="navbar-nav ml-auto">
+                @if(count(config('app.languages')) > 1)
+                <li class="nav-item dropdown d-md-down-none">
+                    <a class="nav-link" href="#" data-toggle="dropdown" role="button" aria-haspopup="true">
+                        {{ strtoupper(app()->getLocale()) }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        @foreach(config('app.languages') as $langLocale => $langName)
+                            <a class="dropdown-item" href="{{url()->current()}}?change_language={{ $langLocale }}">
+                                {{ strtoupper($langLocale)}} ({{ $langName }})
+                            </a>
+                        @endforeach
+                    </div>
+                </li>
+                @endif
+            </ul>
+            
             <ul class="hidden sm:flex sm:text-left text-blue-500 text-sm">
                 @foreach ($topNavLinks as $item)
                     <a href="{{ url('/'.$item->slug) }}">
@@ -29,7 +46,7 @@
             @if (Route::has('login'))
                 <div class="sm:flex sm:text-left text-blue-500 text-sm">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="cursor-pointer px-4 py-2 hover:bg-blue-100 rounded font-bold">{{__('Dashboard')}}</a>
+                        <a href="{{ url('/dashboard') }}" class="cursor-pointer  px-4 py-2 hover:bg-blue-100 rounded font-bold">{{__('My Space')}}</a>
                     @else
                     <div class="flex justify-end sm:w-auto items-center">
                         <a href="{{ route('login') }}" class="cursor-pointer md:px-4 px-2 py-2 hover:bg-blue-100 rounded font-bold">{{__('Log in')}}</a>

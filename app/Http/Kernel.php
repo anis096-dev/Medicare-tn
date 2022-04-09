@@ -2,9 +2,10 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\SetLocale;
+use App\Http\Middleware\EnsureIdentity;
 use App\Http\Middleware\VerifyPhoneMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use App\Http\Middleware\EnsureIdentity;
 use App\Http\Middleware\CheckRegistrationCompletedMiddleware;
 
 class Kernel extends HttpKernel
@@ -41,6 +42,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\LastSeenUserActivity::class,
+            \App\Http\Middleware\SetLocale::class,
         ],
 
         'api' => [

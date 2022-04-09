@@ -36,10 +36,10 @@
                         <thead>
                             <tr>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                    <input type="checkbox" wire:model="selectAll"> Select All
+                                    <input type="checkbox" wire:model="selectAll">
                                 </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Days</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Times</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('Days')}}</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">{{__('Times')}}</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">                           
@@ -79,9 +79,9 @@
         </div>
     </div>
     
-    {{-- <div class="mt-5">
+    <div class="mt-5">
     {{ $data->links() }}
-    </div> --}}
+    </div>
 
     {{-- Modal Form --}}
     <x-jet-dialog-modal wire:model="modalFormVisible">
@@ -108,7 +108,7 @@
             </div>
             
             <div class="mt-4">
-                <span class="text-sm font-bold text-red-600">Please enter times by order!! (ex:
+                <span class="text-sm font-bold text-red-600">{{__('Please enter times by order!! (ex')}}
                     <button class="bg-blue-500 px-2 py-2 ml-2 mb-2 rounded text-white text-xs font-bold items-center">08:00-09:30</button>
                     <button class="bg-blue-500 px-2 py-2 ml-2 mr-2 mb-2 rounded text-white text-xs font-bold items-center">12:30-14:30</button>
                     )</span>
