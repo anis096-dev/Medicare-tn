@@ -163,6 +163,22 @@ class UserPermissionsTableSeeder extends Seeder
                 'created_at' => '2021-05-25 01:22:44',
                 'updated_at' => '2021-05-25 01:22:44',
             ),
+            18 => 
+            array (
+                'id' => 20,
+                'role' => 'Patient',
+                'route_name' => 'treatments-prices',
+                'created_at' => '2022-04-23 00:10:31',
+                'updated_at' => '2022-04-23 00:10:31',
+            ),
+            19 => 
+            array (
+                'id' => 21,
+                'role' => 'Health specialist',
+                'route_name' => 'treatments-prices',
+                'created_at' => '2022-04-23 00:10:49',
+                'updated_at' => '2022-04-23 00:10:49',
+            ),
         ));
         
         

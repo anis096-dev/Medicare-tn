@@ -231,6 +231,40 @@
                 </div>
             </div>
 
+            <div class="flex justify-end">
+                <x-jet-dropdown>
+                    @if(count(config('app.languages')) > 1)
+                    <x-slot name="trigger">
+                            <span class="inline-flex rounded-md">
+                                <x-jet-nav-link class="mt-4 pb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                                    </svg>
+                                    <span class=" text-red-500 text-xs -mt-4">{{ strtoupper(app()->getLocale()) }}</span>
+                                    <svg class="-ml-4 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </x-jet-nav-link>
+                            </span>
+                    </x-slot>
+
+                    <x-slot name="content">
+                        <!-- Languages Management -->
+                        <div class="block px-4 py-2 text-xs text-gray-400">
+                            {{ __('languages') }}
+                        </div>
+
+                        <div class="border-t border-gray-50"></div>
+                        @foreach(config('app.languages') as $langLocale => $langName)
+                        <x-jet-dropdown-link class=" font-bold" href="{{url()->current()}}?change_language={{ $langLocale }}">
+                            {{ strtoupper($langLocale)}} ({{ $langName }})
+                        </x-jet-dropdown-link>
+                        @endforeach
+                    </x-slot>
+                    @endif
+                </x-jet-dropdown>
+            </div>
+
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
@@ -347,7 +381,7 @@
             </div>
         </div>
     </div>
-
+    
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">

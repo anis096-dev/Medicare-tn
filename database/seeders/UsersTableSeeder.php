@@ -30,8 +30,9 @@ class UsersTableSeeder extends Seeder
                 'date_of_birth' => NULL,
                 'tel' => '21222222',
                 'isVerified' => 1,
+                'account_Verified' => 1,
                 'Governorate' => 'Jendouba',
-                'adresse' => 'Jendouba, جندوبة, Tunisie',
+                'adresse' => '17 rue farhat hached, جندوبة, Tunisie',
                 'bio' => NULL,
                 'email' => 'admin@admin.com',
                 'email_verified_at' => '2021-05-30 20:54:54',
@@ -40,10 +41,10 @@ class UsersTableSeeder extends Seeder
                 'two_factor_recovery_codes' => NULL,
                 'remember_token' => 'WTWHpsX42S405AnvqAqj78S9brGz3rBOdfVPpe2JaJNLeYKKd1PSLdkvLNiB',
                 'current_team_id' => NULL,
-                'profile_photo_path' => 'profile-photos/9OYVow6VBrwHPMk4hZukEtZ0ZBhWhgbyY6P4GvON.jpg',
+                'profile_photo_path' => NULL,
                 'created_at' => '2021-03-21 07:16:51',
-                'updated_at' => '2021-10-23 20:44:48',
-                'last_seen' => '2021-10-23 20:44:48',
+                'updated_at' => '2022-04-23 00:16:13',
+                'last_seen' => '2022-04-23 00:16:13',
             ),
             1 => 
             array (
@@ -56,6 +57,7 @@ class UsersTableSeeder extends Seeder
                 'date_of_birth' => '1996-05-09',
                 'tel' => '25219853',
                 'isVerified' => 1,
+                'account_Verified' => 0,
                 'Governorate' => 'Tunis',
                 'adresse' => 'Rue el mar, Tunis, تونس, Tunisie',
                 'bio' => NULL,
@@ -82,6 +84,7 @@ class UsersTableSeeder extends Seeder
                 'date_of_birth' => '2017-03-02',
                 'tel' => '22222222',
                 'isVerified' => 1,
+                'account_Verified' => 0,
                 'Governorate' => 'Sousse',
                 'adresse' => 'Tunis, تونس, Tunisia',
                 'bio' => NULL,
@@ -108,6 +111,7 @@ class UsersTableSeeder extends Seeder
                 'date_of_birth' => '1996-05-07',
                 'tel' => '23451244',
                 'isVerified' => 1,
+                'account_Verified' => 0,
                 'Governorate' => 'Monastir',
                 'adresse' => 'rue 10808, Tunis, تونس, Tunisia',
                 'bio' => NULL,
@@ -125,32 +129,6 @@ class UsersTableSeeder extends Seeder
             ),
             4 => 
             array (
-                'id' => 5,
-                'role' => 'Health specialist',
-                'specialty' => 'Physiotherapist',
-                'name' => 'amin',
-                'gender' => 'm',
-                'marital_status' => 'single',
-                'date_of_birth' => '1995-01-01',
-                'tel' => '23456788',
-                'isVerified' => 1,
-                'Governorate' => 'Nabeul',
-                'adresse' => 'Borj Cédria, Tunisia, بن عروس, Tunisia',
-                'bio' => 'Nurse from Tunisia!',
-                'email' => 'amin@test.com',
-                'email_verified_at' => '2021-05-30 20:54:54',
-                'password' => '$2y$10$p4MrnVrLDCFP2J4dQuQ0f.I3V0.dHbOLsgNEliHTpDTA2ItZGemfW',
-                'two_factor_secret' => NULL,
-                'two_factor_recovery_codes' => NULL,
-                'remember_token' => 'qJaZZCBSeTd3udIAKLvsrZrDEbHMM0PTcB4qz2wlvqKn3Zi6ZZMwdS4rxzRM',
-                'current_team_id' => NULL,
-                'profile_photo_path' => 'profile-photos/gNojfdXc3THoP0ix7ghVQ9RaiuxQxush8wKkRA32.jpg',
-                'created_at' => '2021-04-05 04:28:55',
-                'updated_at' => '2021-04-07 07:52:18',
-                'last_seen' => NULL,
-            ),
-            5 => 
-            array (
                 'id' => 6,
                 'role' => 'Health specialist',
                 'specialty' => 'Nurse',
@@ -160,6 +138,7 @@ class UsersTableSeeder extends Seeder
                 'date_of_birth' => '1990-02-01',
                 'tel' => '12222222',
                 'isVerified' => 1,
+                'account_Verified' => 0,
                 'Governorate' => 'Sfax',
                 'adresse' => 'Monastir, المنستير, Tunisia',
                 'bio' => 'NOYR4S PRRR',
@@ -175,7 +154,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2021-04-05 05:12:27',
                 'last_seen' => NULL,
             ),
-            6 => 
+            5 => 
             array (
                 'id' => 7,
                 'role' => 'Health specialist',
@@ -186,6 +165,7 @@ class UsersTableSeeder extends Seeder
                 'date_of_birth' => '1993-02-02',
                 'tel' => '34567728',
                 'isVerified' => 1,
+                'account_Verified' => 0,
                 'Governorate' => 'Jendouba',
                 'adresse' => 'Tabursuq, Bājah, Tunisia',
                 'bio' => 'JVDLJVVLJV JLHGDLJHG LDJHGDJH GLDJHOJH',
@@ -201,7 +181,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2021-10-23 20:50:25',
                 'last_seen' => '2021-10-23 20:50:25',
             ),
-            7 => 
+            6 => 
             array (
                 'id' => 8,
                 'role' => 'Health specialist',
@@ -212,6 +192,7 @@ class UsersTableSeeder extends Seeder
                 'date_of_birth' => '1993-02-02',
                 'tel' => '34567728',
                 'isVerified' => 1,
+                'account_Verified' => 0,
                 'Governorate' => 'Mahdia',
                 'adresse' => 'Tabursuq, Bājah, Tunisia',
                 'bio' => 'JVDLJVVLJV JLHGDLJHG LDJHGDJH GLDJHOJH',
@@ -227,7 +208,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2021-04-05 05:39:37',
                 'last_seen' => NULL,
             ),
-            8 => 
+            7 => 
             array (
                 'id' => 9,
                 'role' => 'Health specialist',
@@ -238,6 +219,7 @@ class UsersTableSeeder extends Seeder
                 'date_of_birth' => '1993-02-02',
                 'tel' => '34567728',
                 'isVerified' => 1,
+                'account_Verified' => 0,
                 'Governorate' => 'Tatouine',
                 'adresse' => 'Tabursuq, Bājah, Tunisia',
                 'bio' => 'JVDLJVVLJV JLHGDLJHG LDJHGDJH GLDJHOJH',
@@ -253,7 +235,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2021-04-05 05:39:37',
                 'last_seen' => NULL,
             ),
-            9 => 
+            8 => 
             array (
                 'id' => 10,
                 'role' => 'Health specialist',
@@ -264,6 +246,7 @@ class UsersTableSeeder extends Seeder
                 'date_of_birth' => '1993-02-02',
                 'tel' => '34567728',
                 'isVerified' => 1,
+                'account_Verified' => 0,
                 'Governorate' => 'Sidi bouzid',
                 'adresse' => 'Tabursuq, Bājah, Tunisia',
                 'bio' => 'JVDLJVVLJV JLHGDLJHG LDJHGDJH GLDJHOJH',
@@ -279,7 +262,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2021-04-05 05:39:37',
                 'last_seen' => NULL,
             ),
-            10 => 
+            9 => 
             array (
                 'id' => 11,
                 'role' => 'Health specialist',
@@ -290,6 +273,7 @@ class UsersTableSeeder extends Seeder
                 'date_of_birth' => '1993-02-02',
                 'tel' => '34567728',
                 'isVerified' => 1,
+                'account_Verified' => 0,
                 'Governorate' => 'Kef',
                 'adresse' => 'Tabursuq, Bājah, Tunisia',
                 'bio' => 'JVDLJVVLJV JLHGDLJHG LDJHGDJH GLDJHOJH',
@@ -305,7 +289,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2021-04-05 05:39:37',
                 'last_seen' => NULL,
             ),
-            11 => 
+            10 => 
             array (
                 'id' => 12,
                 'role' => 'Health specialist',
@@ -316,6 +300,7 @@ class UsersTableSeeder extends Seeder
                 'date_of_birth' => '1993-02-02',
                 'tel' => '34567728',
                 'isVerified' => 1,
+                'account_Verified' => 0,
                 'Governorate' => 'Bizerte',
                 'adresse' => 'Tabursuq, Bājah, Tunisia',
                 'bio' => 'JVDLJVVLJV JLHGDLJHG LDJHGDJH GLDJHOJH',
@@ -331,7 +316,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2021-09-24 01:08:28',
                 'last_seen' => '2021-09-24 01:08:28',
             ),
-            12 => 
+            11 => 
             array (
                 'id' => 13,
                 'role' => 'Patient',
@@ -342,6 +327,7 @@ class UsersTableSeeder extends Seeder
                 'date_of_birth' => '1995-01-01',
                 'tel' => '+21625219853',
                 'isVerified' => 1,
+                'account_Verified' => 0,
                 'Governorate' => 'Jendouba',
                 'adresse' => 'Jendouba',
                 'bio' => NULL,
@@ -357,7 +343,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2021-10-11 20:03:08',
                 'last_seen' => '2021-10-11 19:59:55',
             ),
-            13 => 
+            12 => 
             array (
                 'id' => 14,
                 'role' => 'Patient',
@@ -368,6 +354,7 @@ class UsersTableSeeder extends Seeder
                 'date_of_birth' => '2005-01-14',
                 'tel' => NULL,
                 'isVerified' => 0,
+                'account_Verified' => 0,
                 'Governorate' => NULL,
                 'adresse' => NULL,
                 'bio' => NULL,

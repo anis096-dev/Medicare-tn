@@ -4,9 +4,9 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use App\Models\Rating;
-use Illuminate\Http\Client\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Storage;
 
 class Users extends Component
 {
@@ -286,6 +286,18 @@ class Users extends Component
     //         'message' => 'Be careful!! Deleting Admin may cause a problem!!'
     //         ]);
     // }
+
+
+    public function cleanupOldTempImages () {
+        $oldFiles = Storage::files('livewire-tmp');
+        foreach($oldFiles as $files) {
+            Storage::delete($files);
+        }
+        $this->dispatchBrowserEvent('alert', 
+        ['type' => 'info',  
+        'message' => 'All temporary photos deleted succefully!'
+        ]);
+    }
 
     public function render()
     {  

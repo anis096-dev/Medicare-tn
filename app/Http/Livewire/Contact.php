@@ -7,7 +7,7 @@ use App\Models\Message;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
-class ContactForm extends Component
+class Contact extends Component
 {
     public $name = '';
     public $email= '';
@@ -51,9 +51,9 @@ class ContactForm extends Component
             'message'=>"You message has been sent Successfully!! Thank You for contacting us!!"
         ]);
     }
-    
+
     public function render()
     {
-        return view('livewire.contact-form');
+        return view('livewire.contact');
     }
 }

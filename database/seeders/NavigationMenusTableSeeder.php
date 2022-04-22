@@ -49,6 +49,16 @@ class NavigationMenusTableSeeder extends Seeder
                 'created_at' => '2021-05-25 01:28:09',
                 'updated_at' => '2021-05-25 01:28:09',
             ),
+            3 => 
+            array (
+                'id' => 4,
+                'sequence' => 4,
+                'type' => 'TopNav',
+                'label' => 'FaQs',
+                'slug' => 'f-a-qs',
+                'created_at' => '2022-04-22 22:17:18',
+                'updated_at' => '2022-04-22 22:25:55',
+            ),
         ));
         
         

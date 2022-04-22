@@ -12,22 +12,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
-Route::group(['prefix' => '(locale)', 'where' => ['locale' => '[a-zA-Z]{2}']], function () {
-    Route::group(['middleware' => ['auth:sanctum', 'verified','accessrole',]], function ()
-{
-    Route::view('/multiple-image-upload','master')->name('ensure_identity')->withoutMiddleware('accessrole');
+
+Route::group(['middleware' => ['auth:sanctum', 'verified', 'accessrole',]], function () {
+    Route::view('/multiple-image-upload', 'master')->name('ensure_identity')->withoutMiddleware('accessrole');
     Route::get('/add-phone',  'App\Http\Controllers\VerifyPhoneController@create')->name('add-phone')->withoutMiddleware('accessrole');
     Route::post('/store-phone', 'App\Http\Controllers\VerifyPhoneController@store')->name('store-phone')->withoutMiddleware('accessrole');
     Route::get('/verify-show', 'App\Http\Controllers\VerifyPhoneController@verifyShow')->name('verify-show')->withoutMiddleware('accessrole');
     Route::post('/verify', 'App\Http\Controllers\VerifyPhoneController@verify')->name('verify')->withoutMiddleware('accessrole');
-    
-    Route::group(['middleware' => ['verify_phone']], function() {
-        Route::get('register-step2', [App\Http\Controllers\RegisterStepTwoController::class, 'create'])->name('register-step2.create')->withoutMiddleware('accessrole');
-        Route::post('register-step2', [App\Http\Controllers\RegisterStepTwoController::class, 'store'])->name('register-step2.store')->withoutMiddleware('accessrole');
-        Route::get('user/{user}', [App\Http\Livewire\Users::class, 'show'])->name('user.show')->withoutMiddleware('accessrole');
 
-        Route::group(['middleware' => ['registration_completed']], function() {
-            Route::group(['middleware' => ['ensure_identity']], function() {
+    Route::group(['middleware' => ['verify_phone']], function () {
+        Route::get('/register-step2', [App\Http\Controllers\RegisterStepTwoController::class, 'create'])->name('register-step2.create')->withoutMiddleware('accessrole');
+        Route::post('/register-step2', [App\Http\Controllers\RegisterStepTwoController::class, 'store'])->name('register-step2.store')->withoutMiddleware('accessrole');
+        Route::get('/user/{user}', [App\Http\Livewire\Users::class, 'show'])->name('user.show')->withoutMiddleware('accessrole');
+
+        Route::group(['middleware' => ['registration_completed']], function () {
+            Route::group(['middleware' => ['ensure_identity']], function () {
                 Route::get('/dashboard', function () {
                     return view('dashboard');
                 })->name('dashboard');
@@ -51,7 +50,7 @@ Route::group(['prefix' => '(locale)', 'where' => ['locale' => '[a-zA-Z]{2}']], f
                 Route::get('/user-permissions', function () {
                     return view('admin.user-permissions');
                 })->name('user-permissions');
-                
+
                 Route::get('/specialties', function () {
                     return view('admin.specialties');
                 })->name('specialties');
@@ -63,15 +62,15 @@ Route::group(['prefix' => '(locale)', 'where' => ['locale' => '[a-zA-Z]{2}']], f
                 Route::get('/sub-treatments', function () {
                     return view('admin.sub-treatments');
                 })->name('sub-treatments');
-                
+
                 Route::get('/experiences', function () {
                     return view('admin.user-experience');
                 })->name('user-experience');
-                
+
                 Route::get('/educations', function () {
                     return view('admin.user-education');
                 })->name('user-education');
-                
+
                 Route::get('/user-time-settings', function () {
                     return view('admin.user-time-settings');
                 })->name('user-time-settings');
@@ -99,7 +98,5 @@ Route::group(['prefix' => '(locale)', 'where' => ['locale' => '[a-zA-Z]{2}']], f
         });
     });
 });
-
 Route::get('/', Frontpage::class);
 Route::get('/{urlslug}', Frontpage::class);
-});
