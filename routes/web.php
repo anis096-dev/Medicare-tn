@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::group(['middleware' => ['auth:sanctum', 'verified', 'accessrole',]], function () {
-    Route::view('/multiple-image-upload', 'master')->name('ensure_identity')->withoutMiddleware('accessrole');
     Route::get('/add-phone',  'App\Http\Controllers\VerifyPhoneController@create')->name('add-phone')->withoutMiddleware('accessrole');
     Route::post('/store-phone', 'App\Http\Controllers\VerifyPhoneController@store')->name('store-phone')->withoutMiddleware('accessrole');
     Route::get('/verify-show', 'App\Http\Controllers\VerifyPhoneController@verifyShow')->name('verify-show')->withoutMiddleware('accessrole');
@@ -24,6 +23,10 @@ Route::group(['middleware' => ['auth:sanctum', 'verified', 'accessrole',]], func
         Route::get('/register-step2', [App\Http\Controllers\RegisterStepTwoController::class, 'create'])->name('register-step2.create')->withoutMiddleware('accessrole');
         Route::post('/register-step2', [App\Http\Controllers\RegisterStepTwoController::class, 'store'])->name('register-step2.store')->withoutMiddleware('accessrole');
         Route::get('/user/{user}', [App\Http\Livewire\Users::class, 'show'])->name('user.show')->withoutMiddleware('accessrole');
+        
+        Route::get('/ensure-identity', function () {
+            return view('admin.ensure-identity');
+        })->name('ensure-identity');
 
         Route::group(['middleware' => ['registration_completed']], function () {
             Route::group(['middleware' => ['ensure_identity']], function () {

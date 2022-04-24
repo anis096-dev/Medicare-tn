@@ -35,6 +35,7 @@ class UserPermission extends Model
             'patient-appointments',
             'contacts-from-website',
             'treatments-prices',
+            'ensure-identity',
         ];
     }
 

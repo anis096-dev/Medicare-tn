@@ -274,20 +274,6 @@ class Users extends Component
             ]);
     }
 
-    // /**
-    //  * Write code on Method
-    //  *
-    //  * @return response()
-    //  */
-    // public function adminAlert()
-    // {
-    //     $this->dispatchBrowserEvent('alert', 
-    //         ['type' => 'info',  
-    //         'message' => 'Be careful!! Deleting Admin may cause a problem!!'
-    //         ]);
-    // }
-
-
     public function cleanupOldTempImages () {
         $oldFiles = Storage::files('livewire-tmp');
         foreach($oldFiles as $files) {

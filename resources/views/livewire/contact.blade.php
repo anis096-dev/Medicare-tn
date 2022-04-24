@@ -41,6 +41,7 @@
   </div>
 </section> --}}
 
+
 <section class="text-gray-600 body-font relative">
   <div class="container px-5 py-24 mx-auto">
     <div class="flex flex-col text-center w-full mb-12">
@@ -54,7 +55,7 @@
             <label for="name" class="leading-7 text-sm text-gray-600">{{__('Name')}}</label>
             <input wire:model.lazy="name" type="text" class="w-full mb-1 bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
             @error('name') <span class="text-xs text-white bg-red-300 rounded-xl p-1">{{ $message }}</span> @enderror
-        </div>
+          </div>
         </div>
         <div class="p-2 w-1/2">
           <div class="relative">

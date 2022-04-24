@@ -17,7 +17,7 @@ class EnsureIdentity
     public function handle(Request $request, Closure $next)
     {
         if(auth()->user()->role == 'Health specialist' && auth()->user()->account_Verified == false) {
-            return redirect()->route('ensure_identity');
+            return redirect()->route('ensure-identity');
         }
         return $next($request);
     }

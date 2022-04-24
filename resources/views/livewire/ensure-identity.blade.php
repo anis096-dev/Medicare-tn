@@ -18,13 +18,13 @@
                         }, 6000); // 6 second
                     </script>
                 @endif
-                <div class="mb-3">
+                <div class="mb-4">
                     {{-- <label class="form-label"></label> --}}
                     <div>
-                        <div class="inline-flex">
+                        <div class="inline-flex justify-center mb-1">
                             @if (is_array($images) || is_object($images))                   
                             @forelse ($images as $item)
-                            <div class="col-3 me-1 mb-1">
+                            <div class="col-3 ml-1 mb-1">
                                 <img src="{{ $item->temporaryUrl() }}">
                             </div>
                             @empty
@@ -41,18 +41,20 @@
                     </div>
                     @error('images.*') <span class="error">{{ $message }}</span> @enderror
                 </div>
-                <x-jet-secondary-button type="submit" class="text-gray-500 text-center justify-center mx-auto font-bold hover:bg-blue-200">
-                    {{ __('Confirm') }}
-                </x-jet-secondary-button>
-                <div wire:loading wire:target="images">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 ml-2 -mb-3 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                    </svg>
-                </div>
-                <div wire:loading wire:target="save">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 ml-2 -mb-2 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
+                <div class="flex justify-center">
+                    <x-jet-secondary-button type="submit" class="text-gray-500 text-center font-bold hover:bg-blue-200">
+                        {{ __('Confirm') }}
+                    </x-jet-secondary-button>
+                    <div wire:loading wire:target="images">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 ml-2 -mb-2 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                    </div>
+                    <div wire:loading wire:target="save">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600 ml-2 -mb-2 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                    </div>
                 </div>
             </form>
         </div>  

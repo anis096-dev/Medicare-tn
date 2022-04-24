@@ -6,15 +6,16 @@ use App\Models\Image;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class MultipleImageUpload extends Component
+class EnsureIdentity extends Component
 {
+    
     use WithFileUploads;     
     public $images = [];
 
     public function save()
     {
         $this->validate([
-            'images' => 'required|array|max:2',
+            'images' => 'required|array|max:2|min:2',
             'images.*' => 'image|mimes:jpeg,jpg,png|max:2048', // 2MB Max
         ]);
 
@@ -40,6 +41,6 @@ class MultipleImageUpload extends Component
 
     public function render()
     {
-        return view('livewire.multiple-image-upload');
+        return view('livewire.ensure-identity');
     }
 }
