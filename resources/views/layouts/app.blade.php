@@ -78,6 +78,24 @@
         @stack('modals')
 
         @livewireScripts
+        <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
+        <script>
+            (function() {
+            
+              var latlng = {
+                lat: 33.88146,
+                lng: 10.0982
+            };
+
+            var placesAutocomplete = places({
+                apiKey: 'AIzaSyCsyL0pIHNe-y-822rFVamcC7WHi4fIHus',
+                container: document.querySelector('#adresse')
+            }).configure({
+                countries: ['TN'],
+                type: ['city', 'address', 'busStop', 'trainStation', 'townhall', 'airport'],
+            });
+          })();
+        </script>  
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script>
             const Toast = Swal.mixin({

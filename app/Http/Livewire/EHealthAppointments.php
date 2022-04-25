@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use Exception;
 use App\Models\User;
 use Livewire\Component;
+use Twilio\Rest\Client;
 use App\Models\Treatment;
 use App\Models\Appointment;
 use App\Models\SubTreatment;
@@ -149,38 +151,80 @@ class EHealthAppointments extends Component
     public function update()
     {
         $this->validate();
-        try{
         Appointment::find($this->modelId)->update($this->modelDataUpdate());
-        $this->modalFormVisible = false; 
         if($this->status == 'accepted'){
+
+            $receiverNumber = $this->patient_tel;
+            $message = "Hello! your appointment was: {$this->status}!, You can call {$this->related_name} right now!, Please check your email for more information.";
+            try {
+            $account_sid = getenv("TWILIO_SID");
+            $auth_token = getenv("TWILIO_TOKEN");
+            $twilio_number = getenv("TWILIO_FROM");
+            
+            $client = new Client($account_sid, $auth_token);
+            $client->messages->create($receiverNumber, [
+            'from' => $twilio_number,
+            'body' => $message]);
+
             Mail::to($this->patient_email)->send(new PatientApptNotif(
-            auth()->user()->name,auth()->user()->specialty, auth()->user()->tel, auth()->user()->adresse,
-            $this->status,$this->treatment, $this->sub_treatment,
-            $this->passage_number,$this->start_date,$this->care_place));
+                auth()->user()->name,auth()->user()->specialty, auth()->user()->tel, auth()->user()->adresse,
+                $this->status,$this->treatment, $this->sub_treatment,
+                $this->passage_number,$this->start_date,$this->care_place));
+    
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"A confirmation email & sms was sent to $this->patient_name!!"
+            ]);
+
+            // Reset Form Fields After Creating Category
+            $this->cleanVars();
+            }
+            catch(Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+
+            // Reset Form Fields After Creating Category
+            $this->cleanVars();
+            }
+            $this->modalFormVisible = false; 
         }else{
-            Mail::to($this->patient_email)->send(new PatientApptNotifRefuse(
-                auth()->user()->name,auth()->user()->specialty,
-                $this->status,$this->treatment, $this->sub_treatment));
+
+            $receiverNumber = $this->patient_tel;
+            $message = "Hello! your appointment was: {$this->status}!, {$this->related_name} is busy!, Hope you find another health specialist.";
+            try {
+            $account_sid = getenv("TWILIO_SID");
+            $auth_token = getenv("TWILIO_TOKEN");
+            $twilio_number = getenv("TWILIO_FROM");
+            
+            $client = new Client($account_sid, $auth_token);
+            $client->messages->create($receiverNumber, [
+            'from' => $twilio_number,
+            'body' => $message]);
+                    // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'success',
+                'message'=>"A confirmation email was sent to $this->patient_name!!"
+            ]);
+
+            // Reset Form Fields After Creating Category
+            $this->cleanVars();
+            }
+            catch(Exception $e){
+            // Set Flash Message
+            $this->dispatchBrowserEvent('alert',[
+                'type'=>'error',
+                'message'=>"Something goes wrong!!"
+            ]);
+
+            // Reset Form Fields After Creating Category
+            $this->cleanVars();
+            }
+            $this->modalFormVisible = false; 
         } 
-        // Set Flash Message
-        $this->dispatchBrowserEvent('alert',[
-            'type'=>'success',
-            'message'=>"A confirmation email was sent to $this->patient_name!!"
-        ]);
-
-        // Reset Form Fields After Creating Category
-        $this->cleanVars();
-        }
-        catch(\Exception $e){
-        // Set Flash Message
-        $this->dispatchBrowserEvent('alert',[
-            'type'=>'error',
-            'message'=>"Something goes wrong!!"
-        ]);
-
-        // Reset Form Fields After Creating Category
-        $this->cleanVars();
-        }
     }
 
     /**Show appointment */

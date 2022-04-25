@@ -15,7 +15,8 @@
                 <x-jet-label class=" font-bold text-center text-lg mb-1" for="tel" value="{{ __('Phone') }}" />
                 <div class="text-center">
                     <span class=" font-bold  text-sm text-blue-700">This number will be used for all transactions here!!</span><br>
-                    <span class=" font-bold  text-sm text-red-500">The owner of this number will be responsible for any violation related to this account!!</span>
+                    <span class=" font-bold  text-sm text-red-500">The owner of this number will be responsible for any violation related to this account!!</span><br>
+                    <span class=" font-bold  text-sm text-green-500">Phone numbers should be formatted with a ‘+’ and country code (+216)</span>
                 </div>
                 <div class="mt-3 flex rounded-md shadow-sm">
                     <x-jet-input id="tel" class="w-full border border-gray-300 text-gray-600 h-14 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none text-center font-bold text-lg" type="tel" name="tel" maxlength="12" minlength="12" placeholder="+21622222222" autofocus />

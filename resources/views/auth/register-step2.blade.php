@@ -5,14 +5,8 @@
         </div>
         <div class="flex items-center justify-center w-full h-screen px-6 bg-white md:max-w-md lg:-mt-16 lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/2 lg:px-16 xl:px-12">
             <div class="w-full h-100">
-                <form class="lg:-mt-16 md:mt-6" method="POST" action="{{ route('register-step2.store') }}">
+                <form class="md:mt-6" method="POST" action="{{ route('register-step2.store') }}">
                     @csrf
-                    <h1 class="mt-4 md:mt-12 text-2xl font-semibold text-black tracking-ringtighter sm:text-3xl title-font">
-                        <a class="text-3xl font-medium text-black" href="{{ url('/') }}">
-                            {{ config('app.name', 'Laravel') }}
-                        </a>                  
-                    </h1>
-
                     <div class="flex items-center mt-5 md:-ml-2 lg:-mt-8 justify-end">
                         <x-jet-button class="ml-6">
                             {{ __('Finish Registeration') }}

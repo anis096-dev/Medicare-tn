@@ -12,7 +12,7 @@
             @csrf
 
             <div class="mt-4">
-                <p>Please enter the Verification code sent to: {{session('tel')}}</p>
+                <p class="font-bold  text-sm text-blue-700">Please enter the Verification code sent to: {{session('tel')}}</p><br>
                 <x-jet-label class=" font-bold text-center text-lg mb-1" for="tel" value="{{ __('Verification Code') }}" />
                 <div class="mt-3 flex rounded-md shadow-sm">
                     <input type="hidden" name="tel" value="{{session('tel')}}">
