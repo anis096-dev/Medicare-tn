@@ -155,8 +155,9 @@ class EHealthAppointments extends Component
         if($this->status == 'accepted'){
 
             $receiverNumber = $this->patient_tel;
-            $message = "Hello! your appointment was: {$this->status}!, You can call {$this->related_name} right now!, Please check your email for more information.";
-            try {
+            // $message = "Hello! your appointment was: {$this->status}!, You can call {$this->related_name} right now!, Please check your email for more information. Regards, Medicare.TN";
+            $message = "{$this->patient_name} مرحبا\nلقد تمّ قبول موعدك\nالأخصائي {$this->related_name}\nالعلاج {$this->treatment}--{$this->sub_treatment}\nيمكنك الاطلاع على بريدك الالكتروني للمزيد من المعلومات\n\nفريق Medicare-Tn";
+            try{
             $account_sid = getenv("TWILIO_SID");
             $auth_token = getenv("TWILIO_TOKEN");
             $twilio_number = getenv("TWILIO_FROM");
@@ -174,7 +175,7 @@ class EHealthAppointments extends Component
             // Set Flash Message
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',
-                'message'=>"A confirmation email & sms was sent to $this->patient_name!!"
+                'message'=>"A confirmation Email & SMS was sent to $this->patient_name!!"
             ]);
 
             // Reset Form Fields After Creating Category
@@ -194,7 +195,8 @@ class EHealthAppointments extends Component
         }else{
 
             $receiverNumber = $this->patient_tel;
-            $message = "Hello! your appointment was: {$this->status}!, {$this->related_name} is busy!, Hope you find another health specialist.";
+            // $message = "Hello! your appointment was: {$this->status}!, {$this->related_name} is too busy!, Hope you find another healthcare specialist.  Regards, Medicare.TN";
+            $message = "{$this->patient_name} مرحبا\nلقد تمّ رفض موعدك\nالأخصائي {$this->related_name}\nالعلاج {$this->treatment}--{$this->sub_treatment}\nيمكنك البحث عن أخصّائي آخر\n\nفريق Medicare-Tn";    
             try {
             $account_sid = getenv("TWILIO_SID");
             $auth_token = getenv("TWILIO_TOKEN");
@@ -207,7 +209,7 @@ class EHealthAppointments extends Component
                     // Set Flash Message
             $this->dispatchBrowserEvent('alert',[
                 'type'=>'success',
-                'message'=>"A confirmation email was sent to $this->patient_name!!"
+                'message'=>"A confirmation SMS was sent to $this->patient_name!!"
             ]);
 
             // Reset Form Fields After Creating Category

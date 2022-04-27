@@ -107,13 +107,13 @@
                 @error('status') <span class="error">{{ $message }}</span> @enderror
             </div>
 
-            <div class="mt-4 space-y-2">
+            {{-- <div class="mt-4 space-y-2">
                 <x-jet-label for="patient_email" value="{{ __('Re-write patient email') }}" />
                 <span class=" font-bold text-xs text-red-700">{{__('Please confirm your patient email to notify him by using it!!')}}</span><br>
                 <span class=" font-bold text-xs text-blue-700">{{__('If your patient has another email so enter the newest email!!')}}</span>
                 <x-jet-input id="user_email" class="w-full border border-gray-300 text-gray-600 h-14 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none" type="email" wire:model.debounce.800ms="patient_email" />
                 @error('patient_email') <span class="error">{{ $message }}</span> @enderror
-            </div>
+            </div> --}}
         </x-slot>
 
         <x-slot name="footer">
