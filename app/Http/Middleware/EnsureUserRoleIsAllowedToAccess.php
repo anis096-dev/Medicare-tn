@@ -47,6 +47,13 @@ class EnsureUserRoleIsAllowedToAccess
                 'register-step2',
                 'user-permissions',
                 'roles',
+                'languages.index',
+                'languages.create',
+                'languages.store',
+                'languages.translations.index',
+                'languages.translations.create',
+                'languages.translations.store',
+                'languages.translations.update',
             ],
         ];
     }

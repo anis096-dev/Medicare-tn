@@ -84,7 +84,7 @@
                         <img alt="team" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="{{ $item->profile_photo_url }}" alt="{{ $item->name }}">
                         <div class="flex-grow">
                             <h2 class="text-gray-900 title-font font-medium">{{$item->name}}</h2>
-                            <p class="text-gray-500"><span class="text-blue-500 font-bold">{{ $item->specialty }}</span></p>
+                            <p class="text-gray-500"><span class="text-blue-500 font-bold">{{__($item->specialty) }}</span></p>
                             <p class="text-gray-500">@:{{ $item->adresse }}</p>
                             <p class="mt-2 text-gray-500">
                                 <span class="ml-auto">
