@@ -22,5 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SpecialtiesTableSeeder::class);
         $this->call(TreatmentsTableSeeder::class);
         $this->call(SubTreatmentsTableSeeder::class);
+        $this->call(GovernoratesTableSeeder::class);
+        $this->call(DelegationsTableSeeder::class);
     }
 }

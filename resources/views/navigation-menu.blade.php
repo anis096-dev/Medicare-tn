@@ -100,6 +100,15 @@
                                     </svg>
                                 </div>
                             </x-jet-dropdown-link>
+
+                            <x-jet-dropdown-link href="{{ route('admin-faqs') }}" :active="request()->routeIs('admin-faqs')">
+                                {{ __('Manage FAQs') }}
+                                <div class="ml-36 mb-1.5">
+                                    <svg class="-mt-5 h-4 w-4" class="-mt-5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </div>
+                            </x-jet-dropdown-link>
                         </x-slot>
                     </x-jet-dropdown>
 
@@ -472,6 +481,15 @@
                         </svg>
                         <svg class="-ml-1.5 -mt-4 h-2.5 w-2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </x-jet-dropdown-link>
+
+                <x-jet-dropdown-link href="{{ route('admin-faqs') }}" :active="request()->routeIs('admin-faqs')">
+                    {{ __('Manage FAQs') }}
+                    <div class="ml-36 mb-1.5">
+                        <svg class="-mt-5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
                 </x-jet-dropdown-link>

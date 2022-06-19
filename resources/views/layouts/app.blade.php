@@ -8,8 +8,10 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
+        {{-- <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> --}}
+        
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
@@ -78,24 +80,6 @@
         @stack('modals')
 
         @livewireScripts
-        <script src="https://cdn.jsdelivr.net/npm/places.js@1.19.0"></script>
-        <script>
-            (function() {
-            
-              var latlng = {
-                lat: 33.88146,
-                lng: 10.0982
-            };
-
-            var placesAutocomplete = places({
-                apiKey: 'AIzaSyCsyL0pIHNe-y-822rFVamcC7WHi4fIHus',
-                container: document.querySelector('#adresse')
-            }).configure({
-                countries: ['TN'],
-                type: ['city', 'address', 'busStop', 'trainStation', 'townhall', 'airport'],
-            });
-          })();
-        </script>  
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script>
             const Toast = Swal.mixin({
@@ -117,6 +101,6 @@
                     title:message
                 })
             })
-        </script> 
+        </script>
     </body>
 </html>

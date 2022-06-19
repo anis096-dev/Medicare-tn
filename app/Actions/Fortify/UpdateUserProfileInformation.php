@@ -2,13 +2,13 @@
 
 namespace App\Actions\Fortify;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 
 class UpdateUserProfileInformation implements UpdatesUserProfileInformation
-{
+{   
     /**
      * Validate and update the given user's profile information.
      *
@@ -35,8 +35,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $user->forceFill([
                 'name' => $input['name'],
                 'email' => $input['email'],
-                'Governorate' => $input['Governorate'],
-                'adresse' => $input['adresse'],
+                'specialty' => $input['specialty']  ?? null,
+                'governorate_id' => $input['governorate_id'],
+                'delegation_id' => $input['delegation_id'],
+                'location_id' => $input['location_id'],
                 'bio' => $input['bio'],
             ])->save();
         }

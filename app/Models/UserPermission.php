@@ -36,6 +36,10 @@ class UserPermission extends Model
             'contacts-from-website',
             'treatments-prices',
             'ensure-identity',
+            'register-step2',
+            'user.show',
+            'add-phone',
+            'admin-faqs',
         ];
     }
 

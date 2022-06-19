@@ -25,7 +25,6 @@ class CreateNewUser implements CreatesNewUsers
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'role' => ['required', 'string', 'max:255'],
-            'specialty' => ['required_if:role,Health specialist|string'],
             'gender' => ['required'],
             'marital_status' => ['required'],
             'date_of_birth' => ['required', 'string', 'max:255'],
@@ -38,7 +37,6 @@ class CreateNewUser implements CreatesNewUsers
             return tap(User::create([
                 'name' => $input['name'],
                 'role' => $input['role'],
-                'specialty' => $input['specialty']  ?? null,
                 'gender' => $input['gender'],
                 'marital_status' => $input['marital_status'],
                 'date_of_birth' => $input['date_of_birth'],

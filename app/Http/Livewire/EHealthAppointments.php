@@ -13,6 +13,7 @@ use Livewire\WithPagination;
 use App\Mail\PatientApptNotif;
 use App\Mail\PatientApptNotifRefuse;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class EHealthAppointments extends Component
 {

@@ -37,8 +37,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'date_of_birth', 
         'tel',
         'isVerified',
-        'Governorate',
-        'adresse',
+        'governorate_id',
+        'delegation_id',
+        'location_id',
         'bio',
     ];
 
@@ -83,6 +84,21 @@ class User extends Authenticatable implements MustVerifyEmail
             'admin' => 'Admin',
         ];
     }
+
+    public function Governorate()
+    {
+        return $this->belongsTo('App\Models\Governorate');
+    }
+
+    public function Delegation()
+    {
+        return $this->belongsTo('App\Models\Delegation');
+    }
+
+    public function Location()
+    {
+        return $this->belongsTo('App\Models\Location');
+    }
     
     public function ratings()
     {
@@ -108,48 +124,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\Models\Appointment');
     }
-    
-    /**
-     * The list of governorates
-     *
-     * @return void
-     */
-    public static function governorates()
-    {
-        return [
-            'Ariana',
-            'Béja',
-            'Ben Arous',
-            'Bizerte',
-            'Gabès',
-            'Gafsa',
-            'Jendouba',
-            'Kairouan',
-            'Kasserine',
-            'Kebili',
-            'kef',
-            'Mahdia',
-            'Manouba',
-            'Medenine',
-            'Monastir',
-            'Nabeul',
-            'Sfax',
-            'Sidi Bouzid',
-            'Siliana',
-            'Sousse',
-            'Tataouine',
-            'Tozeur',
-            'Tunis',
-            'Zaghouan',
-        ];
-    }
 
     public static function search($query)
     {
-        // return empty($query) ? static::query()
-        //     : static::Where('email', 'like', '%'.$query.'%')
-        //         ->orWhere('tel', 'like', '%'.$query.'%')
-        //         ->orWhere('specialty', 'like', '%'.$query.'%'); 
         return empty($query) ? static::query()
             : static::Where('tel', 'like', '%'.$query.'%');
     }

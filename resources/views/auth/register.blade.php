@@ -48,18 +48,6 @@
                 </select>
                 @error('role') <span class="error">{{ $message }}</span> @enderror
             </div>
-            
-            <div class="mt-4" x-show=" role == 'Health specialist'">
-                <x-jet-label class="mb-2" for="specialty" value="{{ __('Your Specialty') }}" />
-                    @foreach (App\Models\Specialty::all() as $item)
-                    <ul class="sm:flex sm:text-left text-gray">
-                        <li class="px-4 py-2 font-bold">
-                            <x-jet-input id="specialty" type="radio" name="specialty" value="{{$item->name}}"/>{{__($item->name)}}
-                        </li>
-                    </ul>
-                    @endforeach
-                @error('specialty') <span class="error">{{ $message }}</span> @enderror
-            </div>
 
             <div class="mt-4" x-data="{ show: true }">
                 <x-jet-label for="password" value="{{ __('Password') }}" />

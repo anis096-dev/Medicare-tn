@@ -24,8 +24,9 @@ class CreateUsersTable extends Migration
             $table->string('tel')->nullable();
             $table->boolean('isVerified')->default(false);
             $table->boolean('account_Verified')->default(false);
-            $table->string('Governorate')->nullable();
-            $table->string('adresse')->nullable();
+            $table->string('governorate_id')->nullable();
+            $table->string('delegation_id')->nullable();
+            $table->string('location_id')->nullable();
             $table->string('bio')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

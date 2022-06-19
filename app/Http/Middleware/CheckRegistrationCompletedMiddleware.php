@@ -16,7 +16,7 @@ class CheckRegistrationCompletedMiddleware
      */
     public function handle(Request $request, Closure $next)
     {   
-        if(is_null(auth()->user()->adresse)) {
+        if(is_null(auth()->user()->Governorate)) {
             return redirect()->route('register-step2.create');
         }
         return $next($request);

@@ -22,11 +22,11 @@
               Our platform offers a variety of paramedical specialties, a variety of home and local care and assistance services. <br>
               She organizes and manages appointments between the applicant and the medical service provider.
             </p>
-            <a href="#" class="text-indigo-500 inline-flex items-center">Learn More
+            {{-- <a href="#" class="text-indigo-500 inline-flex items-center">Learn More
               <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                 <path d="M5 12h14M12 5l7 7-7 7"></path>
               </svg>
-            </a>
+            </a> --}}
           </div>
         </div>
       </div>

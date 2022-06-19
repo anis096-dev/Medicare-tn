@@ -6,20 +6,19 @@
         <p class="lg:w-2/3 mx-auto leading-relaxed text-base">{{__('Which professional are you looking for?')}}</p>
         <div class="flex flex-col sm:flex-row items-center justify-center mt-2 mb-2">
             @forelse($specialties as $item)
-            <button type="button" value="{{ $name = $item->name }}" onclick="openPopover(event,'popover-id')" class="bg-blue-500 px-2 py-2 ml-2 mb-2 rounded text-white text-sm font-bold items-center focus:bg-blue-400">
-                {{ $item->name }}
-            </button>
-            <div id="popover-id" class="hidden bg-blue-400 border-0 mb-3 z-50 shadow-2xl font-bold leading-normal text-sm max-w-xs text-left no-underline break-words rounded-lg">
-                <div class="p-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mb-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
-                    </svg>
-                    @if( $item->name == $name)
-                    {{$item->description}}
-                    @else
-                    {{__('empty..')}}
-                    @endif
-                </div>
+            <div x-data="{open: false}" class="relative">
+                <!-- Trigger element -->
+                <button @mouseover="open = true" @mouseleave="open = false"
+                class="bg-blue-400 px-2 py-2 ml-2 mb-2 rounded text-white text-sm font-bold items-center focus:bg-blue-400">
+                    {{ $item->name }}
+                </button>
+                <!-- Popover -->
+                <!-- Make sure to add the requisite CSS for x-cloak: https://github.com/alpinejs/alpine#x-cloak -->
+                <div x-cloak x-show.transition="open" id="popover"
+                class="p-3 space-y-1 max-w-xl bg-white rounded shadow-2xl flex flex-col text-sm text-gray-600 mt-3 absolute z-50">
+                    <strong class="text-sm text-gray-800 font-semibold">What's his role?</strong>
+                    <p>{{$item->description}}</p>
+                </div>  
             </div>
             @empty
             <button>{{__('empty..')}}</button>
@@ -50,22 +49,37 @@
                 <option>{{__('empty..')}}</option>
                 @endforelse
             </select>
-            <select wire:model="selectedGovernorate" class="border border-gray-300 text-gray-600 h-14 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none">
-                <option value="">{{__('--Governorate--')}}</option>
-                @forelse(App\Models\User::governorates() as $item)
-                <option>{{$item}}</option>
-                @empty
-                <option>{{__('empty..')}}</option>
-                @endforelse
+            
+            <select id="governorate" wire:model="selectedGovernorateId" wire:change="getDelegationsByGovernorateId"
+            class="border border-gray-300 text-gray-600 h-14 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none select2">
+            <option value="">{{__('--governorate--')}}</option>
+            @forelse ($governorates as $governorate)
+                <option value="{{ $governorate['id'] }}">{{ $governorate['name'] }}</option>
+            @empty
+
+            @endforelse
             </select>
-            <select wire:model="selectedAdresse" class="border border-gray-300 text-gray-600 h-14 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none">
-                <option value="">{{__('--adresse--')}}</option>
-                @forelse($adresses as $item)
-                <option>{{$item->adresse}}</option>
-                @empty
-                <option>{{__('empty..')}}</option>
-                @endforelse
+
+            <select id="delegation" wire:model="selectedDelegationId" wire:change="getLocationsByDelegationId"
+            class="border border-gray-300 text-gray-600 h-14 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none select2">
+            <option value="">{{__('--delegation--')}}</option>
+            @forelse ($delegations as $delegation)
+                <option value="{{ $delegation['id'] }}">{{ $delegation['name'] }}</option>
+            @empty
+
+            @endforelse
             </select>
+
+            <select id="location" wire:model="selectedLocationId"
+            class="border border-gray-300 text-gray-600 h-14 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none select2">
+            <option value="">{{__('--location--')}}</option>
+            @forelse ($locations as $location)
+                <option value="{{ $location['id'] }}">{{ $location['name'] }}</option>
+            @empty
+
+            @endforelse
+            </select>
+
             <select class="border border-gray-300 text-gray-600 h-14 mr-1 rounded bg-white hover:border-gray-400 focus:outline-none appearance-none" wire:model="perPage">
                 <option>12</option>
                 <option>24</option>
@@ -85,7 +99,7 @@
                         <div class="flex-grow">
                             <h2 class="text-gray-900 title-font font-medium">{{$item->name}}</h2>
                             <p class="text-gray-500"><span class="text-blue-500 font-bold">{{__($item->specialty) }}</span></p>
-                            <p class="text-gray-500">@:{{ $item->adresse }}</p>
+                            <p class="text-gray-500">@:{{ $item->Governorate->name }}</p>
                             <p class="mt-2 text-gray-500">
                                 <span class="ml-auto">
                                     ⭐<strong>{{round($ratings->where('related_id', $item->id )->avg('rating'), 1)}}/5</strong>
@@ -129,16 +143,31 @@
     </div>
     </div>
     <script src="https://unpkg.com/@popperjs/core@2.9.1/dist/umd/popper.min.js" charset="utf-8"></script>
+    <script>
+        function openPopover(event,popoverID){
+        let element = event.target;
+        while(element.nodeName !== "BUTTON"){
+        element = element.parentNode;
+        }
+        var popper = Popper.createPopper(element, document.getElementById(popoverID), {
+        placement: 'top'
+        });
+        document.getElementById(popoverID).classList.toggle("hidden");
+        }
+    </script>
+    
+    @push('js')
         <script>
-            function openPopover(event,popoverID){
-            let element = event.target;
-            while(element.nodeName !== "BUTTON"){
-            element = element.parentNode;
-            }
-            var popper = Popper.createPopper(element, document.getElementById(popoverID), {
-            placement: 'top'
-            });
-            document.getElementById(popoverID).classList.toggle("hidden");
-            }
+            $("#governorate").on('change', function(e) {
+                let id = $(this).val()
+                @this.set('selectedGovernorateId', id);
+                livewire.emit('getDelegationsByGovernorateId');
+            })
+            $("#delegation").on('change', function(e) {
+                let id = $(this).val()
+                @this.set('selectedDelegationId', id);
+                livewire.emit('getLocationsByDelegationId');
+            })
         </script>
+    @endpush
 </section> 

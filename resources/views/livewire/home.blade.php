@@ -37,7 +37,7 @@
     </div>
     <!-- health Care --> 
     <div id="RDV">
-        @livewire('find-ehealth-care')
+      @livewire('find-ehealth-care')
     </div> 
     <!-- Statistics -->
     <div class="text-gray-600 bg-white body-font">

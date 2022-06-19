@@ -216,11 +216,11 @@
                             </div>
                             <div class="grid grid-cols-1">
                                 <div class="px-4 py-2 font-semibold bg-blue-50 rounded-md">{{__('Governorate')}}</div>
-                                <div class="px-4 py-2 capitalize">{{$user->Governorate}}</div>
+                                <div class="px-4 py-2 capitalize">{{$user->Governorate->name}}</div>
                             </div>
                             <div class="grid grid-cols-1">
                                 <div class="px-4 py-2 md:ml-1 font-semibold bg-blue-50 rounded-md">{{__('Current Address')}}</div>
-                                <div class="px-4 py-2 capitalize">{{$user->adresse}}</div>
+                                <div class="px-4 py-2 capitalize">{{$user->delegation->name}}, {{$user->location->name}}</div>
                             </div>
                             @if(auth()->user()->role != 'Patient')
                             <div class="grid grid-cols-1 bg-indigo-50 rounded-md">

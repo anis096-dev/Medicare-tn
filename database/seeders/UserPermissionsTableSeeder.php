@@ -141,7 +141,7 @@ class UserPermissionsTableSeeder extends Seeder
             ),
             15 => 
             array (
-                'id' => 17,
+                'id' => 16,
                 'role' => 'Health specialist',
                 'route_name' => 'user-education',
                 'created_at' => '2021-03-24 23:24:47',
@@ -149,7 +149,7 @@ class UserPermissionsTableSeeder extends Seeder
             ),
             16 => 
             array (
-                'id' => 18,
+                'id' => 17,
                 'role' => 'Health specialist',
                 'route_name' => 'user-time-settings',
                 'created_at' => '2021-03-24 23:24:47',
@@ -157,7 +157,7 @@ class UserPermissionsTableSeeder extends Seeder
             ),
             17 => 
             array (
-                'id' => 19,
+                'id' => 18,
                 'role' => 'Health specialist',
                 'route_name' => 'e-health-appointments',
                 'created_at' => '2021-05-25 01:22:44',
@@ -165,7 +165,7 @@ class UserPermissionsTableSeeder extends Seeder
             ),
             18 => 
             array (
-                'id' => 20,
+                'id' => 19,
                 'role' => 'Patient',
                 'route_name' => 'treatments-prices',
                 'created_at' => '2022-04-23 00:10:31',
@@ -173,11 +173,91 @@ class UserPermissionsTableSeeder extends Seeder
             ),
             19 => 
             array (
-                'id' => 21,
+                'id' => 20,
                 'role' => 'Health specialist',
                 'route_name' => 'treatments-prices',
                 'created_at' => '2022-04-23 00:10:49',
                 'updated_at' => '2022-04-23 00:10:49',
+            ),
+            20 => 
+            array (
+                'id' => 21,
+                'role' => 'Patient',
+                'route_name' => 'register-step2',
+                'created_at' => '2022-05-11 12:00:10',
+                'updated_at' => '2022-05-11 12:00:10',
+            ),
+            21 => 
+            array (
+                'id' => 22,
+                'role' => 'Health specialist',
+                'route_name' => 'register-step2',
+                'created_at' => '2022-05-11 12:00:41',
+                'updated_at' => '2022-05-11 12:00:41',
+            ),
+            22 => 
+            array (
+                'id' => 23,
+                'role' => 'Health specialist',
+                'route_name' => 'ensure-identity',
+                'created_at' => '2022-05-11 12:00:55',
+                'updated_at' => '2022-05-11 12:00:55',
+            ),
+            23 => 
+            array (
+                'id' => 26,
+                'role' => 'admin',
+                'route_name' => 'user.show',
+                'created_at' => '2022-05-11 12:22:58',
+                'updated_at' => '2022-05-11 12:22:58',
+            ),
+            24 => 
+            array (
+                'id' => 27,
+                'role' => 'Patient',
+                'route_name' => 'user.show',
+                'created_at' => '2022-05-11 12:23:36',
+                'updated_at' => '2022-05-11 12:23:36',
+            ),
+            25 => 
+            array (
+                'id' => 28,
+                'role' => 'Health specialist',
+                'route_name' => 'user.show',
+                'created_at' => '2022-05-11 12:23:45',
+                'updated_at' => '2022-05-11 12:23:45',
+            ),
+            26 => 
+            array (
+                'id' => 29,
+                'role' => 'admin',
+                'route_name' => 'add-phone',
+                'created_at' => '2022-05-11 12:24:49',
+                'updated_at' => '2022-05-11 12:24:49',
+            ),
+            27 => 
+            array (
+                'id' => 30,
+                'role' => 'Patient',
+                'route_name' => 'add-phone',
+                'created_at' => '2022-05-11 12:25:00',
+                'updated_at' => '2022-05-11 12:25:00',
+            ),
+            28 => 
+            array (
+                'id' => 31,
+                'role' => 'Health specialist',
+                'route_name' => 'add-phone',
+                'created_at' => '2022-05-11 12:25:08',
+                'updated_at' => '2022-05-11 12:25:08',
+            ),
+            29 => 
+            array (
+                'id' => 32,
+                'role' => 'admin',
+                'route_name' => 'admin-faqs',
+                'created_at' => '2022-05-13 08:56:15',
+                'updated_at' => '2022-05-13 08:56:15',
             ),
         ));
         

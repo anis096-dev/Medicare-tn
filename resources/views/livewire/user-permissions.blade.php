@@ -38,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse ($data->unique('role')->unique('role') as $item)
+                            @forelse ($data->unique('role') as $item)
                             <tr>
                                 <td class="px-6 py-2">
                                     <input class="hidden" type="checkbox" wire:model="selectedTimes" value="{{$item->id}}">
