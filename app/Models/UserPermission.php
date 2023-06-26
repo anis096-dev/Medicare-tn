@@ -39,6 +39,7 @@ class UserPermission extends Model
             'register-step2',
             'user.show',
             'add-phone',
+            'store-phone',
             'admin-faqs',
         ];
     }

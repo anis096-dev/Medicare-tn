@@ -19,11 +19,11 @@ class VerifyPhoneController extends Controller
             'tel' => ['required','numeric', 'unique:users'],
         ]);
         /* Get credentials from .env */
-        $token = getenv("TWILIO_AUTH_TOKEN");
-        $twilio_sid = getenv("TWILIO_SID");
-        $twilio_verify_sid = getenv("TWILIO_VERIFY_SID");
-        $twilio = new Client($twilio_sid, $token);
-        $twilio->verify->v2->services($twilio_verify_sid)
+        // $token = getenv("TWILIO_TOKEN");
+        // $twilio_sid = getenv("TWILIO_SID");
+        // $twilio_verify = getenv("TWILIO_VERIFY");
+        $twilio = new Client(config('services.twilio.sid'), config('services.twilio.token'));
+        $twilio->verify->v2->services(config('services.twilio.verify'))
             ->verifications
             ->create($data['tel'], "sms");
         auth()->user()->update([
@@ -45,11 +45,11 @@ class VerifyPhoneController extends Controller
         ]);
         try{
         /* Get credentials from .env */
-        $token = getenv("TWILIO_AUTH_TOKEN");
-        $twilio_sid = getenv("TWILIO_SID");
-        $twilio_verify_sid = getenv("TWILIO_VERIFY_SID");
-        $twilio = new Client($twilio_sid, $token);
-        $verification = $twilio->verify->v2->services($twilio_verify_sid)
+        // $token = getenv("TWILIO_TOKEN");
+        // $twilio_sid = getenv("TWILIO_SID");
+        // $twilio_verify = getenv("TWILIO_VERIFY");
+        $twilio = new Client(config('services.twilio.sid'), config('services.twilio.token'));
+        $verification = $twilio->verify->v2->services(config('services.twilio.verify'))
             ->verificationChecks
             ->create($data['verification_code'], array('to' => $data['tel']));
         if ($verification->valid) {
